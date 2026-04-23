@@ -3,27 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Caisse du Ball-Trap de Vence</title>
-  <meta name="theme-color" content="#121212" />
+  <title>Caisse Ball-Trap de Vence</title>
+  <meta name="theme-color" content="#0b0b0c" />
   <style>
     :root{
-      --bg:#121212;
-      --panel:#1c1c1e;
-      --panel2:#2a2a2d;
-      --text:#f5f5f7;
-      --muted:#b0b0b5;
-      --border:#3a3a3d;
-      --green:#2ecc71;
-      --blue:#0a84ff;
-      --gray:#7b7f87;
-      --orange:#ff8a00;
-      --orange2:#ff9f2e;
-      --red:#e74c3c;
-
-      --tir:#ff8a00;
-      --munitions:#d63b30;
-      --services:#1e88e5;
-      --bar:#2e7d32;
+      --bg:#070708;
+      --panel:#111214;
+      --panel-2:#1a1b1f;
+      --panel-3:#0d0e10;
+      --border:#2a2b31;
+      --text:#f4f4f5;
+      --muted:#a8abb3;
+      --orange:#f48a06;
+      --orange-dark:#d87500;
+      --red:#cf2027;
+      --red-dark:#a8161c;
+      --green:#538d1f;
+      --green-dark:#427116;
+      --blue:#145cad;
+      --blue-dark:#0f4a8c;
+      --cash:#4c9a1a;
+      --card:#0f5ead;
+      --check:#666a73;
+      --danger:#d13a34;
+      --shadow:0 8px 24px rgba(0,0,0,.35);
+      --radius:20px;
+      --radius-sm:14px;
     }
 
     *{box-sizing:border-box}
@@ -32,367 +37,543 @@
       padding:0;
       background:var(--bg);
       color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     }
 
-    body{min-height:100vh}
+    body{
+      min-height:100vh;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    button,input,select{
+      font:inherit;
+    }
 
     .app{
       max-width:820px;
       margin:0 auto;
-      padding:14px;
-      padding-bottom:120px;
+      padding:12px;
+      padding-bottom:110px;
     }
 
     .topbar{
       display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-      margin-bottom:12px;
-    }
-
-    .title{
-      font-size:1.35rem;
-      font-weight:800;
-      line-height:1.15;
-    }
-
-    .subtitle{
-      margin-top:4px;
-      color:var(--muted);
-      font-size:.92rem;
-    }
-
-    .pill{
-      background:var(--panel2);
-      border:1px solid var(--border);
-      border-radius:999px;
-      padding:8px 12px;
-      color:var(--muted);
-      font-size:.9rem;
-      white-space:nowrap;
-    }
-
-    .tabs{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:8px;
-      margin-bottom:12px;
-    }
-
-    .tab{
-      border:none;
-      border-radius:18px;
-      padding:12px 10px;
-      font-weight:800;
-      background:var(--panel2);
-      color:var(--text);
-      cursor:pointer;
-      box-shadow:0 4px 10px rgba(0,0,0,.18);
-    }
-
-    .tab.active{
-      background:var(--orange);
-      color:#fff;
-    }
-
-    .card{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:24px;
-      padding:14px;
-      margin-bottom:12px;
-      box-shadow:0 10px 24px rgba(0,0,0,.22);
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:8px;
-    }
-
-    .stat{
-      background:var(--panel2);
-      border-radius:18px;
-      padding:10px;
-      text-align:center;
-    }
-
-    .stat-label{
-      color:var(--muted);
-      font-size:.78rem;
-      margin-bottom:6px;
-    }
-
-    .stat-value{
-      font-size:1rem;
-      font-weight:800;
-    }
-
-    .section-title{
-      font-size:1rem;
-      font-weight:800;
-      margin:0 0 12px;
-    }
-
-    .section-subtitle{
-      color:var(--muted);
-      font-size:.88rem;
-      margin:-4px 0 12px;
-    }
-
-    .category-block{
-      margin-bottom:14px;
-      border:1px solid var(--border);
-      border-radius:22px;
-      overflow:hidden;
-      background:#171719;
-    }
-
-    .category-head{
-      padding:11px 14px;
-      font-weight:800;
-      color:#fff;
-      font-size:.95rem;
-      letter-spacing:.2px;
-    }
-
-    .cat-tir{background:var(--tir)}
-    .cat-munitions{background:var(--munitions)}
-    .cat-services{background:var(--services)}
-    .cat-bar{background:var(--bar)}
-
-    .items-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:10px;
-      padding:12px;
-    }
-
-    .item-btn{
-      min-height:100px;
-      border:none;
-      border-radius:24px;
-      background:linear-gradient(180deg,var(--orange2),var(--orange));
-      color:#fff;
-      padding:10px 8px;
-      text-align:center;
-      cursor:pointer;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
       align-items:center;
-      gap:6px;
-      font-weight:800;
-      box-shadow:0 6px 14px rgba(0,0,0,.28);
-    }
-
-    .item-btn:active,
-    .tab:active,
-    .btn:active,
-    .pay-btn:active{
-      transform:scale(.98);
-    }
-
-    .item-btn .icon{
-      font-size:1.2rem;
-      line-height:1;
-    }
-
-    .item-btn .name{
-      font-size:.76rem;
-      line-height:1.1;
-      min-height:2.2em;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .item-btn .price{
-      font-size:.88rem;
-      opacity:.96;
-    }
-
-    .ticket-header{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-bottom:8px;
-    }
-
-    input, select{
-      width:100%;
-      background:var(--panel2);
-      color:#fff;
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:12px;
-      font-size:1rem;
-      font-family:inherit;
-      box-shadow:0 3px 8px rgba(0,0,0,.15) inset;
-    }
-
-    .ticket-lines{
-      border-top:1px solid rgba(255,255,255,.08);
-      margin-top:8px;
-    }
-
-    .ticket-line{
-      display:flex;
       justify-content:space-between;
       gap:10px;
-      padding:10px 0;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      align-items:center;
+      margin-bottom:10px;
     }
 
-    .ticket-left{
+    .brand{
       display:flex;
       align-items:center;
       gap:10px;
       min-width:0;
     }
 
-    .ticket-index{
+    .brand-mark{
       width:28px;
       height:28px;
-      border-radius:999px;
-      background:var(--panel2);
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:.82rem;
-      color:var(--muted);
+      color:var(--orange);
       flex:0 0 auto;
     }
 
-    .ticket-name{
+    .brand-title{
+      font-size:1.9rem;
       font-weight:800;
-      font-size:.95rem;
-      line-height:1.15;
-    }
-
-    .ticket-meta{
-      color:var(--muted);
-      font-size:.8rem;
-      margin-top:3px;
-    }
-
-    .ticket-total{
-      font-weight:800;
+      letter-spacing:-.02em;
       white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    .empty{
+    .gear-btn{
+      border:none;
+      background:transparent;
+      color:#fff;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1.15fr;
+      gap:10px;
+      margin-bottom:12px;
+    }
+
+    .info-card{
+      background:var(--panel-3);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:14px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:92px;
+      box-shadow:var(--shadow);
+    }
+
+    .info-icon{
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      opacity:.96;
+      flex:0 0 auto;
+    }
+
+    .info-copy{
+      min-width:0;
+    }
+
+    .info-label{
       color:var(--muted);
-      font-size:.92rem;
-      padding-top:6px;
+      font-size:.9rem;
+      margin-bottom:4px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      font-weight:700;
     }
 
-    .total-box{
+    .info-value{
+      font-size:2rem;
+      line-height:1;
+      font-weight:900;
+      color:var(--orange);
+    }
+
+    .info-sub{
+      font-size:1.05rem;
+      line-height:1.2;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .tabs{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .tab{
+      border:none;
+      border-radius:16px;
+      padding:11px 8px;
+      background:var(--panel-2);
+      color:var(--muted);
+      font-weight:800;
+      cursor:pointer;
+      border:1px solid var(--border);
+    }
+
+    .tab.active{
+      background:var(--orange);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .screen{display:none}
+    .screen.active{display:block}
+
+    .category-block{
+      margin-bottom:10px;
+    }
+
+    .category-title{
+      font-size:.95rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+      margin:0 0 6px 4px;
+    }
+
+    .cat-tir .category-title{color:var(--orange)}
+    .cat-munitions .category-title{color:#ff3b3b}
+    .cat-services .category-title{color:#71c531}
+    .cat-bar .category-title{color:#28a1ff}
+
+    .cards-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+    }
+
+    .item-card{
+      border:none;
+      border-radius:16px;
+      color:#fff;
+      min-height:112px;
+      padding:10px 8px 8px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .item-card::after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:27%;
+      background:rgba(0,0,0,.13);
+    }
+
+    .item-card.tir{background:linear-gradient(180deg,var(--orange),var(--orange-dark))}
+    .item-card.munitions{background:linear-gradient(180deg,var(--red),var(--red-dark))}
+    .item-card.services{background:linear-gradient(180deg,var(--green),var(--green-dark))}
+    .item-card.bar{background:linear-gradient(180deg,var(--blue),var(--blue-dark))}
+
+    .item-top{
+      position:relative;
+      z-index:1;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:34px;
+      margin-top:2px;
+    }
+
+    .item-icon{
+      width:46px;
+      height:46px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+    }
+
+    .item-middle{
+      position:relative;
+      z-index:1;
+      text-align:center;
+      font-weight:800;
+      line-height:1.1;
+      font-size:.9rem;
+      min-height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 4px;
+      text-transform:uppercase;
+    }
+
+    .item-price{
+      position:relative;
+      z-index:1;
+      text-align:center;
+      font-size:.95rem;
+      font-weight:900;
+      margin-top:4px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:12px;
+      margin-top:10px;
+    }
+
+    .field-label{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:#fff;
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    .field-label .muted{
+      color:var(--muted);
+      font-weight:600;
+      font-size:.92rem;
+    }
+
+    .customer-input{
+      width:100%;
+      background:#0d0e10;
+      border:1px solid var(--border);
+      color:#fff;
+      border-radius:10px;
+      padding:11px 12px;
+      outline:none;
+    }
+
+    .ticket-title{
+      color:var(--orange);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+      margin-bottom:8px;
+      font-size:1rem;
+    }
+
+    .ticket-box{
+      background:#0b0c0d;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px 8px;
+      min-height:360px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .ticket-scroll{
+      flex:1;
+      overflow:auto;
+      max-height:360px;
+      padding-right:4px;
+    }
+
+    .ticket-row{
+      display:grid;
+      grid-template-columns:auto 1fr auto auto;
+      gap:10px;
+      align-items:center;
+      padding:4px 0;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      font-size:.98rem;
+    }
+
+    .ticket-row:last-child{border-bottom:none}
+
+    .ticket-qty{width:24px; color:#fff}
+    .ticket-name{color:#fff}
+    .ticket-price{color:#fff; white-space:nowrap}
+    .ticket-del{
+      border:none;
+      background:transparent;
+      color:#c8cad0;
+      cursor:pointer;
+      padding:2px;
+      width:24px;
+      height:24px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:6px;
+    }
+
+    .ticket-del:hover{
+      background:rgba(255,255,255,.08);
+    }
+
+    .ticket-total-line{
       display:flex;
       justify-content:space-between;
       align-items:center;
+      border-top:2px dashed rgba(255,255,255,.18);
       margin-top:10px;
       padding-top:10px;
-      border-top:2px solid rgba(255,255,255,.08);
-      font-size:1.05rem;
       font-weight:900;
+      font-size:1.15rem;
+      color:var(--orange);
     }
 
     .pay-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      margin-top:12px;
+      gap:8px;
+      margin-top:10px;
     }
 
     .pay-btn{
       border:none;
-      border-radius:22px;
-      padding:13px 10px;
-      font-weight:900;
+      border-radius:14px;
+      min-height:58px;
       color:#fff;
       cursor:pointer;
-      opacity:.8;
-      box-shadow:0 6px 14px rgba(0,0,0,.2);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      font-weight:900;
+      border:2px solid transparent;
     }
 
+    .pay-btn.cash{background:var(--cash)}
+    .pay-btn.card{background:var(--card)}
+    .pay-btn.check{background:var(--check)}
     .pay-btn.active{
-      outline:2px solid #fff;
-      opacity:1;
+      border-color:#9be76a;
+      box-shadow:0 0 0 2px rgba(255,255,255,.06) inset;
     }
 
-    .pay-cash{background:var(--green)}
-    .pay-card{background:var(--blue)}
-    .pay-check{background:var(--gray)}
-
-    .actions,
-    .actions-2,
-    .actions-3{
+    .btn-row{
       display:grid;
-      gap:10px;
-      margin-top:12px;
+      grid-template-columns:1.45fr .55fr .7fr;
+      gap:8px;
+      margin-top:8px;
     }
 
-    .actions{grid-template-columns:repeat(2,1fr)}
-    .actions-2{grid-template-columns:repeat(2,1fr)}
-    .actions-3{grid-template-columns:repeat(3,1fr)}
-
-    .btn{
+    .big-action, .secondary-action{
       border:none;
-      border-radius:22px;
-      padding:13px 12px;
+      border-radius:14px;
+      color:#fff;
       font-weight:900;
       cursor:pointer;
-      color:#fff;
-      box-shadow:0 6px 14px rgba(0,0,0,.22);
+      min-height:60px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-align:center;
     }
 
-    .btn-green{background:var(--green)}
-    .btn-blue{background:var(--blue)}
-    .btn-gray{background:var(--panel2); border:1px solid var(--border)}
-    .btn-red{background:var(--red)}
-    .btn-orange{background:var(--orange)}
+    .big-action{
+      background:var(--cash);
+      font-size:1rem;
+    }
 
-    .muted{color:var(--muted)}
-    .hidden{display:none !important}
+    .secondary-action{
+      background:#090909;
+      border:1px solid var(--border);
+      font-size:.92rem;
+    }
 
-    .manage-grid{
+    .footer-nav{
+      margin-top:12px;
+      background:#0a0b0c;
+      border:1px solid var(--border);
+      border-radius:16px;
       display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
+      grid-template-columns:repeat(4,1fr);
+      padding:4px;
+      box-shadow:var(--shadow);
+    }
+
+    .footer-tab{
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      min-height:52px;
+      border-radius:12px;
+      font-weight:800;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .footer-tab.active{
+      color:var(--orange);
+      background:rgba(255,255,255,.02);
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin-bottom:10px;
+    }
+
+    .stat-card{
+      background:#0d0e10;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+    }
+
+    .stat-card-label{
+      color:var(--muted);
+      font-size:.84rem;
+      margin-bottom:6px;
+      font-weight:700;
+    }
+
+    .stat-card-value{
+      font-size:1.1rem;
+      font-weight:900;
+      color:#fff;
+    }
+
+    .manage-section-title{
+      font-size:1rem;
+      font-weight:900;
+      margin:0 0 8px;
+    }
+
+    .manage-form{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr 1fr auto;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .manage-btn{
+      border:none;
+      border-radius:12px;
+      padding:0 14px;
+      background:var(--orange);
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .manage-list{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
     }
 
     .manage-row{
+      background:#0d0e10;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:8px;
       display:grid;
-      grid-template-columns:1.2fr .8fr .8fr .9fr auto auto;
+      grid-template-columns:90px 1.1fr .6fr 90px auto auto;
       gap:8px;
       align-items:center;
-      padding:10px 0;
-      border-bottom:1px solid rgba(255,255,255,.08);
     }
 
-    .small-btn{
+    .row-btn{
       border:none;
-      border-radius:12px;
-      padding:8px 10px;
-      cursor:pointer;
+      border-radius:10px;
+      padding:10px 12px;
       color:#fff;
-      font-weight:800;
-      box-shadow:0 4px 10px rgba(0,0,0,.18);
+      font-weight:900;
+      cursor:pointer;
     }
 
-    .history-ticket{
-      padding:12px 0;
-      border-bottom:1px solid rgba(255,255,255,.08);
+    .row-btn.save{background:var(--blue)}
+    .row-btn.del{background:var(--danger)}
+
+    .history-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .history-card{
+      background:#0d0e10;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
     }
 
     .history-head{
       display:flex;
       justify-content:space-between;
-      gap:10px;
+      gap:8px;
       align-items:center;
       font-weight:900;
       margin-bottom:4px;
@@ -400,276 +581,333 @@
 
     .history-sub{
       color:var(--muted);
-      font-size:.86rem;
-      margin-bottom:6px;
+      font-size:.9rem;
+      margin-bottom:8px;
     }
 
     .history-line{
-      color:var(--text);
-      font-size:.9rem;
-      margin:2px 0;
+      font-size:.92rem;
+      padding:2px 0;
     }
 
-    .footer-bar{
-      position:fixed;
-      left:0;
-      right:0;
-      bottom:0;
-      background:rgba(20,20,22,.97);
-      border-top:1px solid var(--border);
-      backdrop-filter:blur(8px);
-      padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    .hidden{display:none !important}
+
+    @media (max-width:900px){
+      .cards-grid{grid-template-columns:repeat(4,1fr)}
     }
 
-    .footer-inner{
-      max-width:820px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:10px;
-      align-items:center;
+    @media (max-width:760px){
+      .info-grid{grid-template-columns:1fr}
+      .brand-title{font-size:1.45rem}
+      .cards-grid{grid-template-columns:repeat(4,1fr)}
+      .manage-form{grid-template-columns:1fr 1fr}
+      .manage-row{grid-template-columns:1fr}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
     }
 
-    .footer-label{
-      color:var(--muted);
-      font-size:.85rem;
-      margin-bottom:4px;
+    @media (max-width:560px){
+      .cards-grid{grid-template-columns:repeat(4,1fr)}
+      .item-card{min-height:100px}
+      .item-middle{font-size:.8rem}
+      .item-price{font-size:.88rem}
+      .btn-row{grid-template-columns:1fr 1fr 1fr}
+      .big-action,.secondary-action{min-height:56px}
     }
 
-    .footer-total{
-      font-weight:900;
-      font-size:1.2rem;
-    }
-
-    @media (max-width: 820px){
-      .stats{grid-template-columns:repeat(3,1fr)}
-    }
-
-    @media (max-width: 640px){
-      .items-grid{grid-template-columns:repeat(3,1fr)}
-      .stats{grid-template-columns:repeat(2,1fr)}
-      .manage-row{grid-template-columns:1fr; gap:6px}
-      .ticket-header{grid-template-columns:1fr}
-    }
-
-    @media (max-width: 420px){
-      .items-grid{grid-template-columns:repeat(3,1fr)}
-      .item-btn .name{font-size:.72rem}
-      .actions-3,.actions,.actions-2,.pay-grid{grid-template-columns:1fr}
+    @media (max-width:430px){
+      .brand-title{font-size:1.25rem}
+      .cards-grid{grid-template-columns:repeat(4,1fr); gap:6px}
+      .item-card{min-height:92px; border-radius:14px; padding:8px 6px 7px}
+      .item-icon{width:40px; height:40px}
+      .item-middle{font-size:.72rem; min-height:36px}
+      .item-price{font-size:.82rem}
+      .footer-nav{grid-template-columns:repeat(4,1fr)}
+      .pay-grid{grid-template-columns:repeat(3,1fr)}
+      .btn-row{grid-template-columns:1.15fr .65fr .8fr}
+      .ticket-box{min-height:420px}
+      .ticket-scroll{max-height:420px}
     }
   </style>
 </head>
 <body>
   <div class="app">
     <div class="topbar">
-      <div>
-        <div class="title" id="appTitle">Caisse du Ball-Trap de Vence</div>
-        <div class="subtitle" id="todayLabel"></div>
+      <div class="brand">
+        <div class="brand-mark" id="brandMark"></div>
+        <div class="brand-title">Caisse Ball-Trap de Vence</div>
       </div>
-      <div class="pill" id="ticketNumberLabel">Ticket n° 1</div>
+      <button class="gear-btn" id="openGestionTop" title="Gestion"></button>
     </div>
 
-    <div class="tabs">
-      <button class="tab active" id="tab-caisse" type="button">Caisse</button>
-      <button class="tab" id="tab-gestion" type="button">Gestion</button>
-      <button class="tab" id="tab-historique" type="button">Historique</button>
-    </div>
-
-    <div class="card">
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-label">Total jour</div>
-          <div class="stat-value" id="dayTotal">0,00 €</div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon" id="ticketIcon"></div>
+        <div class="info-copy">
+          <div class="info-label">Ticket n°</div>
+          <div class="info-sub" id="ticketNumber">1</div>
         </div>
-        <div class="stat">
-          <div class="stat-label">Articles</div>
-          <div class="stat-value" id="dayCount">0</div>
+      </div>
+      <div class="info-card">
+        <div class="info-copy" style="width:100%; text-align:center">
+          <div class="info-label">Total</div>
+          <div class="info-value" id="headerTotal">0,00 €</div>
         </div>
-        <div class="stat">
-          <div class="stat-label">Tickets</div>
-          <div class="stat-value" id="dayTickets">0</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">CB</div>
-          <div class="stat-value" id="dayCard">0,00 €</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Espèces / Chèque</div>
-          <div class="stat-value" id="dayOther">0,00 €</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon" id="clockIcon"></div>
+        <div class="info-copy">
+          <div class="info-label">Date / Heure</div>
+          <div class="info-sub" id="headerDate"></div>
         </div>
       </div>
     </div>
 
-    <section id="screen-caisse">
+    <section id="screen-caisse" class="screen active">
+      <div id="categoriesHost"></div>
+
       <div class="card">
-        <div class="section-title">Articles</div>
-        <div class="section-subtitle">Touchez un bouton pour l’ajouter au ticket.</div>
-        <div id="categoriesContainer"></div>
+        <div class="field-label">
+          <span id="customerIcon"></span>
+          <span>Nom du client <span class="muted">(facultatif)</span></span>
+        </div>
+        <input class="customer-input" id="customerName" type="text" placeholder="Saisie libre du nom du client">
       </div>
 
       <div class="card">
-        <div class="section-title">Ticket en cours</div>
-
-        <div class="ticket-header">
-          <input type="text" id="ticketName" placeholder="Nom ou référence (facultatif)">
-          <input type="email" id="ticketEmail" placeholder="E-mail (facultatif)">
-        </div>
-
-        <div id="ticketLines" class="ticket-lines"></div>
-        <div id="ticketEmpty" class="empty">Aucun article sur le ticket en cours.</div>
-
-        <div class="total-box">
-          <span>Total ticket</span>
-          <span id="currentTicketTotal">0,00 €</span>
+        <div class="ticket-title">Ticket en cours</div>
+        <div class="ticket-box">
+          <div class="ticket-scroll" id="ticketList"></div>
+          <div class="ticket-total-line">
+            <span>TOTAL</span>
+            <span id="ticketTotal">0,00 €</span>
+          </div>
         </div>
 
         <div class="pay-grid">
-          <button class="pay-btn pay-cash active" id="pay-cash" type="button">💶 Espèces</button>
-          <button class="pay-btn pay-card" id="pay-card" type="button">💳 Carte bancaire</button>
-          <button class="pay-btn pay-check" id="pay-check" type="button">🧾 Chèque</button>
+          <button class="pay-btn cash active" id="btnCash">
+            <span id="cashIcon"></span>
+            <span>ESPÈCES</span>
+          </button>
+          <button class="pay-btn card" id="btnCard">
+            <span id="cardIcon"></span>
+            <span>CB</span>
+          </button>
+          <button class="pay-btn check" id="btnCheck">
+            <span id="checkIcon"></span>
+            <span>CHÈQUE</span>
+          </button>
         </div>
 
-        <div class="actions">
-          <button class="btn btn-gray" id="undoLineBtn" type="button">Annuler dernière ligne</button>
-          <button class="btn btn-green" id="validateBtn" type="button">Valider la vente</button>
-        </div>
-      </div>
-
-      <div id="afterSaleView" class="card hidden">
-        <div class="section-title">Ticket validé</div>
-        <div id="lastTicketPreview" class="muted"></div>
-        <div class="actions-3">
-          <button class="btn btn-gray" id="printTicketBtn" type="button">Imprimer</button>
-          <button class="btn btn-orange" id="copyTicketBtn" type="button">Copier le ticket</button>
-          <button class="btn btn-gray" id="closeAfterSaleBtn" type="button">Fermer</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="section-title">Clôture du jour</div>
-        <div class="section-subtitle">La clôture enregistre un résumé. Les ventes restent conservées.</div>
-        <div class="actions">
-          <button class="btn btn-red" id="closeDayBtn" type="button">Clôturer la journée</button>
-          <button class="btn btn-gray" id="historyShortcutBtn" type="button">Voir l’historique</button>
+        <div class="btn-row">
+          <button class="big-action" id="btnValidate">
+            <span id="validateIcon"></span>
+            <span>VALIDER LA VENTE</span>
+          </button>
+          <button class="secondary-action" id="btnPrint">
+            <span id="printIcon"></span>
+            <span>IMPRIMER</span>
+          </button>
+          <button class="secondary-action" id="btnCopy">
+            <span id="copyIcon"></span>
+            <span>COPIER LE TICKET</span>
+          </button>
         </div>
       </div>
     </section>
 
-    <section id="screen-gestion" class="hidden">
+    <section id="screen-historique" class="screen">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-label">Total du jour</div>
+          <div class="stat-card-value" id="statTotalDay">0,00 €</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-label">Tickets</div>
+          <div class="stat-card-value" id="statTicketsDay">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-label">CB</div>
+          <div class="stat-card-value" id="statCardDay">0,00 €</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-label">Espèces / Chèque</div>
+          <div class="stat-card-value" id="statOtherDay">0,00 €</div>
+        </div>
+      </div>
+
       <div class="card">
-        <div class="section-title">Ajouter un article</div>
-        <div class="manage-grid">
-          <select id="newItemCategory">
+        <div class="manage-section-title">Historique du jour</div>
+        <div class="history-list" id="historyList"></div>
+      </div>
+    </section>
+
+    <section id="screen-cloture" class="screen">
+      <div class="card">
+        <div class="manage-section-title">Clôture du jour</div>
+        <p style="color:var(--muted); margin-top:0">La clôture enregistre un résumé. Les ventes restent conservées.</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-card-label">Total</div>
+            <div class="stat-card-value" id="closeTotal">0,00 €</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">CB</div>
+            <div class="stat-card-value" id="closeCard">0,00 €</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">Espèces</div>
+            <div class="stat-card-value" id="closeCash">0,00 €</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">Chèque</div>
+            <div class="stat-card-value" id="closeCheck">0,00 €</div>
+          </div>
+        </div>
+        <button class="big-action" id="btnCloseDay" style="margin-top:12px;">
+          <span id="closeIcon"></span>
+          <span>CLOTURER LA JOURNÉE</span>
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="manage-section-title">Clôtures enregistrées</div>
+        <div class="history-list" id="closuresList"></div>
+      </div>
+    </section>
+
+    <section id="screen-gestion" class="screen">
+      <div class="card">
+        <div class="manage-section-title">Ajouter un article</div>
+        <div class="manage-form">
+          <select id="newCategory">
             <option value="tir">Tir / Séries</option>
             <option value="munitions">Munitions</option>
             <option value="services">Services</option>
             <option value="bar">Bar / Boissons</option>
           </select>
-          <input type="text" id="newItemIcon" placeholder="Icône (ex. 🎯)">
-          <input type="text" id="newItemName" placeholder="Nom de l’article">
-          <input type="number" id="newItemPrice" step="0.01" placeholder="Prix">
-        </div>
-        <div class="actions">
-          <button class="btn btn-green" id="addItemBtn" type="button">Ajouter l’article</button>
-          <button class="btn btn-gray" id="resetFormBtn" type="button">Vider les champs</button>
+          <input id="newName" type="text" placeholder="Nom de l’article">
+          <input id="newPrice" type="number" step="0.01" placeholder="Prix">
+          <input id="newIconKey" type="text" placeholder="Type icône (tir, boite, café...)">
+          <button class="manage-btn" id="btnAddItem">Ajouter</button>
         </div>
       </div>
 
       <div class="card">
-        <div class="section-title">Modifier les articles</div>
-        <div class="section-subtitle">Tu peux changer le nom, le prix, l’icône et la catégorie.</div>
-        <div id="catalogList"></div>
-      </div>
-
-      <div class="card">
-        <div class="section-title">Réglages</div>
-        <input type="text" id="associationName" placeholder="Nom affiché (facultatif)">
-        <div class="actions">
-          <button class="btn btn-blue" id="saveSettingsBtn" type="button">Enregistrer le nom</button>
-          <button class="btn btn-red" id="resetDataBtn" type="button">Tout remettre à zéro</button>
-        </div>
+        <div class="manage-section-title">Modifier les articles</div>
+        <div class="manage-list" id="manageList"></div>
       </div>
     </section>
 
-    <section id="screen-historique" class="hidden">
-      <div class="card">
-        <div class="section-title">Historique du jour</div>
-        <div id="historyContent"></div>
-        <div class="actions">
-          <button class="btn btn-gray" id="exportBtn" type="button">Exporter les données</button>
-          <button class="btn btn-gray" id="showClosuresBtn" type="button">Voir les clôtures</button>
-        </div>
-      </div>
-
-      <div id="closuresView" class="card hidden">
-        <div class="section-title">Clôtures enregistrées</div>
-        <div id="closuresContent"></div>
-      </div>
-    </section>
-  </div>
-
-  <div class="footer-bar">
-    <div class="footer-inner">
-      <div>
-        <div class="footer-label">Encaissement</div>
-        <div class="footer-total" id="footerTotal">0,00 €</div>
-      </div>
-      <button class="btn btn-green" id="footerValidateBtn" type="button">Valider</button>
+    <div class="footer-nav">
+      <button class="footer-tab active" data-screen="caisse" id="navCash">
+        <span id="navCashIcon"></span><span>CAISSE</span>
+      </button>
+      <button class="footer-tab" data-screen="historique" id="navHistory">
+        <span id="navHistoryIcon"></span><span>HISTORIQUE</span>
+      </button>
+      <button class="footer-tab" data-screen="cloture" id="navClose">
+        <span id="navCloseIcon"></span><span>CLÔTURE</span>
+      </button>
+      <button class="footer-tab" data-screen="gestion" id="navManage">
+        <span id="navManageIcon"></span><span>GESTION</span>
+      </button>
     </div>
   </div>
 
   <script>
-    function uid(){
+    const STORAGE = {
+      items: 'btv_items_v3',
+      sales: 'btv_sales_v3',
+      closures: 'btv_closures_v3',
+      counter: 'btv_counter_v3'
+    };
+
+    const CATEGORY_META = {
+      tir: { label: 'TIR / SÉRIES', cls: 'tir' },
+      munitions: { label: 'MUNITIONS', cls: 'munitions' },
+      services: { label: 'SERVICES', cls: 'services' },
+      bar: { label: 'BAR / BOISSONS', cls: 'bar' }
+    };
+
+    const DEFAULT_ITEMS = [
+      { id: id(), category: 'tir', name: 'Jeton fosse', price: 6.00, iconKey: 'target' },
+      { id: id(), category: 'tir', name: 'Initiation', price: 35.00, iconKey: 'shells' },
+      { id: id(), category: 'tir', name: 'Fosse universelle', price: 7.00, iconKey: 'shooter' },
+      { id: id(), category: 'tir', name: 'Fosse américaine', price: 7.00, iconKey: 'shooter' },
+      { id: id(), category: 'tir', name: 'Parcours chasse', price: 7.00, iconKey: 'shooter2' },
+      { id: id(), category: 'tir', name: 'Sanglier courant', price: 15.00, iconKey: 'boar' },
+      { id: id(), category: 'tir', name: 'Tir sur cible', price: 5.00, iconKey: 'targetplus' },
+      { id: id(), category: 'tir', name: 'Tarif bénévole', price: 6.00, iconKey: 'dot3' },
+      { id: id(), category: 'tir', name: 'Série supplémentaire', price: 1.00, iconKey: 'targetplus' },
+
+      { id: id(), category: 'munitions', name: 'Boîte cart. type 2', price: 8.50, iconKey: 'boxshell' },
+      { id: id(), category: 'munitions', name: 'Carton cart. type 2', price: 83.00, iconKey: 'box' },
+      { id: id(), category: 'munitions', name: 'Boîte cart. type 3', price: 9.00, iconKey: 'boxshell2' },
+      { id: id(), category: 'munitions', name: 'Carton cart. type 3', price: 85.00, iconKey: 'box' },
+
+      { id: id(), category: 'services', name: 'Location fusil', price: 5.00, iconKey: 'rifle' },
+      { id: id(), category: 'services', name: 'Assurance + participation', price: 15.00, iconKey: 'shield' },
+
+      { id: id(), category: 'bar', name: 'Café', price: 1.00, iconKey: 'coffee' },
+      { id: id(), category: 'bar', name: 'Boisson soft', price: 2.00, iconKey: 'can' },
+      { id: id(), category: 'bar', name: 'Eau plate', price: 1.00, iconKey: 'water' },
+      { id: id(), category: 'bar', name: 'Eau pétillante', price: 1.50, iconKey: 'sparkling' }
+    ];
+
+    const ICONS = {
+      mark: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="32" r="18"/><circle cx="28" cy="32" r="8"/><path d="M28 14V6M10 32H2M16 16l-6-6"/><path d="M36 24 58 6"/><path d="m52 6 6 6-18 6z"/></svg>`),
+      ticket: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M16 10h32v10a5 5 0 0 0 0 24v10H16V44a5 5 0 0 1 0-24V10z"/><path d="M24 22h16M24 32h16M24 42h10"/></svg>`),
+      clock: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="24"/><path d="M32 18v15l10 5"/></svg>`),
+      customer: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="32" cy="22" r="10"/><path d="M14 54c2-10 10-16 18-16s16 6 18 16z"/></svg>`),
+      cash: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="16" width="48" height="32" rx="4"/><circle cx="32" cy="32" r="7"/><path d="M16 22c0 4-4 6-8 6M48 42c0-4 4-6 8-6"/></svg>`),
+      card: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><rect x="8" y="14" width="48" height="36" rx="5"/><path d="M8 24h48M18 40h10"/></svg>`),
+      check: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M12 50h40"/><path d="M20 42 42 20"/><path d="M30 20h12v12"/></svg>`),
+      validate: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34 26 46 50 18"/></svg>`),
+      print: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M18 22V10h28v12"/><rect x="12" y="22" width="40" height="22" rx="4"/><path d="M18 38h28v16H18z"/></svg>`),
+      copy: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><rect x="22" y="18" width="24" height="30" rx="3"/><path d="M18 42H14V14h24v4"/></svg>`),
+      trash: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M20 18h24M26 18v-4h12v4M22 22l2 28h16l2-28"/><path d="M30 28v16M34 28v16"/></svg>`),
+      pie: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 8v24h24"/><path d="M28 12A20 20 0 1 0 52 36"/></svg>`),
+      list: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M22 18h28M22 32h28M22 46h28"/><circle cx="12" cy="18" r="2"/><circle cx="12" cy="32" r="2"/><circle cx="12" cy="46" r="2"/></svg>`),
+      manage: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="6"/><path d="M32 10v8M32 46v8M10 32h8M46 32h8M16 16l6 6M42 42l6 6M48 16l-6 6M22 42l-6 6"/></svg>`),
+
+      target: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="5"/></svg>`),
+      targetplus: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="26" cy="38" r="18"/><circle cx="26" cy="38" r="9"/><path d="M50 12v16M42 20h16"/></svg>`),
+      shells: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="10" y="14" width="12" height="34" rx="3"/><rect x="26" y="14" width="12" height="34" rx="3"/><rect x="42" y="14" width="12" height="34" rx="3"/><path d="M10 22h12M26 22h12M42 22h12"/></svg>`),
+      shooter: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="55" cy="16" r="4"/></svg>`),
+      shooter2: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="50" cy="14" r="3"/><circle cx="58" cy="19" r="3"/></svg>`),
+      boar: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M10 34c4-10 14-16 28-16l8-4 6 4-4 6c2 2 3 6 2 10l-6 6h-8l-4 6h-6l2-6H20l-4 6h-6l4-8c-3-1-5-2-6-4z"/></svg>`),
+      dot3: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="32" r="5"/><circle cx="32" cy="32" r="5"/><circle cx="46" cy="32" r="5"/></svg>`),
+      box: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 20h40v28H12z"/><path d="M12 20 24 12h28M24 12v8"/></svg>`),
+      boxshell: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="40" y="26" width="6" height="18" rx="2"/><rect x="50" y="26" width="6" height="18" rx="2"/></svg>`),
+      boxshell2: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="42" y="28" width="12" height="10" rx="2"/></svg>`),
+      rifle: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M6 38h20l18-10h10v4L32 40H20v6H14v-6H6z"/></svg>`),
+      shield: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 10 48 16v12c0 10-7 18-16 24-9-6-16-14-16-24V16z"/></svg>`),
+      coffee: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M14 24h28v12a10 10 0 0 1-10 10H24A10 10 0 0 1 14 36z"/><path d="M42 28h6a6 6 0 0 1 0 12h-4"/><path d="M20 16c0-4 4-4 4-8M30 16c0-4 4-4 4-8"/></svg>`),
+      can: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="20" y="12" width="24" height="40" rx="5"/><path d="M24 18h16"/><path d="M18 40c12 0 18-10 28-10"/></svg>`),
+      water: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M24 34h16"/></svg>`),
+      sparkling: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M48 18v6M45 21h6M50 28v4M48 32h4M12 24v5M10 26h4"/></svg>`)
+    };
+
+    function svg(markup){
+      return markup.trim();
+    }
+
+    function id(){
       return 'id-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
     }
 
-    const DEFAULT_ITEMS = [
-      { id: uid(), category: 'tir', icon: '🎯', name: 'Fosse universelle', price: 7.00 },
-      { id: uid(), category: 'tir', icon: '🏹', name: 'Parcours chasse', price: 7.00 },
-      { id: uid(), category: 'tir', icon: '🇺🇸', name: 'Fosse américaine', price: 7.00 },
-      { id: uid(), category: 'tir', icon: '🐗', name: 'Sanglier courant', price: 15.00 },
-      { id: uid(), category: 'tir', icon: '🎯', name: 'Tir sur cible', price: 5.00 },
-      { id: uid(), category: 'tir', icon: '👤', name: 'Tarif bénévole', price: 6.00 },
-      { id: uid(), category: 'tir', icon: '🔰', name: 'Initiation', price: 35.00 },
-      { id: uid(), category: 'tir', icon: '➕', name: 'Série supplémentaire', price: 1.00 },
+    function money(v){
+      return Number(v || 0).toLocaleString('fr-FR', { style:'currency', currency:'EUR' });
+    }
 
-      { id: uid(), category: 'munitions', icon: '📦', name: 'Boîte cart. type 2', price: 8.50 },
-      { id: uid(), category: 'munitions', icon: '🧱', name: 'Carton cart. type 2', price: 83.00 },
-      { id: uid(), category: 'munitions', icon: '📦', name: 'Boîte cart. type 3', price: 9.00 },
-      { id: uid(), category: 'munitions', icon: '🧱', name: 'Carton cart. type 3', price: 85.00 },
+    function todayKey(){
+      return new Date().toISOString().slice(0,10);
+    }
 
-      { id: uid(), category: 'services', icon: '🔫', name: 'Location fusil', price: 5.00 },
-      { id: uid(), category: 'services', icon: '🛡️', name: 'Assurance + participation', price: 15.00 },
-
-      { id: uid(), category: 'bar', icon: '☕', name: 'Café', price: 1.00 },
-      { id: uid(), category: 'bar', icon: '🥤', name: 'Boisson soft', price: 2.00 },
-      { id: uid(), category: 'bar', icon: '🫧', name: 'Eau pétillante', price: 1.50 }
-    ];
-
-    const CATEGORY_META = {
-      tir: { label: 'TIR / SÉRIES', headClass: 'cat-tir' },
-      munitions: { label: 'MUNITIONS', headClass: 'cat-munitions' },
-      services: { label: 'SERVICES', headClass: 'cat-services' },
-      bar: { label: 'BAR / BOISSONS', headClass: 'cat-bar' }
-    };
-
-    const STORAGE_KEYS = {
-      items: 'balltrap_v2_items',
-      sales: 'balltrap_v2_sales',
-      ticketCounter: 'balltrap_v2_counter',
-      closures: 'balltrap_v2_closures',
-      settings: 'balltrap_v2_settings'
-    };
-
-    let items = load(STORAGE_KEYS.items, DEFAULT_ITEMS);
-    let sales = load(STORAGE_KEYS.sales, []);
-    let ticketCounter = load(STORAGE_KEYS.ticketCounter, {});
-    let closures = load(STORAGE_KEYS.closures, []);
-    let settings = load(STORAGE_KEYS.settings, { associationName: '' });
-
-    let currentTicket = [];
-    let selectedPaymentMethod = 'ESPÈCES';
-    let lastTicket = null;
+    function nowDisplay(){
+      const d = new Date();
+      return d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+    }
 
     function load(key, fallback){
       try{
@@ -684,173 +922,149 @@
       localStorage.setItem(key, JSON.stringify(value));
     }
 
-    function euro(value){
-      return Number(value || 0).toLocaleString('fr-FR', { style:'currency', currency:'EUR' });
-    }
-
-    function todayKey(){
-      return new Date().toISOString().slice(0,10);
-    }
-
-    function nowText(){
-      return new Date().toLocaleDateString('fr-FR');
-    }
-
-    function dateTimeText(iso){
-      return new Date(iso).toLocaleString('fr-FR');
-    }
+    let items = load(STORAGE.items, DEFAULT_ITEMS);
+    let sales = load(STORAGE.sales, []);
+    let closures = load(STORAGE.closures, []);
+    let counters = load(STORAGE.counter, {});
+    let currentTicket = [];
+    let paymentMethod = 'ESPÈCES';
+    let currentScreen = 'caisse';
 
     function nextTicketNumber(){
-      const key = todayKey();
-      if(!ticketCounter[key]) ticketCounter[key] = 1;
-      return ticketCounter[key];
+      const k = todayKey();
+      if(!counters[k]) counters[k] = 1;
+      return counters[k];
     }
 
-    function bumpTicketNumber(){
-      const key = todayKey();
-      if(!ticketCounter[key]) ticketCounter[key] = 1;
-      ticketCounter[key] += 1;
-      save(STORAGE_KEYS.ticketCounter, ticketCounter);
+    function incTicketNumber(){
+      const k = todayKey();
+      if(!counters[k]) counters[k] = 1;
+      counters[k] += 1;
+      save(STORAGE.counter, counters);
     }
 
-    function todaySales(){
-      return sales.filter(s => s.dayKey === todayKey());
+    function setStaticIcons(){
+      document.getElementById('brandMark').innerHTML = ICONS.mark;
+      document.getElementById('ticketIcon').innerHTML = ICONS.ticket;
+      document.getElementById('clockIcon').innerHTML = ICONS.clock;
+      document.getElementById('customerIcon').innerHTML = ICONS.customer;
+      document.getElementById('cashIcon').innerHTML = ICONS.cash;
+      document.getElementById('cardIcon').innerHTML = ICONS.card;
+      document.getElementById('checkIcon').innerHTML = ICONS.check;
+      document.getElementById('validateIcon').innerHTML = ICONS.validate;
+      document.getElementById('printIcon').innerHTML = ICONS.print;
+      document.getElementById('copyIcon').innerHTML = ICONS.copy;
+      document.getElementById('closeIcon').innerHTML = ICONS.pie;
+      document.getElementById('navCashIcon').innerHTML = ICONS.cash;
+      document.getElementById('navHistoryIcon').innerHTML = ICONS.list;
+      document.getElementById('navCloseIcon').innerHTML = ICONS.pie;
+      document.getElementById('navManageIcon').innerHTML = ICONS.manage;
     }
 
-    function switchTab(tab){
-      document.getElementById('screen-caisse').classList.toggle('hidden', tab !== 'caisse');
-      document.getElementById('screen-gestion').classList.toggle('hidden', tab !== 'gestion');
-      document.getElementById('screen-historique').classList.toggle('hidden', tab !== 'historique');
-
-      document.getElementById('tab-caisse').classList.toggle('active', tab === 'caisse');
-      document.getElementById('tab-gestion').classList.toggle('active', tab === 'gestion');
-      document.getElementById('tab-historique').classList.toggle('active', tab === 'historique');
-
-      if(tab === 'gestion') renderCatalogList();
-      if(tab === 'historique') renderHistory();
+    function switchScreen(name){
+      currentScreen = name;
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-' + name).classList.add('active');
+      document.querySelectorAll('.footer-tab').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.footer-tab[data-screen="${name}"]`).classList.add('active');
     }
 
     function renderHeader(){
-      const name = settings.associationName && settings.associationName.trim()
-        ? settings.associationName.trim()
-        : 'Caisse du Ball-Trap de Vence';
-
-      document.getElementById('appTitle').textContent = name;
-      document.getElementById('todayLabel').textContent = nowText();
-      document.getElementById('ticketNumberLabel').textContent = 'Ticket n° ' + nextTicketNumber();
-      document.getElementById('associationName').value = settings.associationName || '';
+      document.getElementById('ticketNumber').textContent = nextTicketNumber();
+      document.getElementById('headerDate').textContent = nowDisplay();
+      document.getElementById('headerTotal').textContent = money(ticketTotal());
     }
 
-    function renderStats(){
-      const day = todaySales();
-      const total = day.reduce((s,x)=>s + Number(x.lineTotal), 0);
-      const count = day.reduce((s,x)=>s + Number(x.quantity), 0);
-      const tickets = new Set(day.map(x=>x.ticketNumber)).size;
-      const cb = day.filter(x=>x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.lineTotal), 0);
-      const cash = day.filter(x=>x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.lineTotal), 0);
-      const check = day.filter(x=>x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.lineTotal), 0);
+    function ticketTotal(){
+      return currentTicket.reduce((sum, row) => sum + Number(row.price), 0);
+    }
 
-      document.getElementById('dayTotal').textContent = euro(total);
-      document.getElementById('dayCount').textContent = count;
-      document.getElementById('dayTickets').textContent = tickets;
-      document.getElementById('dayCard').textContent = euro(cb);
-      document.getElementById('dayOther').textContent = euro(cash + check);
+    function addToTicket(item){
+      currentTicket.push({
+        id: id(),
+        itemId: item.id,
+        name: item.name,
+        price: Number(item.price),
+        category: item.category
+      });
+      renderTicket();
+      renderHeader();
+    }
+
+    function removeTicketLine(lineId){
+      currentTicket = currentTicket.filter(x => x.id !== lineId);
+      renderTicket();
+      renderHeader();
     }
 
     function renderCategories(){
-      const container = document.getElementById('categoriesContainer');
-      container.innerHTML = '';
+      const host = document.getElementById('categoriesHost');
+      host.innerHTML = '';
 
       Object.keys(CATEGORY_META).forEach(catKey => {
         const catItems = items.filter(i => i.category === catKey);
         if(catItems.length === 0) return;
 
         const block = document.createElement('div');
-        block.className = 'category-block';
+        block.className = `category-block cat-${catKey}`;
 
-        const head = document.createElement('div');
-        head.className = 'category-head ' + CATEGORY_META[catKey].headClass;
-        head.textContent = CATEGORY_META[catKey].label;
+        const title = document.createElement('div');
+        title.className = 'category-title';
+        title.textContent = CATEGORY_META[catKey].label;
 
         const grid = document.createElement('div');
-        grid.className = 'items-grid';
+        grid.className = 'cards-grid';
 
         catItems.forEach(item => {
           const btn = document.createElement('button');
-          btn.className = 'item-btn';
+          btn.className = `item-card ${CATEGORY_META[item.category].cls}`;
           btn.type = 'button';
           btn.innerHTML = `
-            <div class="icon">${escapeHtml(item.icon || '•')}</div>
-            <div class="name">${escapeHtml(item.name)}</div>
-            <div class="price">${euro(item.price)}</div>
+            <div class="item-top">
+              <div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div>
+            </div>
+            <div class="item-middle">${escapeHtml(item.name)}</div>
+            <div class="item-price">${money(item.price)}</div>
           `;
-          btn.addEventListener('click', () => addItemToTicket(item));
+          btn.addEventListener('click', () => addToTicket(item));
           grid.appendChild(btn);
         });
 
-        block.appendChild(head);
+        block.appendChild(title);
         block.appendChild(grid);
-        container.appendChild(block);
+        host.appendChild(block);
       });
-    }
-
-    function addItemToTicket(item){
-      currentTicket.push({
-        itemId: item.id,
-        name: item.name,
-        category: item.category,
-        icon: item.icon,
-        unitPrice: Number(item.price),
-        quantity: 1,
-        lineTotal: Number(item.price)
-      });
-      renderTicket();
     }
 
     function renderTicket(){
-      const box = document.getElementById('ticketLines');
-      const empty = document.getElementById('ticketEmpty');
-      box.innerHTML = '';
+      const list = document.getElementById('ticketList');
+      list.innerHTML = '';
 
       if(currentTicket.length === 0){
-        empty.classList.remove('hidden');
+        list.innerHTML = `<div style="color:var(--muted); padding:8px 0;">Aucun article sur le ticket.</div>`;
       } else {
-        empty.classList.add('hidden');
+        currentTicket.forEach((row, index) => {
+          const line = document.createElement('div');
+          line.className = 'ticket-row';
+          line.innerHTML = `
+            <div class="ticket-qty">${index + 1}</div>
+            <div class="ticket-name">${escapeHtml(row.name)}</div>
+            <div class="ticket-price">${money(row.price)}</div>
+            <button class="ticket-del" title="Supprimer">${ICONS.trash}</button>
+          `;
+          line.querySelector('.ticket-del').addEventListener('click', () => removeTicketLine(row.id));
+          list.appendChild(line);
+        });
       }
 
-      currentTicket.forEach((line, index) => {
-        const row = document.createElement('div');
-        row.className = 'ticket-line';
-        row.innerHTML = `
-          <div class="ticket-left">
-            <div class="ticket-index">${index + 1}</div>
-            <div>
-              <div class="ticket-name">${escapeHtml(line.name)}</div>
-              <div class="ticket-meta">${CATEGORY_META[line.category]?.label || ''}</div>
-            </div>
-          </div>
-          <div class="ticket-total">${euro(line.lineTotal)}</div>
-        `;
-        box.appendChild(row);
-      });
-
-      const total = currentTicket.reduce((s,x)=>s + Number(x.lineTotal), 0);
-      document.getElementById('currentTicketTotal').textContent = euro(total);
-      document.getElementById('footerTotal').textContent = euro(total);
-      document.getElementById('ticketNumberLabel').textContent = 'Ticket n° ' + nextTicketNumber();
+      document.getElementById('ticketTotal').textContent = money(ticketTotal());
     }
 
-    function setPaymentMethod(method){
-      selectedPaymentMethod = method;
-      document.getElementById('pay-cash').classList.toggle('active', method === 'ESPÈCES');
-      document.getElementById('pay-card').classList.toggle('active', method === 'CB');
-      document.getElementById('pay-check').classList.toggle('active', method === 'CHÈQUE');
-    }
-
-    function undoLastLine(){
-      if(currentTicket.length === 0) return;
-      currentTicket.pop();
-      renderTicket();
+    function setPayment(method){
+      paymentMethod = method;
+      document.getElementById('btnCash').classList.toggle('active', method === 'ESPÈCES');
+      document.getElementById('btnCard').classList.toggle('active', method === 'CB');
+      document.getElementById('btnCheck').classList.toggle('active', method === 'CHÈQUE');
     }
 
     function validateSale(){
@@ -861,89 +1075,88 @@
 
       const ticketNumber = nextTicketNumber();
       const createdAt = new Date().toISOString();
-      const dayKey = todayKey();
-      const customerName = document.getElementById('ticketName').value.trim();
-      const customerEmail = document.getElementById('ticketEmail').value.trim();
-      const total = currentTicket.reduce((s,x)=>s + Number(x.lineTotal), 0);
+      const customerName = document.getElementById('customerName').value.trim();
+      const total = ticketTotal();
 
-      currentTicket.forEach(line => {
-        sales.push({
-          id: uid(),
-          ticketNumber,
-          createdAt,
-          dayKey,
-          customerName,
-          customerEmail,
-          paymentMethod: selectedPaymentMethod,
-          itemId: line.itemId,
-          name: line.name,
-          category: line.category,
-          icon: line.icon,
-          unitPrice: line.unitPrice,
-          quantity: line.quantity,
-          lineTotal: line.lineTotal
-        });
-      });
+      const groupedLines = currentTicket.map(row => ({
+        name: row.name,
+        price: row.price,
+        category: row.category
+      }));
 
-      save(STORAGE_KEYS.sales, sales);
-
-      lastTicket = {
+      sales.push({
+        id: id(),
+        dayKey: todayKey(),
         ticketNumber,
         createdAt,
         customerName,
-        customerEmail,
-        paymentMethod: selectedPaymentMethod,
-        lines: JSON.parse(JSON.stringify(currentTicket)),
-        total
-      };
+        paymentMethod,
+        total,
+        lines: groupedLines
+      });
 
-      bumpTicketNumber();
+      save(STORAGE.sales, sales);
+      incTicketNumber();
 
       currentTicket = [];
-      document.getElementById('ticketName').value = '';
-      document.getElementById('ticketEmail').value = '';
-      document.getElementById('afterSaleView').classList.remove('hidden');
-      renderLastTicketPreview();
-      renderAll();
+      document.getElementById('customerName').value = '';
+      renderTicket();
+      renderHeader();
+      renderHistory();
+      renderClotureStats();
+      alert('Vente enregistrée.');
     }
 
-    function renderLastTicketPreview(){
-      const box = document.getElementById('lastTicketPreview');
-      if(!lastTicket){
-        box.textContent = 'Aucun ticket récent.';
-        return;
-      }
-      box.innerHTML = `
-        <strong>Ticket n° ${lastTicket.ticketNumber}</strong><br>
-        ${escapeHtml(lastTicket.customerName || 'Sans nom')}<br>
-        ${euro(lastTicket.total)} — ${lastTicket.paymentMethod}
-      `;
-    }
-
-    function closeAfterSale(){
-      document.getElementById('afterSaleView').classList.add('hidden');
-    }
-
-    function buildTicketText(ticket){
+    function currentTicketText(){
+      const customerName = document.getElementById('customerName').value.trim();
       let txt = 'Fédération Française de Ball-Trap\n';
       txt += 'Club de Vence\n\n';
-      txt += 'Ticket n° ' + ticket.ticketNumber + '\n';
-      txt += 'Date : ' + dateTimeText(ticket.createdAt) + '\n';
-      if(ticket.customerName){
-        txt += 'Nom / Référence : ' + ticket.customerName + '\n';
+      txt += 'Ticket n° ' + nextTicketNumber() + '\n';
+      txt += 'Date : ' + nowDisplay() + '\n';
+      if(customerName){
+        txt += 'Nom / Référence : ' + customerName + '\n';
       }
-      txt += 'Encaissement : ' + ticket.paymentMethod + '\n\n';
-      ticket.lines.forEach(line => {
-        txt += '- ' + line.name + ' : ' + euro(line.lineTotal) + '\n';
+      txt += 'Encaissement : ' + paymentMethod + '\n\n';
+
+      currentTicket.forEach((row, i) => {
+        txt += (i + 1) + ' x ' + row.name + '   ' + money(row.price) + '\n';
       });
-      txt += '\nTotal : ' + euro(ticket.total) + '\n\n';
-      txt += 'Merci pour votre visite';
+
+      txt += '\nTOTAL : ' + money(ticketTotal()) + '\n';
       return txt;
     }
 
-    function printLastTicket(){
-      if(!lastTicket) return;
-      const content = escapeHtml(buildTicketText(lastTicket)).replace(/\n/g, '<br>');
+    function copyTicket(){
+      if(currentTicket.length === 0){
+        alert('Le ticket est vide.');
+        return;
+      }
+      const text = currentTicketText();
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Ticket copié');
+        }).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text){
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      alert('Ticket copié');
+    }
+
+    function printTicket(){
+      if(currentTicket.length === 0){
+        alert('Le ticket est vide.');
+        return;
+      }
+      const content = escapeHtml(currentTicketText()).replace(/\n/g, '<br>');
       const w = window.open('', '_blank');
       if(!w){
         alert('Impossible d’ouvrir la fenêtre d’impression.');
@@ -960,27 +1173,78 @@
       w.print();
     }
 
-    function copyLastTicket(){
-      if(!lastTicket) return;
-      const text = buildTicketText(lastTicket);
-
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text)
-          .then(()=>alert('Ticket copié'))
-          .catch(()=>fallbackCopy(text));
-      } else {
-        fallbackCopy(text);
-      }
+    function todaySales(){
+      return sales.filter(s => s.dayKey === todayKey());
     }
 
-    function fallbackCopy(text){
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      alert('Ticket copié');
+    function renderHistory(){
+      const host = document.getElementById('historyList');
+      host.innerHTML = '';
+
+      const day = todaySales();
+      if(day.length === 0){
+        host.innerHTML = `<div class="history-card">Aucune vente aujourd’hui.</div>`;
+      } else {
+        day.slice().reverse().forEach(sale => {
+          const card = document.createElement('div');
+          card.className = 'history-card';
+          card.innerHTML = `
+            <div class="history-head">
+              <span>Ticket n° ${sale.ticketNumber}</span>
+              <span>${money(sale.total)}</span>
+            </div>
+            <div class="history-sub">${escapeHtml(sale.customerName || 'Sans nom')} — ${sale.paymentMethod}</div>
+            ${sale.lines.map(line => `<div class="history-line">${escapeHtml(line.name)} — ${money(line.price)}</div>`).join('')}
+          `;
+          host.appendChild(card);
+        });
+      }
+
+      const total = day.reduce((s,x)=>s + Number(x.total), 0);
+      const tickets = day.length;
+      const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
+      const other = day.filter(x => x.paymentMethod !== 'CB').reduce((s,x)=>s + Number(x.total), 0);
+
+      document.getElementById('statTotalDay').textContent = money(total);
+      document.getElementById('statTicketsDay').textContent = tickets;
+      document.getElementById('statCardDay').textContent = money(card);
+      document.getElementById('statOtherDay').textContent = money(other);
+    }
+
+    function renderClotureStats(){
+      const day = todaySales();
+      const total = day.reduce((s,x)=>s + Number(x.total), 0);
+      const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
+      const cash = day.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.total), 0);
+      const check = day.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.total), 0);
+
+      document.getElementById('closeTotal').textContent = money(total);
+      document.getElementById('closeCard').textContent = money(card);
+      document.getElementById('closeCash').textContent = money(cash);
+      document.getElementById('closeCheck').textContent = money(check);
+
+      const host = document.getElementById('closuresList');
+      host.innerHTML = '';
+
+      if(closures.length === 0){
+        host.innerHTML = `<div class="history-card">Aucune clôture enregistrée.</div>`;
+      } else {
+        closures.slice().reverse().forEach(c => {
+          const cardEl = document.createElement('div');
+          cardEl.className = 'history-card';
+          cardEl.innerHTML = `
+            <div class="history-head">
+              <span>${c.dayKey}</span>
+              <span>${money(c.total)}</span>
+            </div>
+            <div class="history-sub">Tickets : ${c.tickets}</div>
+            <div class="history-line">CB : ${money(c.card)}</div>
+            <div class="history-line">Espèces : ${money(c.cash)}</div>
+            <div class="history-line">Chèque : ${money(c.check)}</div>
+          `;
+          host.appendChild(cardEl);
+        });
+      }
     }
 
     function closeDay(){
@@ -990,104 +1254,83 @@
         return;
       }
 
-      const total = day.reduce((s,x)=>s + Number(x.lineTotal), 0);
-      const tickets = new Set(day.map(x=>x.ticketNumber)).size;
-      const lines = day.length;
-      const card = day.filter(x=>x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.lineTotal), 0);
-      const cash = day.filter(x=>x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.lineTotal), 0);
-      const check = day.filter(x=>x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.lineTotal), 0);
+      const total = day.reduce((s,x)=>s + Number(x.total), 0);
+      const tickets = day.length;
+      const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
+      const cash = day.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.total), 0);
+      const check = day.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.total), 0);
 
       closures.push({
-        id: uid(),
+        id: id(),
         dayKey: todayKey(),
-        closedAt: new Date().toISOString(),
         total,
         tickets,
-        lines,
         card,
         cash,
         check
       });
 
-      save(STORAGE_KEYS.closures, closures);
-      alert(
-        'Clôture enregistrée.\n' +
-        'Total : ' + euro(total) + '\n' +
-        'CB : ' + euro(card) + '\n' +
-        'Espèces : ' + euro(cash) + '\n' +
-        'Chèque : ' + euro(check)
-      );
-      renderAll();
+      save(STORAGE.closures, closures);
+      renderClotureStats();
+      alert('Clôture enregistrée.');
     }
 
-    function renderCatalogList(){
-      const box = document.getElementById('catalogList');
-      box.innerHTML = '';
-
-      if(items.length === 0){
-        box.innerHTML = '<div class="muted">Aucun article.</div>';
-        return;
-      }
+    function renderManage(){
+      const host = document.getElementById('manageList');
+      host.innerHTML = '';
 
       items.forEach(item => {
         const row = document.createElement('div');
         row.className = 'manage-row';
         row.innerHTML = `
-          <input type="text" value="${escapeAttr(item.name)}" data-field="name">
-          <input type="number" step="0.01" value="${Number(item.price).toFixed(2)}" data-field="price">
-          <input type="text" value="${escapeAttr(item.icon || '')}" data-field="icon">
-          <select data-field="category">
-            <option value="tir" ${item.category==='tir'?'selected':''}>Tir / Séries</option>
-            <option value="munitions" ${item.category==='munitions'?'selected':''}>Munitions</option>
-            <option value="services" ${item.category==='services'?'selected':''}>Services</option>
-            <option value="bar" ${item.category==='bar'?'selected':''}>Bar / Boissons</option>
+          <select data-k="category">
+            <option value="tir" ${item.category === 'tir' ? 'selected' : ''}>Tir</option>
+            <option value="munitions" ${item.category === 'munitions' ? 'selected' : ''}>Munitions</option>
+            <option value="services" ${item.category === 'services' ? 'selected' : ''}>Services</option>
+            <option value="bar" ${item.category === 'bar' ? 'selected' : ''}>Bar</option>
           </select>
-          <div style="display:flex; gap:8px;">
-            <button class="small-btn btn-blue" type="button">OK</button>
-            <button class="small-btn btn-red" type="button">X</button>
-          </div>
+          <input data-k="name" type="text" value="${escapeAttr(item.name)}">
+          <input data-k="price" type="number" step="0.01" value="${Number(item.price).toFixed(2)}">
+          <input data-k="iconKey" type="text" value="${escapeAttr(item.iconKey)}">
+          <button class="row-btn save" type="button">OK</button>
+          <button class="row-btn del" type="button">X</button>
         `;
 
-        const saveBtn = row.querySelector('.btn-blue');
-        const delBtn = row.querySelector('.btn-red');
-
-        saveBtn.addEventListener('click', () => {
-          const name = row.querySelector('[data-field="name"]').value.trim();
-          const price = Number(row.querySelector('[data-field="price"]').value);
-          const icon = row.querySelector('[data-field="icon"]').value.trim();
-          const category = row.querySelector('[data-field="category"]').value;
+        row.querySelector('.save').addEventListener('click', () => {
+          const category = row.querySelector('[data-k="category"]').value;
+          const name = row.querySelector('[data-k="name"]').value.trim();
+          const price = Number(row.querySelector('[data-k="price"]').value);
+          const iconKey = row.querySelector('[data-k="iconKey"]').value.trim();
 
           if(!name || Number.isNaN(price)){
             alert('Nom ou prix invalide.');
             return;
           }
 
+          item.category = category;
           item.name = name;
           item.price = price;
-          item.icon = icon || '•';
-          item.category = category;
-          save(STORAGE_KEYS.items, items);
+          item.iconKey = iconKey || 'dot3';
+          save(STORAGE.items, items);
           renderAll();
-          switchTab('gestion');
         });
 
-        delBtn.addEventListener('click', () => {
+        row.querySelector('.del').addEventListener('click', () => {
           if(!confirm('Supprimer cet article ?')) return;
           items = items.filter(x => x.id !== item.id);
-          save(STORAGE_KEYS.items, items);
+          save(STORAGE.items, items);
           renderAll();
-          switchTab('gestion');
         });
 
-        box.appendChild(row);
+        host.appendChild(row);
       });
     }
 
     function addItem(){
-      const category = document.getElementById('newItemCategory').value;
-      const icon = document.getElementById('newItemIcon').value.trim() || '•';
-      const name = document.getElementById('newItemName').value.trim();
-      const price = Number(document.getElementById('newItemPrice').value);
+      const category = document.getElementById('newCategory').value;
+      const name = document.getElementById('newName').value.trim();
+      const price = Number(document.getElementById('newPrice').value);
+      const iconKey = document.getElementById('newIconKey').value.trim() || 'dot3';
 
       if(!name || Number.isNaN(price)){
         alert('Complète le nom et le prix.');
@@ -1095,134 +1338,27 @@
       }
 
       items.push({
-        id: uid(),
+        id: id(),
         category,
-        icon,
         name,
-        price
+        price,
+        iconKey
       });
 
-      save(STORAGE_KEYS.items, items);
-      clearItemForm();
+      save(STORAGE.items, items);
+      document.getElementById('newName').value = '';
+      document.getElementById('newPrice').value = '';
+      document.getElementById('newIconKey').value = '';
       renderAll();
-      switchTab('gestion');
-    }
-
-    function clearItemForm(){
-      document.getElementById('newItemCategory').value = 'tir';
-      document.getElementById('newItemIcon').value = '';
-      document.getElementById('newItemName').value = '';
-      document.getElementById('newItemPrice').value = '';
-    }
-
-    function renderHistory(){
-      const box = document.getElementById('historyContent');
-      box.innerHTML = '';
-
-      const day = todaySales();
-      if(day.length === 0){
-        box.innerHTML = '<div class="muted">Aucune vente aujourd’hui.</div>';
-        return;
-      }
-
-      const grouped = {};
-      day.forEach(line => {
-        if(!grouped[line.ticketNumber]) grouped[line.ticketNumber] = [];
-        grouped[line.ticketNumber].push(line);
-      });
-
-      Object.keys(grouped).sort((a,b)=>Number(a)-Number(b)).forEach(ticketNo => {
-        const lines = grouped[ticketNo];
-        const total = lines.reduce((s,x)=>s + Number(x.lineTotal), 0);
-        const payment = lines[0].paymentMethod;
-        const customer = lines[0].customerName || 'Sans nom';
-
-        const block = document.createElement('div');
-        block.className = 'history-ticket';
-        block.innerHTML = `
-          <div class="history-head">
-            <span>Ticket n° ${ticketNo}</span>
-            <span>${euro(total)}</span>
-          </div>
-          <div class="history-sub">${escapeHtml(customer)} — ${payment}</div>
-          ${lines.map(line => `<div class="history-line">${escapeHtml(line.name)} — ${euro(line.lineTotal)}</div>`).join('')}
-        `;
-        box.appendChild(block);
-      });
-    }
-
-    function showClosures(){
-      const view = document.getElementById('closuresView');
-      const box = document.getElementById('closuresContent');
-      view.classList.remove('hidden');
-
-      if(closures.length === 0){
-        box.innerHTML = '<div class="muted">Aucune clôture enregistrée.</div>';
-        return;
-      }
-
-      box.innerHTML = closures.slice().reverse().map(c => `
-        <div class="history-ticket">
-          <div class="history-head">
-            <span>${c.dayKey}</span>
-            <span>${euro(c.total)}</span>
-          </div>
-          <div class="history-sub">Tickets : ${c.tickets} — Articles : ${c.lines}</div>
-          <div class="history-line">CB : ${euro(c.card)}</div>
-          <div class="history-line">Espèces : ${euro(c.cash)}</div>
-          <div class="history-line">Chèque : ${euro(c.check)}</div>
-        </div>
-      `).join('');
-    }
-
-    function exportData(){
-      const data = { settings, items, sales, closures };
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'caisse-balltrap-export.json';
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function saveSettings(){
-      settings.associationName = document.getElementById('associationName').value.trim();
-      save(STORAGE_KEYS.settings, settings);
-      renderHeader();
-      alert('Nom enregistré.');
-    }
-
-    function resetAllData(){
-      if(!confirm('Tout remettre à zéro ? Cela efface ventes, clôtures et ticket en cours.')) return;
-
-      sales = [];
-      closures = [];
-      ticketCounter = {};
-      currentTicket = [];
-      lastTicket = null;
-
-      save(STORAGE_KEYS.sales, sales);
-      save(STORAGE_KEYS.closures, closures);
-      save(STORAGE_KEYS.ticketCounter, ticketCounter);
-
-      document.getElementById('ticketName').value = '';
-      document.getElementById('ticketEmail').value = '';
-      document.getElementById('afterSaleView').classList.add('hidden');
-
-      renderAll();
-      switchTab('gestion');
     }
 
     function renderAll(){
       renderHeader();
-      renderStats();
       renderCategories();
       renderTicket();
-      renderCatalogList();
       renderHistory();
-      renderLastTicketPreview();
-      save(STORAGE_KEYS.items, items);
+      renderClotureStats();
+      renderManage();
     }
 
     function escapeHtml(str){
@@ -1235,41 +1371,25 @@
     }
 
     function escapeAttr(str){
-      return escapeHtml(String(str ?? ''));
+      return escapeHtml(str ?? '');
     }
 
-    function bindEvents(){
-      document.getElementById('tab-caisse').addEventListener('click', ()=>switchTab('caisse'));
-      document.getElementById('tab-gestion').addEventListener('click', ()=>switchTab('gestion'));
-      document.getElementById('tab-historique').addEventListener('click', ()=>switchTab('historique'));
+    document.getElementById('btnCash').addEventListener('click', () => setPayment('ESPÈCES'));
+    document.getElementById('btnCard').addEventListener('click', () => setPayment('CB'));
+    document.getElementById('btnCheck').addEventListener('click', () => setPayment('CHÈQUE'));
+    document.getElementById('btnValidate').addEventListener('click', validateSale);
+    document.getElementById('btnCopy').addEventListener('click', copyTicket);
+    document.getElementById('btnPrint').addEventListener('click', printTicket);
+    document.getElementById('btnCloseDay').addEventListener('click', closeDay);
+    document.getElementById('btnAddItem').addEventListener('click', addItem);
 
-      document.getElementById('pay-cash').addEventListener('click', ()=>setPaymentMethod('ESPÈCES'));
-      document.getElementById('pay-card').addEventListener('click', ()=>setPaymentMethod('CB'));
-      document.getElementById('pay-check').addEventListener('click', ()=>setPaymentMethod('CHÈQUE'));
+    document.querySelectorAll('.footer-tab').forEach(btn => {
+      btn.addEventListener('click', () => switchScreen(btn.dataset.screen));
+    });
 
-      document.getElementById('undoLineBtn').addEventListener('click', undoLastLine);
-      document.getElementById('validateBtn').addEventListener('click', validateSale);
-      document.getElementById('footerValidateBtn').addEventListener('click', validateSale);
+    document.getElementById('openGestionTop').addEventListener('click', () => switchScreen('gestion'));
 
-      document.getElementById('printTicketBtn').addEventListener('click', printLastTicket);
-      document.getElementById('copyTicketBtn').addEventListener('click', copyLastTicket);
-      document.getElementById('closeAfterSaleBtn').addEventListener('click', closeAfterSale);
-
-      document.getElementById('closeDayBtn').addEventListener('click', closeDay);
-      document.getElementById('historyShortcutBtn').addEventListener('click', ()=>switchTab('historique'));
-
-      document.getElementById('addItemBtn').addEventListener('click', addItem);
-      document.getElementById('resetFormBtn').addEventListener('click', clearItemForm);
-
-      document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
-      document.getElementById('resetDataBtn').addEventListener('click', resetAllData);
-
-      document.getElementById('exportBtn').addEventListener('click', exportData);
-      document.getElementById('showClosuresBtn').addEventListener('click', showClosures);
-    }
-
-    bindEvents();
-    setPaymentMethod('ESPÈCES');
+    setStaticIcons();
     renderAll();
   </script>
 </body>
