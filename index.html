@@ -4,31 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Caisse Ball-Trap de Vence</title>
-  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="theme-color" content="#080808" />
   <style>
     :root{
-      --bg:#070708;
-      --panel:#111214;
-      --panel-2:#1a1b1f;
-      --panel-3:#0d0e10;
-      --border:#2a2b31;
-      --text:#f4f4f5;
-      --muted:#a8abb3;
-      --orange:#f48a06;
-      --orange-dark:#d87500;
-      --red:#cf2027;
-      --red-dark:#a8161c;
-      --green:#538d1f;
-      --green-dark:#427116;
-      --blue:#145cad;
-      --blue-dark:#0f4a8c;
-      --cash:#4c9a1a;
-      --card:#0f5ead;
-      --check:#666a73;
-      --danger:#d13a34;
+      --bg:#050506;
+      --panel:#0c0d0f;
+      --panel2:#121316;
+      --line:#2a2c31;
+      --text:#f3f3f4;
+      --muted:#a8adb6;
+      --orange:#ef8600;
+      --orange2:#d77400;
+      --red:#d12128;
+      --red2:#aa171d;
+      --green:#4c851a;
+      --green2:#3f6f14;
+      --blue:#0e58ac;
+      --blue2:#0a4690;
+      --cash:#4f971d;
+      --card:#0b57a7;
+      --check:#5f6670;
+      --danger:#d53d38;
+      --radius:16px;
       --shadow:0 8px 24px rgba(0,0,0,.35);
-      --radius:20px;
-      --radius-sm:14px;
     }
 
     *{box-sizing:border-box}
@@ -51,172 +49,124 @@
     }
 
     .app{
-      max-width:820px;
+      max-width:760px;
       margin:0 auto;
       padding:12px;
-      padding-bottom:110px;
+      padding-bottom:96px;
     }
 
     .topbar{
-      display:flex;
+      display:grid;
+      grid-template-columns:32px 1fr 32px;
       align-items:center;
-      justify-content:space-between;
       gap:10px;
       margin-bottom:10px;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:0;
-    }
-
-    .brand-mark{
-      width:28px;
-      height:28px;
+    .brand-mark,
+    .gear-btn{
+      width:32px;
+      height:32px;
       display:flex;
       align-items:center;
       justify-content:center;
       color:var(--orange);
-      flex:0 0 auto;
-    }
-
-    .brand-title{
-      font-size:1.9rem;
-      font-weight:800;
-      letter-spacing:-.02em;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
     }
 
     .gear-btn{
       border:none;
       background:transparent;
       color:#fff;
-      width:38px;
-      height:38px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
       cursor:pointer;
     }
 
-    .info-grid{
+    .title{
+      text-align:center;
+      font-size:1.05rem;
+      font-weight:900;
+      letter-spacing:-.01em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .top-info{
       display:grid;
-      grid-template-columns:1fr 1fr 1.15fr;
-      gap:10px;
-      margin-bottom:12px;
+      grid-template-columns:1fr 1.2fr;
+      gap:8px;
+      margin-bottom:6px;
     }
 
-    .info-card{
-      background:var(--panel-3);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:14px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-height:92px;
-      box-shadow:var(--shadow);
-    }
-
-    .info-icon{
-      width:42px;
-      height:42px;
+    .top-pill{
+      background:#0d0e10;
+      border:1px solid var(--line);
+      border-radius:12px;
+      min-height:54px;
       display:flex;
       align-items:center;
       justify-content:center;
-      color:#fff;
-      opacity:.96;
-      flex:0 0 auto;
+      padding:8px 12px;
+      box-shadow:var(--shadow);
+      font-weight:800;
+      gap:10px;
     }
 
-    .info-copy{
-      min-width:0;
-    }
-
-    .info-label{
+    .top-pill .small{
       color:var(--muted);
-      font-size:.9rem;
-      margin-bottom:4px;
-      text-transform:uppercase;
-      letter-spacing:.04em;
       font-weight:700;
     }
 
-    .info-value{
-      font-size:2rem;
-      line-height:1;
-      font-weight:900;
-      color:var(--orange);
-    }
-
-    .info-sub{
-      font-size:1.05rem;
-      line-height:1.2;
-      font-weight:800;
-      color:#fff;
-    }
-
-    .tabs{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
+    .top-total{
+      background:#0d0e10;
+      border:1px solid var(--line);
+      border-radius:12px;
+      min-height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       gap:8px;
-      margin-bottom:12px;
+      margin-bottom:10px;
+      box-shadow:var(--shadow);
+      font-weight:900;
     }
 
-    .tab{
-      border:none;
-      border-radius:16px;
-      padding:11px 8px;
-      background:var(--panel-2);
-      color:var(--muted);
-      font-weight:800;
-      cursor:pointer;
-      border:1px solid var(--border);
-    }
-
-    .tab.active{
-      background:var(--orange);
-      color:#fff;
-      border-color:transparent;
+    .top-total .value{
+      color:var(--orange);
+      font-size:1.05rem;
     }
 
     .screen{display:none}
     .screen.active{display:block}
 
-    .category-block{
-      margin-bottom:10px;
+    .section{
+      margin-bottom:8px;
     }
 
-    .category-title{
-      font-size:.95rem;
+    .section-title{
+      margin:0 0 6px 2px;
+      font-size:.84rem;
       font-weight:900;
       text-transform:uppercase;
       letter-spacing:.03em;
-      margin:0 0 6px 4px;
     }
 
-    .cat-tir .category-title{color:var(--orange)}
-    .cat-munitions .category-title{color:#ff3b3b}
-    .cat-services .category-title{color:#71c531}
-    .cat-bar .category-title{color:#28a1ff}
+    .title-tir{color:var(--orange)}
+    .title-munitions{color:#ff3434}
+    .title-services{color:#70c92c}
+    .title-bar{color:#2e9fff}
 
-    .cards-grid{
+    .grid{
       display:grid;
       grid-template-columns:repeat(4,1fr);
-      gap:8px;
+      gap:6px;
     }
 
-    .item-card{
+    .item{
       border:none;
-      border-radius:16px;
+      border-radius:12px;
       color:#fff;
-      min-height:112px;
-      padding:10px 8px 8px;
+      min-height:94px;
+      padding:8px 6px 6px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
@@ -226,93 +176,92 @@
       box-shadow:var(--shadow);
     }
 
-    .item-card::after{
+    .item::after{
       content:"";
       position:absolute;
       left:0; right:0; bottom:0;
-      height:27%;
-      background:rgba(0,0,0,.13);
+      height:25%;
+      background:rgba(0,0,0,.12);
     }
 
-    .item-card.tir{background:linear-gradient(180deg,var(--orange),var(--orange-dark))}
-    .item-card.munitions{background:linear-gradient(180deg,var(--red),var(--red-dark))}
-    .item-card.services{background:linear-gradient(180deg,var(--green),var(--green-dark))}
-    .item-card.bar{background:linear-gradient(180deg,var(--blue),var(--blue-dark))}
+    .tir{background:linear-gradient(180deg,var(--orange),var(--orange2))}
+    .munitions{background:linear-gradient(180deg,var(--red),var(--red2))}
+    .services{background:linear-gradient(180deg,var(--green),var(--green2))}
+    .bar{background:linear-gradient(180deg,var(--blue),var(--blue2))}
 
-    .item-top{
+    .item-top,
+    .item-mid,
+    .item-price{
       position:relative;
       z-index:1;
+    }
+
+    .item-top{
       display:flex;
       justify-content:center;
       align-items:center;
-      min-height:34px;
-      margin-top:2px;
+      min-height:28px;
+      margin-top:1px;
     }
 
     .item-icon{
-      width:46px;
-      height:46px;
+      width:34px;
+      height:34px;
       display:flex;
       align-items:center;
       justify-content:center;
       color:#fff;
     }
 
-    .item-middle{
-      position:relative;
-      z-index:1;
+    .item-mid{
       text-align:center;
-      font-weight:800;
-      line-height:1.1;
-      font-size:.9rem;
-      min-height:42px;
+      font-size:.68rem;
+      font-weight:900;
+      line-height:1.08;
+      min-height:30px;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:0 4px;
       text-transform:uppercase;
+      padding:0 2px;
     }
 
     .item-price{
-      position:relative;
-      z-index:1;
       text-align:center;
-      font-size:.95rem;
+      font-size:.78rem;
       font-weight:900;
-      margin-top:4px;
     }
 
     .card{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:18px;
+      background:#0c0d0f;
+      border:1px solid var(--line);
+      border-radius:14px;
       box-shadow:var(--shadow);
-      padding:12px;
-      margin-top:10px;
+      padding:10px;
+      margin-top:8px;
     }
 
     .field-label{
       display:flex;
       align-items:center;
       gap:8px;
-      color:#fff;
+      margin-bottom:6px;
+      font-size:.82rem;
       font-weight:800;
-      margin-bottom:8px;
     }
 
     .field-label .muted{
       color:var(--muted);
       font-weight:600;
-      font-size:.92rem;
     }
 
     .customer-input{
       width:100%;
-      background:#0d0e10;
-      border:1px solid var(--border);
+      background:#090a0b;
+      border:1px solid var(--line);
       color:#fff;
-      border-radius:10px;
-      padding:11px 12px;
+      border-radius:8px;
+      padding:10px 12px;
       outline:none;
     }
 
@@ -322,69 +271,75 @@
       text-transform:uppercase;
       letter-spacing:.03em;
       margin-bottom:8px;
-      font-size:1rem;
+      font-size:.95rem;
     }
 
     .ticket-box{
-      background:#0b0c0d;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px 8px;
+      background:#090a0b;
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:8px 10px;
       min-height:360px;
       display:flex;
       flex-direction:column;
+    }
+
+    .ticket-head{
+      display:grid;
+      grid-template-columns:46px 1fr 84px 84px 24px;
+      gap:8px;
+      color:var(--muted);
+      font-size:.8rem;
+      padding-bottom:6px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      margin-bottom:4px;
     }
 
     .ticket-scroll{
       flex:1;
       overflow:auto;
       max-height:360px;
-      padding-right:4px;
+      padding-right:2px;
     }
 
     .ticket-row{
       display:grid;
-      grid-template-columns:auto 1fr auto auto;
-      gap:10px;
+      grid-template-columns:46px 1fr 84px 84px 24px;
+      gap:8px;
       align-items:center;
       padding:4px 0;
-      border-bottom:1px solid rgba(255,255,255,.05);
-      font-size:.98rem;
+      border-bottom:1px solid rgba(255,255,255,.04);
+      font-size:.92rem;
     }
 
     .ticket-row:last-child{border-bottom:none}
 
-    .ticket-qty{width:24px; color:#fff}
-    .ticket-name{color:#fff}
-    .ticket-price{color:#fff; white-space:nowrap}
-    .ticket-del{
+    .qty, .unit, .total-line{
+      white-space:nowrap;
+    }
+
+    .trash{
       border:none;
       background:transparent;
-      color:#c8cad0;
+      color:#d1d4db;
       cursor:pointer;
-      padding:2px;
-      width:24px;
-      height:24px;
+      padding:0;
+      width:20px;
+      height:20px;
       display:flex;
       align-items:center;
       justify-content:center;
-      border-radius:6px;
     }
 
-    .ticket-del:hover{
-      background:rgba(255,255,255,.08);
-    }
-
-    .ticket-total-line{
+    .ticket-total{
+      margin-top:8px;
+      padding-top:8px;
+      border-top:2px dashed rgba(255,255,255,.18);
       display:flex;
       justify-content:space-between;
-      align-items:center;
-      border-top:2px dashed rgba(255,255,255,.18);
-      margin-top:10px;
-      padding-top:10px;
       font-weight:900;
-      font-size:1.15rem;
       color:var(--orange);
+      font-size:1rem;
     }
 
     .pay-grid{
@@ -394,10 +349,10 @@
       margin-top:10px;
     }
 
-    .pay-btn{
+    .pay{
       border:none;
-      border-radius:14px;
-      min-height:58px;
+      border-radius:12px;
+      min-height:50px;
       color:#fff;
       cursor:pointer;
       display:flex;
@@ -408,51 +363,51 @@
       border:2px solid transparent;
     }
 
-    .pay-btn.cash{background:var(--cash)}
-    .pay-btn.card{background:var(--card)}
-    .pay-btn.check{background:var(--check)}
-    .pay-btn.active{
-      border-color:#9be76a;
-      box-shadow:0 0 0 2px rgba(255,255,255,.06) inset;
+    .pay.cash{background:var(--cash)}
+    .pay.card{background:var(--card)}
+    .pay.check{background:var(--check)}
+    .pay.active{
+      border-color:#95e85d;
+      box-shadow:0 0 0 2px rgba(255,255,255,.05) inset;
     }
 
-    .btn-row{
+    .action-row{
       display:grid;
-      grid-template-columns:1.45fr .55fr .7fr;
+      grid-template-columns:1.4fr .7fr .8fr;
       gap:8px;
       margin-top:8px;
     }
 
-    .big-action, .secondary-action{
+    .big-btn, .small-btn{
       border:none;
-      border-radius:14px;
+      border-radius:12px;
       color:#fff;
       font-weight:900;
       cursor:pointer;
-      min-height:60px;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
+      gap:8px;
       text-align:center;
     }
 
-    .big-action{
+    .big-btn{
+      min-height:52px;
       background:var(--cash);
-      font-size:1rem;
     }
 
-    .secondary-action{
-      background:#090909;
-      border:1px solid var(--border);
-      font-size:.92rem;
+    .small-btn{
+      min-height:52px;
+      background:#090a0b;
+      border:1px solid var(--line);
+      font-size:.85rem;
     }
 
     .footer-nav{
-      margin-top:12px;
-      background:#0a0b0c;
-      border:1px solid var(--border);
-      border-radius:16px;
+      margin-top:10px;
+      background:#090a0b;
+      border:1px solid var(--line);
+      border-radius:14px;
       display:grid;
       grid-template-columns:repeat(4,1fr);
       padding:4px;
@@ -463,14 +418,15 @@
       border:none;
       background:transparent;
       color:var(--muted);
-      min-height:52px;
-      border-radius:12px;
-      font-weight:800;
+      min-height:46px;
+      border-radius:10px;
+      font-weight:900;
       cursor:pointer;
       display:flex;
       align-items:center;
       justify-content:center;
       gap:8px;
+      font-size:.84rem;
     }
 
     .footer-tab.active{
@@ -485,42 +441,49 @@
       margin-bottom:10px;
     }
 
-    .stat-card{
-      background:#0d0e10;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:12px;
+    .stat{
+      background:#090a0b;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px;
     }
 
-    .stat-card-label{
+    .stat-label{
       color:var(--muted);
-      font-size:.84rem;
-      margin-bottom:6px;
+      font-size:.78rem;
+      margin-bottom:5px;
       font-weight:700;
     }
 
-    .stat-card-value{
-      font-size:1.1rem;
-      font-weight:900;
-      color:#fff;
-    }
-
-    .manage-section-title{
+    .stat-value{
       font-size:1rem;
       font-weight:900;
+    }
+
+    .manage-title{
       margin:0 0 8px;
+      font-size:.95rem;
+      font-weight:900;
     }
 
     .manage-form{
       display:grid;
-      grid-template-columns:1fr 1fr 1fr 1fr auto;
+      grid-template-columns:1fr 1fr .8fr 1fr auto;
       gap:8px;
-      margin-bottom:12px;
+      margin-bottom:10px;
     }
 
-    .manage-btn{
+    .manage-input, .manage-select{
+      background:#090a0b;
+      border:1px solid var(--line);
+      color:#fff;
+      border-radius:10px;
+      padding:10px;
+    }
+
+    .manage-add{
       border:none;
-      border-radius:12px;
+      border-radius:10px;
       padding:0 14px;
       background:var(--orange);
       color:#fff;
@@ -535,12 +498,12 @@
     }
 
     .manage-row{
-      background:#0d0e10;
-      border:1px solid var(--border);
-      border-radius:14px;
+      background:#090a0b;
+      border:1px solid var(--line);
+      border-radius:12px;
       padding:8px;
       display:grid;
-      grid-template-columns:90px 1.1fr .6fr 90px auto auto;
+      grid-template-columns:90px 1.1fr .7fr 1fr auto auto;
       gap:8px;
       align-items:center;
     }
@@ -564,10 +527,10 @@
     }
 
     .history-card{
-      background:#0d0e10;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:12px;
+      background:#090a0b;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px;
     }
 
     .history-head{
@@ -581,85 +544,94 @@
 
     .history-sub{
       color:var(--muted);
-      font-size:.9rem;
-      margin-bottom:8px;
+      font-size:.88rem;
+      margin-bottom:6px;
     }
 
     .history-line{
-      font-size:.92rem;
+      font-size:.9rem;
       padding:2px 0;
     }
 
     .hidden{display:none !important}
 
-    @media (max-width:900px){
-      .cards-grid{grid-template-columns:repeat(4,1fr)}
+    svg{
+      width:100%;
+      height:100%;
+      display:block;
     }
 
     @media (max-width:760px){
+      .brand-title{font-size:.98rem}
       .info-grid{grid-template-columns:1fr}
-      .brand-title{font-size:1.45rem}
-      .cards-grid{grid-template-columns:repeat(4,1fr)}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
       .manage-form{grid-template-columns:1fr 1fr}
       .manage-row{grid-template-columns:1fr}
-      .stats-grid{grid-template-columns:repeat(2,1fr)}
-    }
-
-    @media (max-width:560px){
-      .cards-grid{grid-template-columns:repeat(4,1fr)}
-      .item-card{min-height:100px}
-      .item-middle{font-size:.8rem}
-      .item-price{font-size:.88rem}
-      .btn-row{grid-template-columns:1fr 1fr 1fr}
-      .big-action,.secondary-action{min-height:56px}
     }
 
     @media (max-width:430px){
-      .brand-title{font-size:1.25rem}
-      .cards-grid{grid-template-columns:repeat(4,1fr); gap:6px}
-      .item-card{min-height:92px; border-radius:14px; padding:8px 6px 7px}
-      .item-icon{width:40px; height:40px}
-      .item-middle{font-size:.72rem; min-height:36px}
-      .item-price{font-size:.82rem}
-      .footer-nav{grid-template-columns:repeat(4,1fr)}
-      .pay-grid{grid-template-columns:repeat(3,1fr)}
-      .btn-row{grid-template-columns:1.15fr .65fr .8fr}
-      .ticket-box{min-height:420px}
-      .ticket-scroll{max-height:420px}
+      .cards-grid{
+        grid-template-columns:repeat(4,1fr);
+        gap:6px;
+      }
+      .item{
+        min-height:90px;
+        border-radius:12px;
+        padding:7px 5px 5px;
+      }
+      .item-icon{
+        width:30px;
+        height:30px;
+      }
+      .item-mid{
+        font-size:.62rem;
+        min-height:28px;
+      }
+      .item-price{
+        font-size:.74rem;
+      }
+      .ticket-box{
+        min-height:390px;
+      }
+      .ticket-scroll{
+        max-height:390px;
+      }
+      .ticket-head,
+      .ticket-row{
+        grid-template-columns:40px 1fr 70px 70px 20px;
+        gap:6px;
+        font-size:.86rem;
+      }
+      .pay-grid{
+        grid-template-columns:repeat(3,1fr);
+      }
+      .action-row{
+        grid-template-columns:1.25fr .7fr .8fr;
+      }
     }
   </style>
 </head>
 <body>
   <div class="app">
     <div class="topbar">
-      <div class="brand">
-        <div class="brand-mark" id="brandMark"></div>
-        <div class="brand-title">Caisse Ball-Trap de Vence</div>
-      </div>
-      <button class="gear-btn" id="openGestionTop" title="Gestion"></button>
+      <div class="brand-mark" id="brandMark"></div>
+      <div class="title">Caisse Ball-Trap de Vence</div>
+      <button class="gear-btn" id="openGestionTop"></button>
     </div>
 
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="info-icon" id="ticketIcon"></div>
-        <div class="info-copy">
-          <div class="info-label">Ticket n°</div>
-          <div class="info-sub" id="ticketNumber">1</div>
-        </div>
+    <div class="top-info">
+      <div class="top-pill">
+        <span style="font-weight:900;">TICKET N° <span id="ticketNumber" style="color:var(--orange)"></span></span>
       </div>
-      <div class="info-card">
-        <div class="info-copy" style="width:100%; text-align:center">
-          <div class="info-label">Total</div>
-          <div class="info-value" id="headerTotal">0,00 €</div>
-        </div>
+      <div class="top-pill">
+        <span id="clockIcon" style="width:22px;height:22px;display:inline-block;"></span>
+        <span id="headerDate"></span>
       </div>
-      <div class="info-card">
-        <div class="info-icon" id="clockIcon"></div>
-        <div class="info-copy">
-          <div class="info-label">Date / Heure</div>
-          <div class="info-sub" id="headerDate"></div>
-        </div>
-      </div>
+    </div>
+
+    <div class="top-total">
+      <span>TOTAL :</span>
+      <span class="value" id="headerTotal">0,00 €</span>
     </div>
 
     <section id="screen-caisse" class="screen active">
@@ -667,7 +639,7 @@
 
       <div class="card">
         <div class="field-label">
-          <span id="customerIcon"></span>
+          <span id="customerIcon" style="width:22px;height:22px;display:inline-block;"></span>
           <span>Nom du client <span class="muted">(facultatif)</span></span>
         </div>
         <input class="customer-input" id="customerName" type="text" placeholder="Saisie libre du nom du client">
@@ -675,40 +647,50 @@
 
       <div class="card">
         <div class="ticket-title">Ticket en cours</div>
+
         <div class="ticket-box">
+          <div class="ticket-head">
+            <div>Qté</div>
+            <div>Article</div>
+            <div>Prix unit.</div>
+            <div>Total</div>
+            <div></div>
+          </div>
+
           <div class="ticket-scroll" id="ticketList"></div>
-          <div class="ticket-total-line">
+
+          <div class="ticket-total">
             <span>TOTAL</span>
             <span id="ticketTotal">0,00 €</span>
           </div>
         </div>
 
         <div class="pay-grid">
-          <button class="pay-btn cash active" id="btnCash">
-            <span id="cashIcon"></span>
+          <button class="pay cash active" id="btnCash">
+            <span style="width:20px;height:20px;display:inline-block;" id="cashIcon"></span>
             <span>ESPÈCES</span>
           </button>
-          <button class="pay-btn card" id="btnCard">
-            <span id="cardIcon"></span>
+          <button class="pay card" id="btnCard">
+            <span style="width:20px;height:20px;display:inline-block;" id="cardIcon"></span>
             <span>CB</span>
           </button>
-          <button class="pay-btn check" id="btnCheck">
-            <span id="checkIcon"></span>
+          <button class="pay check" id="btnCheck">
+            <span style="width:20px;height:20px;display:inline-block;" id="checkIcon"></span>
             <span>CHÈQUE</span>
           </button>
         </div>
 
-        <div class="btn-row">
-          <button class="big-action" id="btnValidate">
-            <span id="validateIcon"></span>
+        <div class="action-row">
+          <button class="big-btn" id="btnValidate">
+            <span style="width:22px;height:22px;display:inline-block;" id="validateIcon"></span>
             <span>VALIDER LA VENTE</span>
           </button>
-          <button class="secondary-action" id="btnPrint">
-            <span id="printIcon"></span>
+          <button class="small-btn" id="btnPrint">
+            <span style="width:20px;height:20px;display:inline-block;" id="printIcon"></span>
             <span>IMPRIMER</span>
           </button>
-          <button class="secondary-action" id="btnCopy">
-            <span id="copyIcon"></span>
+          <button class="small-btn" id="btnCopy">
+            <span style="width:20px;height:20px;display:inline-block;" id="copyIcon"></span>
             <span>COPIER LE TICKET</span>
           </button>
         </div>
@@ -717,182 +699,185 @@
 
     <section id="screen-historique" class="screen">
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-card-label">Total du jour</div>
-          <div class="stat-card-value" id="statTotalDay">0,00 €</div>
+        <div class="stat">
+          <div class="stat-label">Total du jour</div>
+          <div class="stat-value" id="statTotalDay">0,00 €</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-card-label">Tickets</div>
-          <div class="stat-card-value" id="statTicketsDay">0</div>
+        <div class="stat">
+          <div class="stat-label">Tickets</div>
+          <div class="stat-value" id="statTicketsDay">0</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-card-label">CB</div>
-          <div class="stat-card-value" id="statCardDay">0,00 €</div>
+        <div class="stat">
+          <div class="stat-label">CB</div>
+          <div class="stat-value" id="statCardDay">0,00 €</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-card-label">Espèces / Chèque</div>
-          <div class="stat-card-value" id="statOtherDay">0,00 €</div>
+        <div class="stat">
+          <div class="stat-label">Espèces / Chèque</div>
+          <div class="stat-value" id="statOtherDay">0,00 €</div>
         </div>
       </div>
 
       <div class="card">
-        <div class="manage-section-title">Historique du jour</div>
+        <div class="manage-title">Historique du jour</div>
         <div class="history-list" id="historyList"></div>
       </div>
     </section>
 
     <section id="screen-cloture" class="screen">
       <div class="card">
-        <div class="manage-section-title">Clôture du jour</div>
-        <p style="color:var(--muted); margin-top:0">La clôture enregistre un résumé. Les ventes restent conservées.</p>
+        <div class="manage-title">Clôture du jour</div>
         <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-card-label">Total</div>
-            <div class="stat-card-value" id="closeTotal">0,00 €</div>
+          <div class="stat">
+            <div class="stat-label">Total</div>
+            <div class="stat-value" id="closeTotal">0,00 €</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-card-label">CB</div>
-            <div class="stat-card-value" id="closeCard">0,00 €</div>
+          <div class="stat">
+            <div class="stat-label">CB</div>
+            <div class="stat-value" id="closeCard">0,00 €</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-card-label">Espèces</div>
-            <div class="stat-card-value" id="closeCash">0,00 €</div>
+          <div class="stat">
+            <div class="stat-label">Espèces</div>
+            <div class="stat-value" id="closeCash">0,00 €</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-card-label">Chèque</div>
-            <div class="stat-card-value" id="closeCheck">0,00 €</div>
+          <div class="stat">
+            <div class="stat-label">Chèque</div>
+            <div class="stat-value" id="closeCheck">0,00 €</div>
           </div>
         </div>
-        <button class="big-action" id="btnCloseDay" style="margin-top:12px;">
-          <span id="closeIcon"></span>
+        <button class="big-btn" id="btnCloseDay" style="margin-top:8px;">
+          <span style="width:22px;height:22px;display:inline-block;" id="closeIcon"></span>
           <span>CLOTURER LA JOURNÉE</span>
         </button>
       </div>
 
       <div class="card">
-        <div class="manage-section-title">Clôtures enregistrées</div>
+        <div class="manage-title">Clôtures enregistrées</div>
         <div class="history-list" id="closuresList"></div>
       </div>
     </section>
 
     <section id="screen-gestion" class="screen">
       <div class="card">
-        <div class="manage-section-title">Ajouter un article</div>
+        <div class="manage-title">Ajouter un article</div>
         <div class="manage-form">
-          <select id="newCategory">
+          <select class="manage-select" id="newCategory">
             <option value="tir">Tir / Séries</option>
             <option value="munitions">Munitions</option>
             <option value="services">Services</option>
             <option value="bar">Bar / Boissons</option>
           </select>
-          <input id="newName" type="text" placeholder="Nom de l’article">
-          <input id="newPrice" type="number" step="0.01" placeholder="Prix">
-          <input id="newIconKey" type="text" placeholder="Type icône (tir, boite, café...)">
-          <button class="manage-btn" id="btnAddItem">Ajouter</button>
+          <input class="manage-input" id="newName" type="text" placeholder="Nom">
+          <input class="manage-input" id="newPrice" type="number" step="0.01" placeholder="Prix">
+          <input class="manage-input" id="newIconKey" type="text" placeholder="Icône">
+          <button class="manage-add" id="btnAddItem">Ajouter</button>
         </div>
       </div>
 
       <div class="card">
-        <div class="manage-section-title">Modifier les articles</div>
+        <div class="manage-title">Modifier les articles</div>
         <div class="manage-list" id="manageList"></div>
       </div>
     </section>
 
     <div class="footer-nav">
-      <button class="footer-tab active" data-screen="caisse" id="navCash">
-        <span id="navCashIcon"></span><span>CAISSE</span>
+      <button class="footer-tab active" data-screen="caisse">
+        <span style="width:18px;height:18px;display:inline-block;" id="navCashIcon"></span>
+        <span>CAISSE</span>
       </button>
-      <button class="footer-tab" data-screen="historique" id="navHistory">
-        <span id="navHistoryIcon"></span><span>HISTORIQUE</span>
+      <button class="footer-tab" data-screen="historique">
+        <span style="width:18px;height:18px;display:inline-block;" id="navHistoryIcon"></span>
+        <span>HISTORIQUE</span>
       </button>
-      <button class="footer-tab" data-screen="cloture" id="navClose">
-        <span id="navCloseIcon"></span><span>CLÔTURE</span>
+      <button class="footer-tab" data-screen="cloture">
+        <span style="width:18px;height:18px;display:inline-block;" id="navCloseIcon"></span>
+        <span>CLÔTURE</span>
       </button>
-      <button class="footer-tab" data-screen="gestion" id="navManage">
-        <span id="navManageIcon"></span><span>GESTION</span>
+      <button class="footer-tab" data-screen="gestion">
+        <span style="width:18px;height:18px;display:inline-block;" id="navManageIcon"></span>
+        <span>GESTION</span>
       </button>
     </div>
   </div>
 
   <script>
     const STORAGE = {
-      items: 'btv_items_v3',
-      sales: 'btv_sales_v3',
-      closures: 'btv_closures_v3',
-      counter: 'btv_counter_v3'
+      items: 'btv_items_v4',
+      sales: 'btv_sales_v4',
+      closures: 'btv_closures_v4',
+      counter: 'btv_counter_v4'
     };
 
     const CATEGORY_META = {
-      tir: { label: 'TIR / SÉRIES', cls: 'tir' },
-      munitions: { label: 'MUNITIONS', cls: 'munitions' },
-      services: { label: 'SERVICES', cls: 'services' },
-      bar: { label: 'BAR / BOISSONS', cls: 'bar' }
+      tir: { label: 'TIR / SÉRIES', css: 'tir', titleCss: 'title-tir' },
+      munitions: { label: 'MUNITIONS', css: 'munitions', titleCss: 'title-munitions' },
+      services: { label: 'SERVICES', css: 'services', titleCss: 'title-services' },
+      bar: { label: 'BAR / BOISSONS', css: 'bar', titleCss: 'title-bar' }
     };
 
     const DEFAULT_ITEMS = [
-      { id: id(), category: 'tir', name: 'Jeton fosse', price: 6.00, iconKey: 'target' },
-      { id: id(), category: 'tir', name: 'Initiation', price: 35.00, iconKey: 'shells' },
-      { id: id(), category: 'tir', name: 'Fosse universelle', price: 7.00, iconKey: 'shooter' },
-      { id: id(), category: 'tir', name: 'Fosse américaine', price: 7.00, iconKey: 'shooter' },
-      { id: id(), category: 'tir', name: 'Parcours chasse', price: 7.00, iconKey: 'shooter2' },
-      { id: id(), category: 'tir', name: 'Sanglier courant', price: 15.00, iconKey: 'boar' },
-      { id: id(), category: 'tir', name: 'Tir sur cible', price: 5.00, iconKey: 'targetplus' },
-      { id: id(), category: 'tir', name: 'Tarif bénévole', price: 6.00, iconKey: 'dot3' },
-      { id: id(), category: 'tir', name: 'Série supplémentaire', price: 1.00, iconKey: 'targetplus' },
+      { id: makeId(), category: 'tir', name: 'Jeton fosse', price: 6.00, iconKey: 'target' },
+      { id: makeId(), category: 'tir', name: 'Initiation', price: 35.00, iconKey: 'shells' },
+      { id: makeId(), category: 'tir', name: 'Fosse universelle', price: 7.00, iconKey: 'shooter' },
+      { id: makeId(), category: 'tir', name: 'Fosse américaine', price: 7.00, iconKey: 'shooter' },
+      { id: makeId(), category: 'tir', name: 'Parcours chasse', price: 7.00, iconKey: 'shooter2' },
+      { id: makeId(), category: 'tir', name: 'Sanglier courant', price: 15.00, iconKey: 'boar' },
+      { id: makeId(), category: 'tir', name: 'Tir sur cible', price: 5.00, iconKey: 'targetplus' },
+      { id: makeId(), category: 'tir', name: 'Tarif bénévole', price: 6.00, iconKey: 'dot3' },
+      { id: makeId(), category: 'tir', name: 'Série supplémentaire', price: 1.00, iconKey: 'targetplus' },
 
-      { id: id(), category: 'munitions', name: 'Boîte cart. type 2', price: 8.50, iconKey: 'boxshell' },
-      { id: id(), category: 'munitions', name: 'Carton cart. type 2', price: 83.00, iconKey: 'box' },
-      { id: id(), category: 'munitions', name: 'Boîte cart. type 3', price: 9.00, iconKey: 'boxshell2' },
-      { id: id(), category: 'munitions', name: 'Carton cart. type 3', price: 85.00, iconKey: 'box' },
+      { id: makeId(), category: 'munitions', name: 'Boîte cart. type 2', price: 8.50, iconKey: 'boxshell' },
+      { id: makeId(), category: 'munitions', name: 'Carton cart. type 2', price: 83.00, iconKey: 'box' },
+      { id: makeId(), category: 'munitions', name: 'Boîte cart. type 3', price: 9.00, iconKey: 'boxshell2' },
+      { id: makeId(), category: 'munitions', name: 'Carton cart. type 3', price: 85.00, iconKey: 'box' },
 
-      { id: id(), category: 'services', name: 'Location fusil', price: 5.00, iconKey: 'rifle' },
-      { id: id(), category: 'services', name: 'Assurance + participation', price: 15.00, iconKey: 'shield' },
+      { id: makeId(), category: 'services', name: 'Location fusil', price: 5.00, iconKey: 'rifle' },
+      { id: makeId(), category: 'services', name: 'Assurance + participation', price: 15.00, iconKey: 'shield' },
 
-      { id: id(), category: 'bar', name: 'Café', price: 1.00, iconKey: 'coffee' },
-      { id: id(), category: 'bar', name: 'Boisson soft', price: 2.00, iconKey: 'can' },
-      { id: id(), category: 'bar', name: 'Eau plate', price: 1.00, iconKey: 'water' },
-      { id: id(), category: 'bar', name: 'Eau pétillante', price: 1.50, iconKey: 'sparkling' }
+      { id: makeId(), category: 'bar', name: 'Café', price: 1.00, iconKey: 'coffee' },
+      { id: makeId(), category: 'bar', name: 'Boisson soft', price: 2.00, iconKey: 'can' },
+      { id: makeId(), category: 'bar', name: 'Eau plate', price: 1.00, iconKey: 'water' },
+      { id: makeId(), category: 'bar', name: 'Eau pétillante', price: 1.50, iconKey: 'sparkling' }
     ];
 
-    const ICONS = {
-      mark: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="32" r="18"/><circle cx="28" cy="32" r="8"/><path d="M28 14V6M10 32H2M16 16l-6-6"/><path d="M36 24 58 6"/><path d="m52 6 6 6-18 6z"/></svg>`),
-      ticket: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M16 10h32v10a5 5 0 0 0 0 24v10H16V44a5 5 0 0 1 0-24V10z"/><path d="M24 22h16M24 32h16M24 42h10"/></svg>`),
-      clock: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="24"/><path d="M32 18v15l10 5"/></svg>`),
-      customer: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="32" cy="22" r="10"/><path d="M14 54c2-10 10-16 18-16s16 6 18 16z"/></svg>`),
-      cash: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="16" width="48" height="32" rx="4"/><circle cx="32" cy="32" r="7"/><path d="M16 22c0 4-4 6-8 6M48 42c0-4 4-6 8-6"/></svg>`),
-      card: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><rect x="8" y="14" width="48" height="36" rx="5"/><path d="M8 24h48M18 40h10"/></svg>`),
-      check: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M12 50h40"/><path d="M20 42 42 20"/><path d="M30 20h12v12"/></svg>`),
-      validate: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34 26 46 50 18"/></svg>`),
-      print: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M18 22V10h28v12"/><rect x="12" y="22" width="40" height="22" rx="4"/><path d="M18 38h28v16H18z"/></svg>`),
-      copy: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><rect x="22" y="18" width="24" height="30" rx="3"/><path d="M18 42H14V14h24v4"/></svg>`),
-      trash: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M20 18h24M26 18v-4h12v4M22 22l2 28h16l2-28"/><path d="M30 28v16M34 28v16"/></svg>`),
-      pie: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 8v24h24"/><path d="M28 12A20 20 0 1 0 52 36"/></svg>`),
-      list: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M22 18h28M22 32h28M22 46h28"/><circle cx="12" cy="18" r="2"/><circle cx="12" cy="32" r="2"/><circle cx="12" cy="46" r="2"/></svg>`),
-      manage: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="6"/><path d="M32 10v8M32 46v8M10 32h8M46 32h8M16 16l6 6M42 42l6 6M48 16l-6 6M22 42l-6 6"/></svg>`),
-
-      target: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="5"/></svg>`),
-      targetplus: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="26" cy="38" r="18"/><circle cx="26" cy="38" r="9"/><path d="M50 12v16M42 20h16"/></svg>`),
-      shells: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="10" y="14" width="12" height="34" rx="3"/><rect x="26" y="14" width="12" height="34" rx="3"/><rect x="42" y="14" width="12" height="34" rx="3"/><path d="M10 22h12M26 22h12M42 22h12"/></svg>`),
-      shooter: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="55" cy="16" r="4"/></svg>`),
-      shooter2: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="50" cy="14" r="3"/><circle cx="58" cy="19" r="3"/></svg>`),
-      boar: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M10 34c4-10 14-16 28-16l8-4 6 4-4 6c2 2 3 6 2 10l-6 6h-8l-4 6h-6l2-6H20l-4 6h-6l4-8c-3-1-5-2-6-4z"/></svg>`),
-      dot3: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="32" r="5"/><circle cx="32" cy="32" r="5"/><circle cx="46" cy="32" r="5"/></svg>`),
-      box: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 20h40v28H12z"/><path d="M12 20 24 12h28M24 12v8"/></svg>`),
-      boxshell: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="40" y="26" width="6" height="18" rx="2"/><rect x="50" y="26" width="6" height="18" rx="2"/></svg>`),
-      boxshell2: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="42" y="28" width="12" height="10" rx="2"/></svg>`),
-      rifle: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M6 38h20l18-10h10v4L32 40H20v6H14v-6H6z"/></svg>`),
-      shield: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 10 48 16v12c0 10-7 18-16 24-9-6-16-14-16-24V16z"/></svg>`),
-      coffee: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M14 24h28v12a10 10 0 0 1-10 10H24A10 10 0 0 1 14 36z"/><path d="M42 28h6a6 6 0 0 1 0 12h-4"/><path d="M20 16c0-4 4-4 4-8M30 16c0-4 4-4 4-8"/></svg>`),
-      can: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="20" y="12" width="24" height="40" rx="5"/><path d="M24 18h16"/><path d="M18 40c12 0 18-10 28-10"/></svg>`),
-      water: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M24 34h16"/></svg>`),
-      sparkling: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M48 18v6M45 21h6M50 28v4M48 32h4M12 24v5M10 26h4"/></svg>`)
-    };
-
-    function svg(markup){
+    function wrapSvg(markup){
       return markup.trim();
     }
 
-    function id(){
+    const ICONS = {
+      brand: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="32" r="18"/><circle cx="28" cy="32" r="8"/><path d="M28 14V6M10 32H2M16 16l-6-6"/><path d="M36 24 58 6"/><path d="m52 6 6 6-18 6z"/></svg>`),
+      gear: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="6"/><path d="M32 12v8M32 44v8M12 32h8M44 32h8M18 18l6 6M40 40l6 6M46 18l-6 6M24 40l-6 6"/></svg>`),
+      clock: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="32" cy="32" r="24"/><path d="M32 20v14l10 6"/></svg>`),
+      customer: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="32" cy="22" r="10"/><path d="M14 54c2-10 10-16 18-16s16 6 18 16z"/></svg>`),
+      cash: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="16" width="48" height="32" rx="4"/><circle cx="32" cy="32" r="7"/></svg>`),
+      card: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="14" width="48" height="36" rx="5"/><path d="M8 24h48M18 40h10"/></svg>`),
+      check: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M12 50h40"/><path d="M20 42 42 20"/><path d="M30 20h12v12"/></svg>`),
+      validate: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34 26 46 50 18"/></svg>`),
+      print: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M18 22V10h28v12"/><rect x="12" y="22" width="40" height="22" rx="4"/><path d="M18 38h28v16H18z"/></svg>`),
+      copy: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="22" y="18" width="24" height="30" rx="3"/><path d="M18 42H14V14h24v4"/></svg>`),
+      trash: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M20 18h24M26 18v-4h12v4M22 22l2 28h16l2-28"/><path d="M30 28v16M34 28v16"/></svg>`),
+      pie: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 8v24h24"/><path d="M28 12A20 20 0 1 0 52 36"/></svg>`),
+      list: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M22 18h28M22 32h28M22 46h28"/><circle cx="12" cy="18" r="2"/><circle cx="12" cy="32" r="2"/><circle cx="12" cy="46" r="2"/></svg>`),
+      manage: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="6"/><path d="M32 10v8M32 46v8M10 32h8M46 32h8"/></svg>`),
+
+      target: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="5"/></svg>`),
+      targetplus: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="26" cy="38" r="18"/><circle cx="26" cy="38" r="9"/><path d="M50 12v16M42 20h16"/></svg>`),
+      shells: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="14" width="12" height="34" rx="3"/><rect x="26" y="14" width="12" height="34" rx="3"/><rect x="42" y="14" width="12" height="34" rx="3"/><path d="M10 22h12M26 22h12M42 22h12"/></svg>`),
+      shooter: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="55" cy="16" r="4"/></svg>`),
+      shooter2: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="50" cy="14" r="3"/><circle cx="58" cy="19" r="3"/></svg>`),
+      boar: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M10 34c4-10 14-16 28-16l8-4 6 4-4 6c2 2 3 6 2 10l-6 6h-8l-4 6h-6l2-6H20l-4 6h-6l4-8c-3-1-5-2-6-4z"/></svg>`),
+      dot3: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="32" r="5"/><circle cx="32" cy="32" r="5"/><circle cx="46" cy="32" r="5"/></svg>`),
+      box: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 20h40v28H12z"/><path d="M12 20 24 12h28M24 12v8"/></svg>`),
+      boxshell: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="40" y="26" width="6" height="18" rx="2"/><rect x="50" y="26" width="6" height="18" rx="2"/></svg>`),
+      boxshell2: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="42" y="28" width="12" height="10" rx="2"/></svg>`),
+      rifle: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M6 38h20l18-10h10v4L32 40H20v6H14v-6H6z"/></svg>`),
+      shield: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 10 48 16v12c0 10-7 18-16 24-9-6-16-14-16-24V16z"/></svg>`),
+      coffee: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M14 24h28v12a10 10 0 0 1-10 10H24A10 10 0 0 1 14 36z"/><path d="M42 28h6a6 6 0 0 1 0 12h-4"/><path d="M20 16c0-4 4-4 4-8M30 16c0-4 4-4 4-8"/></svg>`),
+      can: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="20" y="12" width="24" height="40" rx="5"/><path d="M24 18h16"/><path d="M18 40c12 0 18-10 28-10"/></svg>`),
+      water: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M24 34h16"/></svg>`),
+      sparkling: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M48 18v6M45 21h6M50 28v4M48 32h4M12 24v5M10 26h4"/></svg>`)
+    };
+
+    function makeId(){
       return 'id-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
     }
 
@@ -922,30 +907,42 @@
       localStorage.setItem(key, JSON.stringify(value));
     }
 
+    function escapeHtml(str){
+      return String(str)
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#039;');
+    }
+
+    function escapeAttr(str){
+      return escapeHtml(str ?? '');
+    }
+
     let items = load(STORAGE.items, DEFAULT_ITEMS);
     let sales = load(STORAGE.sales, []);
     let closures = load(STORAGE.closures, []);
     let counters = load(STORAGE.counter, {});
     let currentTicket = [];
     let paymentMethod = 'ESPÈCES';
-    let currentScreen = 'caisse';
 
     function nextTicketNumber(){
-      const k = todayKey();
-      if(!counters[k]) counters[k] = 1;
-      return counters[k];
+      const key = todayKey();
+      if(!counters[key]) counters[key] = 1;
+      return counters[key];
     }
 
-    function incTicketNumber(){
-      const k = todayKey();
-      if(!counters[k]) counters[k] = 1;
-      counters[k] += 1;
+    function incrementTicket(){
+      const key = todayKey();
+      if(!counters[key]) counters[key] = 1;
+      counters[key] += 1;
       save(STORAGE.counter, counters);
     }
 
-    function setStaticIcons(){
-      document.getElementById('brandMark').innerHTML = ICONS.mark;
-      document.getElementById('ticketIcon').innerHTML = ICONS.ticket;
+    function setFixedIcons(){
+      document.getElementById('brandMark').innerHTML = ICONS.brand;
+      document.getElementById('openGestionTop').innerHTML = ICONS.manage;
       document.getElementById('clockIcon').innerHTML = ICONS.clock;
       document.getElementById('customerIcon').innerHTML = ICONS.customer;
       document.getElementById('cashIcon').innerHTML = ICONS.cash;
@@ -961,40 +958,56 @@
       document.getElementById('navManageIcon').innerHTML = ICONS.manage;
     }
 
-    function switchScreen(name){
-      currentScreen = name;
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('screen-' + name).classList.add('active');
-      document.querySelectorAll('.footer-tab').forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.footer-tab[data-screen="${name}"]`).classList.add('active');
-    }
-
-    function renderHeader(){
-      document.getElementById('ticketNumber').textContent = nextTicketNumber();
-      document.getElementById('headerDate').textContent = nowDisplay();
-      document.getElementById('headerTotal').textContent = money(ticketTotal());
+    function groupedTicket(){
+      const map = new Map();
+      currentTicket.forEach(line => {
+        const key = line.itemId;
+        if(!map.has(key)){
+          map.set(key, {
+            itemId: line.itemId,
+            name: line.name,
+            unitPrice: line.unitPrice,
+            quantity: 1,
+            total: line.unitPrice
+          });
+        } else {
+          const row = map.get(key);
+          row.quantity += 1;
+          row.total += line.unitPrice;
+        }
+      });
+      return Array.from(map.values());
     }
 
     function ticketTotal(){
-      return currentTicket.reduce((sum, row) => sum + Number(row.price), 0);
+      return currentTicket.reduce((sum, line) => sum + Number(line.unitPrice), 0);
     }
 
     function addToTicket(item){
       currentTicket.push({
-        id: id(),
+        id: makeId(),
         itemId: item.id,
         name: item.name,
-        price: Number(item.price),
+        unitPrice: Number(item.price),
         category: item.category
       });
       renderTicket();
       renderHeader();
     }
 
-    function removeTicketLine(lineId){
-      currentTicket = currentTicket.filter(x => x.id !== lineId);
+    function removeGroupedLine(itemId){
+      const index = currentTicket.findIndex(x => x.itemId === itemId);
+      if(index >= 0){
+        currentTicket.splice(index, 1);
+      }
       renderTicket();
       renderHeader();
+    }
+
+    function renderHeader(){
+      document.getElementById('ticketNumber').textContent = nextTicketNumber();
+      document.getElementById('headerDate').textContent = nowDisplay();
+      document.getElementById('headerTotal').textContent = money(ticketTotal());
     }
 
     function renderCategories(){
@@ -1005,34 +1018,34 @@
         const catItems = items.filter(i => i.category === catKey);
         if(catItems.length === 0) return;
 
-        const block = document.createElement('div');
-        block.className = `category-block cat-${catKey}`;
+        const section = document.createElement('div');
+        section.className = 'section';
 
         const title = document.createElement('div');
-        title.className = 'category-title';
+        title.className = `section-title ${CATEGORY_META[catKey].titleCss}`;
         title.textContent = CATEGORY_META[catKey].label;
 
         const grid = document.createElement('div');
-        grid.className = 'cards-grid';
+        grid.className = 'grid';
 
         catItems.forEach(item => {
           const btn = document.createElement('button');
-          btn.className = `item-card ${CATEGORY_META[item.category].cls}`;
+          btn.className = `item ${CATEGORY_META[item.category].css}`;
           btn.type = 'button';
           btn.innerHTML = `
             <div class="item-top">
               <div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div>
             </div>
-            <div class="item-middle">${escapeHtml(item.name)}</div>
+            <div class="item-mid">${escapeHtml(item.name)}</div>
             <div class="item-price">${money(item.price)}</div>
           `;
           btn.addEventListener('click', () => addToTicket(item));
           grid.appendChild(btn);
         });
 
-        block.appendChild(title);
-        block.appendChild(grid);
-        host.appendChild(block);
+        section.appendChild(title);
+        section.appendChild(grid);
+        host.appendChild(section);
       });
     }
 
@@ -1040,19 +1053,22 @@
       const list = document.getElementById('ticketList');
       list.innerHTML = '';
 
-      if(currentTicket.length === 0){
+      const rows = groupedTicket();
+
+      if(rows.length === 0){
         list.innerHTML = `<div style="color:var(--muted); padding:8px 0;">Aucun article sur le ticket.</div>`;
       } else {
-        currentTicket.forEach((row, index) => {
+        rows.forEach(row => {
           const line = document.createElement('div');
           line.className = 'ticket-row';
           line.innerHTML = `
-            <div class="ticket-qty">${index + 1}</div>
-            <div class="ticket-name">${escapeHtml(row.name)}</div>
-            <div class="ticket-price">${money(row.price)}</div>
-            <button class="ticket-del" title="Supprimer">${ICONS.trash}</button>
+            <div class="qty">${row.quantity}</div>
+            <div>${escapeHtml(row.name)}</div>
+            <div class="unit">${money(row.unitPrice)}</div>
+            <div class="total-line">${money(row.total)}</div>
+            <button class="trash" title="Retirer une unité">${ICONS.trash}</button>
           `;
-          line.querySelector('.ticket-del').addEventListener('click', () => removeTicketLine(row.id));
+          line.querySelector('.trash').addEventListener('click', () => removeGroupedLine(row.itemId));
           list.appendChild(line);
         });
       }
@@ -1067,48 +1083,9 @@
       document.getElementById('btnCheck').classList.toggle('active', method === 'CHÈQUE');
     }
 
-    function validateSale(){
-      if(currentTicket.length === 0){
-        alert('Le ticket est vide.');
-        return;
-      }
-
-      const ticketNumber = nextTicketNumber();
-      const createdAt = new Date().toISOString();
-      const customerName = document.getElementById('customerName').value.trim();
-      const total = ticketTotal();
-
-      const groupedLines = currentTicket.map(row => ({
-        name: row.name,
-        price: row.price,
-        category: row.category
-      }));
-
-      sales.push({
-        id: id(),
-        dayKey: todayKey(),
-        ticketNumber,
-        createdAt,
-        customerName,
-        paymentMethod,
-        total,
-        lines: groupedLines
-      });
-
-      save(STORAGE.sales, sales);
-      incTicketNumber();
-
-      currentTicket = [];
-      document.getElementById('customerName').value = '';
-      renderTicket();
-      renderHeader();
-      renderHistory();
-      renderClotureStats();
-      alert('Vente enregistrée.');
-    }
-
     function currentTicketText(){
       const customerName = document.getElementById('customerName').value.trim();
+      const rows = groupedTicket();
       let txt = 'Fédération Française de Ball-Trap\n';
       txt += 'Club de Vence\n\n';
       txt += 'Ticket n° ' + nextTicketNumber() + '\n';
@@ -1118,8 +1095,8 @@
       }
       txt += 'Encaissement : ' + paymentMethod + '\n\n';
 
-      currentTicket.forEach((row, i) => {
-        txt += (i + 1) + ' x ' + row.name + '   ' + money(row.price) + '\n';
+      rows.forEach(row => {
+        txt += row.quantity + ' x ' + row.name + '   ' + money(row.total) + '\n';
       });
 
       txt += '\nTOTAL : ' + money(ticketTotal()) + '\n';
@@ -1133,9 +1110,7 @@
       }
       const text = currentTicketText();
       if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(() => {
-          alert('Ticket copié');
-        }).catch(() => fallbackCopy(text));
+        navigator.clipboard.writeText(text).then(() => alert('Ticket copié')).catch(() => fallbackCopy(text));
       } else {
         fallbackCopy(text);
       }
@@ -1173,6 +1148,44 @@
       w.print();
     }
 
+    function validateSale(){
+      if(currentTicket.length === 0){
+        alert('Le ticket est vide.');
+        return;
+      }
+
+      const rows = groupedTicket();
+      const ticketNumber = nextTicketNumber();
+      const createdAt = new Date().toISOString();
+      const customerName = document.getElementById('customerName').value.trim();
+
+      sales.push({
+        id: makeId(),
+        dayKey: todayKey(),
+        ticketNumber,
+        createdAt,
+        customerName,
+        paymentMethod,
+        total: ticketTotal(),
+        lines: rows.map(r => ({
+          name: r.name,
+          quantity: r.quantity,
+          unitPrice: r.unitPrice,
+          total: r.total
+        }))
+      });
+
+      save(STORAGE.sales, sales);
+      incrementTicket();
+      currentTicket = [];
+      document.getElementById('customerName').value = '';
+      renderTicket();
+      renderHeader();
+      renderHistory();
+      renderClosures();
+      alert('Vente enregistrée.');
+    }
+
     function todaySales(){
       return sales.filter(s => s.dayKey === todayKey());
     }
@@ -1194,7 +1207,7 @@
               <span>${money(sale.total)}</span>
             </div>
             <div class="history-sub">${escapeHtml(sale.customerName || 'Sans nom')} — ${sale.paymentMethod}</div>
-            ${sale.lines.map(line => `<div class="history-line">${escapeHtml(line.name)} — ${money(line.price)}</div>`).join('')}
+            ${sale.lines.map(line => `<div class="history-line">${line.quantity} x ${escapeHtml(line.name)} — ${money(line.total)}</div>`).join('')}
           `;
           host.appendChild(card);
         });
@@ -1211,7 +1224,35 @@
       document.getElementById('statOtherDay').textContent = money(other);
     }
 
-    function renderClotureStats(){
+    function closeDay(){
+      const day = todaySales();
+      if(day.length === 0){
+        alert('Aucune vente à clôturer aujourd’hui.');
+        return;
+      }
+
+      const total = day.reduce((s,x)=>s + Number(x.total), 0);
+      const tickets = day.length;
+      const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
+      const cash = day.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.total), 0);
+      const check = day.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.total), 0);
+
+      closures.push({
+        id: makeId(),
+        dayKey: todayKey(),
+        total,
+        tickets,
+        card,
+        cash,
+        check
+      });
+
+      save(STORAGE.closures, closures);
+      renderClosures();
+      alert('Clôture enregistrée.');
+    }
+
+    function renderClosures(){
       const day = todaySales();
       const total = day.reduce((s,x)=>s + Number(x.total), 0);
       const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
@@ -1247,34 +1288,6 @@
       }
     }
 
-    function closeDay(){
-      const day = todaySales();
-      if(day.length === 0){
-        alert('Aucune vente à clôturer aujourd’hui.');
-        return;
-      }
-
-      const total = day.reduce((s,x)=>s + Number(x.total), 0);
-      const tickets = day.length;
-      const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
-      const cash = day.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.total), 0);
-      const check = day.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.total), 0);
-
-      closures.push({
-        id: id(),
-        dayKey: todayKey(),
-        total,
-        tickets,
-        card,
-        cash,
-        check
-      });
-
-      save(STORAGE.closures, closures);
-      renderClotureStats();
-      alert('Clôture enregistrée.');
-    }
-
     function renderManage(){
       const host = document.getElementById('manageList');
       host.innerHTML = '';
@@ -1283,15 +1296,15 @@
         const row = document.createElement('div');
         row.className = 'manage-row';
         row.innerHTML = `
-          <select data-k="category">
+          <select class="manage-select" data-k="category">
             <option value="tir" ${item.category === 'tir' ? 'selected' : ''}>Tir</option>
             <option value="munitions" ${item.category === 'munitions' ? 'selected' : ''}>Munitions</option>
             <option value="services" ${item.category === 'services' ? 'selected' : ''}>Services</option>
             <option value="bar" ${item.category === 'bar' ? 'selected' : ''}>Bar</option>
           </select>
-          <input data-k="name" type="text" value="${escapeAttr(item.name)}">
-          <input data-k="price" type="number" step="0.01" value="${Number(item.price).toFixed(2)}">
-          <input data-k="iconKey" type="text" value="${escapeAttr(item.iconKey)}">
+          <input class="manage-input" data-k="name" type="text" value="${escapeAttr(item.name)}">
+          <input class="manage-input" data-k="price" type="number" step="0.01" value="${Number(item.price).toFixed(2)}">
+          <input class="manage-input" data-k="iconKey" type="text" value="${escapeAttr(item.iconKey)}">
           <button class="row-btn save" type="button">OK</button>
           <button class="row-btn del" type="button">X</button>
         `;
@@ -1338,7 +1351,7 @@
       }
 
       items.push({
-        id: id(),
+        id: makeId(),
         category,
         name,
         price,
@@ -1352,26 +1365,60 @@
       renderAll();
     }
 
+    function switchScreen(name){
+      document.querySelectorAll('.screen').forEach(x => x.classList.remove('active'));
+      document.getElementById('screen-' + name).classList.add('active');
+
+      document.querySelectorAll('.footer-tab').forEach(x => x.classList.remove('active'));
+      document.querySelector(`.footer-tab[data-screen="${name}"]`).classList.add('active');
+    }
+
+    function renderCategories(){
+      const host = document.getElementById('categoriesHost');
+      host.innerHTML = '';
+
+      Object.keys(CATEGORY_META).forEach(catKey => {
+        const catItems = items.filter(x => x.category === catKey);
+        if(catItems.length === 0) return;
+
+        const section = document.createElement('div');
+        section.className = 'section';
+
+        const title = document.createElement('div');
+        title.className = `section-title ${CATEGORY_META[catKey].titleCss}`;
+        title.textContent = CATEGORY_META[catKey].label;
+
+        const grid = document.createElement('div');
+        grid.className = 'grid';
+
+        catItems.forEach(item => {
+          const btn = document.createElement('button');
+          btn.className = `item ${CATEGORY_META[item.category].css}`;
+          btn.type = 'button';
+          btn.innerHTML = `
+            <div class="item-top">
+              <div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div>
+            </div>
+            <div class="item-mid">${escapeHtml(item.name)}</div>
+            <div class="item-price">${money(item.price)}</div>
+          `;
+          btn.addEventListener('click', () => addToTicket(item));
+          grid.appendChild(btn);
+        });
+
+        section.appendChild(title);
+        section.appendChild(grid);
+        host.appendChild(section);
+      });
+    }
+
     function renderAll(){
       renderHeader();
       renderCategories();
       renderTicket();
       renderHistory();
-      renderClotureStats();
+      renderClosures();
       renderManage();
-    }
-
-    function escapeHtml(str){
-      return String(str)
-        .replace(/&/g,'&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;')
-        .replace(/"/g,'&quot;')
-        .replace(/'/g,'&#039;');
-    }
-
-    function escapeAttr(str){
-      return escapeHtml(str ?? '');
     }
 
     document.getElementById('btnCash').addEventListener('click', () => setPayment('ESPÈCES'));
@@ -1382,14 +1429,13 @@
     document.getElementById('btnPrint').addEventListener('click', printTicket);
     document.getElementById('btnCloseDay').addEventListener('click', closeDay);
     document.getElementById('btnAddItem').addEventListener('click', addItem);
+    document.getElementById('openGestionTop').addEventListener('click', () => switchScreen('gestion'));
 
     document.querySelectorAll('.footer-tab').forEach(btn => {
       btn.addEventListener('click', () => switchScreen(btn.dataset.screen));
     });
 
-    document.getElementById('openGestionTop').addEventListener('click', () => switchScreen('gestion'));
-
-    setStaticIcons();
+    setFixedIcons();
     renderAll();
   </script>
 </body>
