@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Caisse Ball-Trap de Vence</title>
-  <meta name="theme-color" content="#080808" />
+  <meta name="theme-color" content="#050506" />
+  <link rel="manifest" href="manifest.json">
   <style>
     :root{
       --bg:#050506;
@@ -25,7 +26,6 @@
       --card:#0b57a7;
       --check:#5f6670;
       --danger:#d53d38;
-      --radius:16px;
       --shadow:0 8px 24px rgba(0,0,0,.35);
     }
 
@@ -38,15 +38,8 @@
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     }
 
-    body{
-      min-height:100vh;
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
-    }
-
-    button,input,select{
-      font:inherit;
-    }
+    body{min-height:100vh}
+    button,input,select{font:inherit}
 
     .app{
       max-width:760px;
@@ -111,11 +104,6 @@
       gap:10px;
     }
 
-    .top-pill .small{
-      color:var(--muted);
-      font-weight:700;
-    }
-
     .top-total{
       background:#0d0e10;
       border:1px solid var(--line);
@@ -138,10 +126,7 @@
     .screen{display:none}
     .screen.active{display:block}
 
-    .section{
-      margin-bottom:8px;
-    }
-
+    .section{margin-bottom:8px}
     .section-title{
       margin:0 0 6px 2px;
       font-size:.84rem;
@@ -165,8 +150,8 @@
       border:none;
       border-radius:12px;
       color:#fff;
-      min-height:94px;
-      padding:8px 6px 6px;
+      min-height:90px;
+      padding:7px 5px 5px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
@@ -184,18 +169,12 @@
       background:rgba(0,0,0,.12);
     }
 
-    .tir{background:linear-gradient(180deg,var(--orange),var(--orange2))}
-    .munitions{background:linear-gradient(180deg,var(--red),var(--red2))}
-    .services{background:linear-gradient(180deg,var(--green),var(--green2))}
-    .bar{background:linear-gradient(180deg,var(--blue),var(--blue2))}
+    .item.tir{background:linear-gradient(180deg,var(--orange),var(--orange2))}
+    .item.munitions{background:linear-gradient(180deg,var(--red),var(--red2))}
+    .item.services{background:linear-gradient(180deg,var(--green),var(--green2))}
+    .item.bar{background:linear-gradient(180deg,var(--blue),var(--blue2))}
 
-    .item-top,
-    .item-mid,
-    .item-price{
-      position:relative;
-      z-index:1;
-    }
-
+    .item-top,.item-mid,.item-price{position:relative; z-index:1}
     .item-top{
       display:flex;
       justify-content:center;
@@ -205,8 +184,8 @@
     }
 
     .item-icon{
-      width:34px;
-      height:34px;
+      width:30px;
+      height:30px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -215,10 +194,10 @@
 
     .item-mid{
       text-align:center;
-      font-size:.68rem;
+      font-size:.62rem;
       font-weight:900;
       line-height:1.08;
-      min-height:30px;
+      min-height:28px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -228,7 +207,7 @@
 
     .item-price{
       text-align:center;
-      font-size:.78rem;
+      font-size:.74rem;
       font-weight:900;
     }
 
@@ -279,15 +258,15 @@
       border:1px solid var(--line);
       border-radius:10px;
       padding:8px 10px;
-      min-height:360px;
+      min-height:390px;
       display:flex;
       flex-direction:column;
     }
 
     .ticket-head{
       display:grid;
-      grid-template-columns:46px 1fr 84px 84px 24px;
-      gap:8px;
+      grid-template-columns:40px 1fr 70px 70px 20px;
+      gap:6px;
       color:var(--muted);
       font-size:.8rem;
       padding-bottom:6px;
@@ -298,25 +277,23 @@
     .ticket-scroll{
       flex:1;
       overflow:auto;
-      max-height:360px;
+      max-height:390px;
       padding-right:2px;
     }
 
     .ticket-row{
       display:grid;
-      grid-template-columns:46px 1fr 84px 84px 24px;
-      gap:8px;
+      grid-template-columns:40px 1fr 70px 70px 20px;
+      gap:6px;
       align-items:center;
       padding:4px 0;
       border-bottom:1px solid rgba(255,255,255,.04);
-      font-size:.92rem;
+      font-size:.86rem;
     }
 
     .ticket-row:last-child{border-bottom:none}
 
-    .qty, .unit, .total-line{
-      white-space:nowrap;
-    }
+    .qty,.unit,.total-line{white-space:nowrap}
 
     .trash{
       border:none;
@@ -378,7 +355,7 @@
       margin-top:8px;
     }
 
-    .big-btn, .small-btn{
+    .big-btn,.small-btn{
       border:none;
       border-radius:12px;
       color:#fff;
@@ -473,7 +450,7 @@
       margin-bottom:10px;
     }
 
-    .manage-input, .manage-select{
+    .manage-input,.manage-select{
       background:#090a0b;
       border:1px solid var(--line);
       color:#fff;
@@ -554,60 +531,14 @@
     }
 
     .hidden{display:none !important}
-
-    svg{
-      width:100%;
-      height:100%;
-      display:block;
-    }
+    svg{width:100%;height:100%;display:block}
 
     @media (max-width:760px){
-      .brand-title{font-size:.98rem}
-      .info-grid{grid-template-columns:1fr}
+      .title{font-size:.98rem}
+      .top-info{grid-template-columns:1fr}
       .stats-grid{grid-template-columns:repeat(2,1fr)}
       .manage-form{grid-template-columns:1fr 1fr}
       .manage-row{grid-template-columns:1fr}
-    }
-
-    @media (max-width:430px){
-      .cards-grid{
-        grid-template-columns:repeat(4,1fr);
-        gap:6px;
-      }
-      .item{
-        min-height:90px;
-        border-radius:12px;
-        padding:7px 5px 5px;
-      }
-      .item-icon{
-        width:30px;
-        height:30px;
-      }
-      .item-mid{
-        font-size:.62rem;
-        min-height:28px;
-      }
-      .item-price{
-        font-size:.74rem;
-      }
-      .ticket-box{
-        min-height:390px;
-      }
-      .ticket-scroll{
-        max-height:390px;
-      }
-      .ticket-head,
-      .ticket-row{
-        grid-template-columns:40px 1fr 70px 70px 20px;
-        gap:6px;
-        font-size:.86rem;
-      }
-      .pay-grid{
-        grid-template-columns:repeat(3,1fr);
-      }
-      .action-row{
-        grid-template-columns:1.25fr .7fr .8fr;
-      }
     }
   </style>
 </head>
@@ -647,7 +578,6 @@
 
       <div class="card">
         <div class="ticket-title">Ticket en cours</div>
-
         <div class="ticket-box">
           <div class="ticket-head">
             <div>Qté</div>
@@ -656,9 +586,7 @@
             <div>Total</div>
             <div></div>
           </div>
-
           <div class="ticket-scroll" id="ticketList"></div>
-
           <div class="ticket-total">
             <span>TOTAL</span>
             <span id="ticketTotal">0,00 €</span>
@@ -801,10 +729,10 @@
 
   <script>
     const STORAGE = {
-      items: 'btv_items_v4',
-      sales: 'btv_sales_v4',
-      closures: 'btv_closures_v4',
-      counter: 'btv_counter_v4'
+      items: 'btv_items_v4b',
+      sales: 'btv_sales_v4b',
+      closures: 'btv_closures_v4b',
+      counter: 'btv_counter_v4b'
     };
 
     const CATEGORY_META = {
@@ -813,6 +741,10 @@
       services: { label: 'SERVICES', css: 'services', titleCss: 'title-services' },
       bar: { label: 'BAR / BOISSONS', css: 'bar', titleCss: 'title-bar' }
     };
+
+    function makeId(){
+      return 'id-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    }
 
     const DEFAULT_ITEMS = [
       { id: makeId(), category: 'tir', name: 'Jeton fosse', price: 6.00, iconKey: 'target' },
@@ -839,47 +771,40 @@
       { id: makeId(), category: 'bar', name: 'Eau pétillante', price: 1.50, iconKey: 'sparkling' }
     ];
 
-    function wrapSvg(markup){
-      return markup.trim();
-    }
+    function svg(s){ return s.trim(); }
 
     const ICONS = {
-      brand: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="32" r="18"/><circle cx="28" cy="32" r="8"/><path d="M28 14V6M10 32H2M16 16l-6-6"/><path d="M36 24 58 6"/><path d="m52 6 6 6-18 6z"/></svg>`),
-      gear: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="6"/><path d="M32 12v8M32 44v8M12 32h8M44 32h8M18 18l6 6M40 40l6 6M46 18l-6 6M24 40l-6 6"/></svg>`),
-      clock: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="32" cy="32" r="24"/><path d="M32 20v14l10 6"/></svg>`),
-      customer: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="32" cy="22" r="10"/><path d="M14 54c2-10 10-16 18-16s16 6 18 16z"/></svg>`),
-      cash: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="16" width="48" height="32" rx="4"/><circle cx="32" cy="32" r="7"/></svg>`),
-      card: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="14" width="48" height="36" rx="5"/><path d="M8 24h48M18 40h10"/></svg>`),
-      check: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M12 50h40"/><path d="M20 42 42 20"/><path d="M30 20h12v12"/></svg>`),
-      validate: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34 26 46 50 18"/></svg>`),
-      print: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M18 22V10h28v12"/><rect x="12" y="22" width="40" height="22" rx="4"/><path d="M18 38h28v16H18z"/></svg>`),
-      copy: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="22" y="18" width="24" height="30" rx="3"/><path d="M18 42H14V14h24v4"/></svg>`),
-      trash: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M20 18h24M26 18v-4h12v4M22 22l2 28h16l2-28"/><path d="M30 28v16M34 28v16"/></svg>`),
-      pie: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 8v24h24"/><path d="M28 12A20 20 0 1 0 52 36"/></svg>`),
-      list: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M22 18h28M22 32h28M22 46h28"/><circle cx="12" cy="18" r="2"/><circle cx="12" cy="32" r="2"/><circle cx="12" cy="46" r="2"/></svg>`),
-      manage: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="6"/><path d="M32 10v8M32 46v8M10 32h8M46 32h8"/></svg>`),
+      brand: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="32" r="18"/><circle cx="28" cy="32" r="8"/><path d="M28 14V6M10 32H2M16 16l-6-6"/><path d="M36 24 58 6"/><path d="m52 6 6 6-18 6z"/></svg>`),
+      manage: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="6"/><path d="M32 10v8M32 46v8M10 32h8M46 32h8"/></svg>`),
+      clock: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="32" cy="32" r="24"/><path d="M32 20v14l10 6"/></svg>`),
+      customer: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="32" cy="22" r="10"/><path d="M14 54c2-10 10-16 18-16s16 6 18 16z"/></svg>`),
+      cash: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="16" width="48" height="32" rx="4"/><circle cx="32" cy="32" r="7"/></svg>`),
+      card: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="14" width="48" height="36" rx="5"/><path d="M8 24h48M18 40h10"/></svg>`),
+      check: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M12 50h40"/><path d="M20 42 42 20"/><path d="M30 20h12v12"/></svg>`),
+      validate: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34 26 46 50 18"/></svg>`),
+      print: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M18 22V10h28v12"/><rect x="12" y="22" width="40" height="22" rx="4"/><path d="M18 38h28v16H18z"/></svg>`),
+      copy: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="22" y="18" width="24" height="30" rx="3"/><path d="M18 42H14V14h24v4"/></svg>`),
+      trash: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M20 18h24M26 18v-4h12v4M22 22l2 28h16l2-28"/><path d="M30 28v16M34 28v16"/></svg>`),
+      pie: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 8v24h24"/><path d="M28 12A20 20 0 1 0 52 36"/></svg>`),
+      list: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M22 18h28M22 32h28M22 46h28"/><circle cx="12" cy="18" r="2"/><circle cx="12" cy="32" r="2"/><circle cx="12" cy="46" r="2"/></svg>`),
 
-      target: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="5"/></svg>`),
-      targetplus: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="26" cy="38" r="18"/><circle cx="26" cy="38" r="9"/><path d="M50 12v16M42 20h16"/></svg>`),
-      shells: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="14" width="12" height="34" rx="3"/><rect x="26" y="14" width="12" height="34" rx="3"/><rect x="42" y="14" width="12" height="34" rx="3"/><path d="M10 22h12M26 22h12M42 22h12"/></svg>`),
-      shooter: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="55" cy="16" r="4"/></svg>`),
-      shooter2: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="50" cy="14" r="3"/><circle cx="58" cy="19" r="3"/></svg>`),
-      boar: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M10 34c4-10 14-16 28-16l8-4 6 4-4 6c2 2 3 6 2 10l-6 6h-8l-4 6h-6l2-6H20l-4 6h-6l4-8c-3-1-5-2-6-4z"/></svg>`),
-      dot3: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="32" r="5"/><circle cx="32" cy="32" r="5"/><circle cx="46" cy="32" r="5"/></svg>`),
-      box: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 20h40v28H12z"/><path d="M12 20 24 12h28M24 12v8"/></svg>`),
-      boxshell: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="40" y="26" width="6" height="18" rx="2"/><rect x="50" y="26" width="6" height="18" rx="2"/></svg>`),
-      boxshell2: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="42" y="28" width="12" height="10" rx="2"/></svg>`),
-      rifle: wrapSvg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M6 38h20l18-10h10v4L32 40H20v6H14v-6H6z"/></svg>`),
-      shield: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 10 48 16v12c0 10-7 18-16 24-9-6-16-14-16-24V16z"/></svg>`),
-      coffee: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M14 24h28v12a10 10 0 0 1-10 10H24A10 10 0 0 1 14 36z"/><path d="M42 28h6a6 6 0 0 1 0 12h-4"/><path d="M20 16c0-4 4-4 4-8M30 16c0-4 4-4 4-8"/></svg>`),
-      can: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="20" y="12" width="24" height="40" rx="5"/><path d="M24 18h16"/><path d="M18 40c12 0 18-10 28-10"/></svg>`),
-      water: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M24 34h16"/></svg>`),
-      sparkling: wrapSvg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M48 18v6M45 21h6M50 28v4M48 32h4M12 24v5M10 26h4"/></svg>`)
+      target: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="5"/></svg>`),
+      targetplus: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="26" cy="38" r="18"/><circle cx="26" cy="38" r="9"/><path d="M50 12v16M42 20h16"/></svg>`),
+      shells: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="14" width="12" height="34" rx="3"/><rect x="26" y="14" width="12" height="34" rx="3"/><rect x="42" y="14" width="12" height="34" rx="3"/><path d="M10 22h12M26 22h12M42 22h12"/></svg>`),
+      shooter: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="55" cy="16" r="4"/></svg>`),
+      shooter2: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="50" cy="14" r="3"/><circle cx="58" cy="19" r="3"/></svg>`),
+      boar: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M10 34c4-10 14-16 28-16l8-4 6 4-4 6c2 2 3 6 2 10l-6 6h-8l-4 6h-6l2-6H20l-4 6h-6l4-8c-3-1-5-2-6-4z"/></svg>`),
+      dot3: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="32" r="5"/><circle cx="32" cy="32" r="5"/><circle cx="46" cy="32" r="5"/></svg>`),
+      box: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 20h40v28H12z"/><path d="M12 20 24 12h28M24 12v8"/></svg>`),
+      boxshell: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="40" y="26" width="6" height="18" rx="2"/><rect x="50" y="26" width="6" height="18" rx="2"/></svg>`),
+      boxshell2: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="42" y="28" width="12" height="10" rx="2"/></svg>`),
+      rifle: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M6 38h20l18-10h10v4L32 40H20v6H14v-6H6z"/></svg>`),
+      shield: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 10 48 16v12c0 10-7 18-16 24-9-6-16-14-16-24V16z"/></svg>`),
+      coffee: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M14 24h28v12a10 10 0 0 1-10 10H24A10 10 0 0 1 14 36z"/><path d="M42 28h6a6 6 0 0 1 0 12h-4"/><path d="M20 16c0-4 4-4 4-8M30 16c0-4 4-4 4-8"/></svg>`),
+      can: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="20" y="12" width="24" height="40" rx="5"/><path d="M24 18h16"/><path d="M18 40c12 0 18-10 28-10"/></svg>`),
+      water: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M24 34h16"/></svg>`),
+      sparkling: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M48 18v6M45 21h6M50 28v4M48 32h4M12 24v5M10 26h4"/></svg>`)
     };
-
-    function makeId(){
-      return 'id-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
-    }
 
     function money(v){
       return Number(v || 0).toLocaleString('fr-FR', { style:'currency', currency:'EUR' });
@@ -997,9 +922,7 @@
 
     function removeGroupedLine(itemId){
       const index = currentTicket.findIndex(x => x.itemId === itemId);
-      if(index >= 0){
-        currentTicket.splice(index, 1);
-      }
+      if(index >= 0) currentTicket.splice(index, 1);
       renderTicket();
       renderHeader();
     }
@@ -1015,7 +938,7 @@
       host.innerHTML = '';
 
       Object.keys(CATEGORY_META).forEach(catKey => {
-        const catItems = items.filter(i => i.category === catKey);
+        const catItems = items.filter(x => x.category === catKey);
         if(catItems.length === 0) return;
 
         const section = document.createElement('div');
@@ -1033,9 +956,7 @@
           btn.className = `item ${CATEGORY_META[item.category].css}`;
           btn.type = 'button';
           btn.innerHTML = `
-            <div class="item-top">
-              <div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div>
-            </div>
+            <div class="item-top"><div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div></div>
             <div class="item-mid">${escapeHtml(item.name)}</div>
             <div class="item-price">${money(item.price)}</div>
           `;
@@ -1052,7 +973,6 @@
     function renderTicket(){
       const list = document.getElementById('ticketList');
       list.innerHTML = '';
-
       const rows = groupedTicket();
 
       if(rows.length === 0){
@@ -1086,20 +1006,18 @@
     function currentTicketText(){
       const customerName = document.getElementById('customerName').value.trim();
       const rows = groupedTicket();
-      let txt = 'Fédération Française de Ball-Trap\n';
-      txt += 'Club de Vence\n\n';
-      txt += 'Ticket n° ' + nextTicketNumber() + '\n';
-      txt += 'Date : ' + nowDisplay() + '\n';
-      if(customerName){
-        txt += 'Nom / Référence : ' + customerName + '\n';
-      }
-      txt += 'Encaissement : ' + paymentMethod + '\n\n';
+      let txt = 'Fédération Française de Ball-Trap\\n';
+      txt += 'Club de Vence\\n\\n';
+      txt += 'Ticket n° ' + nextTicketNumber() + '\\n';
+      txt += 'Date : ' + nowDisplay() + '\\n';
+      if(customerName) txt += 'Nom / Référence : ' + customerName + '\\n';
+      txt += 'Encaissement : ' + paymentMethod + '\\n\\n';
 
       rows.forEach(row => {
-        txt += row.quantity + ' x ' + row.name + '   ' + money(row.total) + '\n';
+        txt += row.quantity + ' x ' + row.name + '   ' + money(row.total) + '\\n';
       });
 
-      txt += '\nTOTAL : ' + money(ticketTotal()) + '\n';
+      txt += '\\nTOTAL : ' + money(ticketTotal()) + '\\n';
       return txt;
     }
 
@@ -1131,18 +1049,13 @@
         alert('Le ticket est vide.');
         return;
       }
-      const content = escapeHtml(currentTicketText()).replace(/\n/g, '<br>');
+      const content = escapeHtml(currentTicketText()).replace(/\\n/g, '<br>');
       const w = window.open('', '_blank');
       if(!w){
         alert('Impossible d’ouvrir la fenêtre d’impression.');
         return;
       }
-      w.document.write(`
-        <html>
-          <head><title>Ticket</title></head>
-          <body style="font-family:Arial;padding:20px;background:#fff;color:#000">${content}</body>
-        </html>
-      `);
+      w.document.write(`<html><head><title>Ticket</title></head><body style="font-family:Arial;padding:20px;background:#fff;color:#000">${content}</body></html>`);
       w.document.close();
       w.focus();
       w.print();
@@ -1193,8 +1106,8 @@
     function renderHistory(){
       const host = document.getElementById('historyList');
       host.innerHTML = '';
-
       const day = todaySales();
+
       if(day.length === 0){
         host.innerHTML = `<div class="history-card">Aucune vente aujourd’hui.</div>`;
       } else {
@@ -1271,9 +1184,9 @@
         host.innerHTML = `<div class="history-card">Aucune clôture enregistrée.</div>`;
       } else {
         closures.slice().reverse().forEach(c => {
-          const cardEl = document.createElement('div');
-          cardEl.className = 'history-card';
-          cardEl.innerHTML = `
+          const el = document.createElement('div');
+          el.className = 'history-card';
+          el.innerHTML = `
             <div class="history-head">
               <span>${c.dayKey}</span>
               <span>${money(c.total)}</span>
@@ -1283,7 +1196,7 @@
             <div class="history-line">Espèces : ${money(c.cash)}</div>
             <div class="history-line">Chèque : ${money(c.check)}</div>
           `;
-          host.appendChild(cardEl);
+          host.appendChild(el);
         });
       }
     }
@@ -1396,9 +1309,7 @@
           btn.className = `item ${CATEGORY_META[item.category].css}`;
           btn.type = 'button';
           btn.innerHTML = `
-            <div class="item-top">
-              <div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div>
-            </div>
+            <div class="item-top"><div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div></div>
             <div class="item-mid">${escapeHtml(item.name)}</div>
             <div class="item-price">${money(item.price)}</div>
           `;
