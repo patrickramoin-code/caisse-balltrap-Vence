@@ -1,0 +1,1001 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Caisse du Ball-Trap de Vence</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --panel: #1c1c1e;
+      --panel-2: #2a2a2d;
+      --text: #f5f5f7;
+      --muted: #b0b0b5;
+      --accent: #ff8a00;
+      --accent-2: #27c93f;
+      --danger: #ff453a;
+      --border: #3a3a3d;
+      --blue: #0a84ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .app {
+      max-width: 640px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 14px;
+      padding-bottom: 120px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .title {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .date {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .stat {
+      background: var(--panel-2);
+      border-radius: 14px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 2px 0 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 12px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.06s ease, opacity 0.2s ease;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .btn-item {
+      background: linear-gradient(180deg, #ff9f2e, #ff8a00);
+      color: white;
+      min-height: 82px;
+      text-align: left;
+    }
+
+    .btn-item small {
+      display: block;
+      opacity: 0.95;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .actions-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-secondary {
+      background: #2f2f33;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-success {
+      background: var(--accent-2);
+      color: white;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-blue {
+      background: var(--blue);
+      color: white;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: white;
+    }
+
+    .ticket-line,
+    .list-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .ticket-line:last-child,
+    .list-line:last-child {
+      border-bottom: 0;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .small {
+      font-size: 0.9rem;
+    }
+
+    .footer-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(20,20,22,0.97);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    }
+
+    .footer-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .footer-total {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #2f2f33;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 6px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"] {
+      width: 100%;
+      background: #2f2f33;
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      font-family: inherit;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.35;
+    }
+
+    .tabbar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tabbtn.active {
+      background: var(--accent);
+      color: white;
+      border: 0;
+    }
+
+    .pay-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .pay-btn.active {
+      outline: 2px solid white;
+      opacity: 1;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 6px 0;
+    }
+
+    @media (max-width: 560px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .actions,
+      .actions-3,
+      .pay-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div>
+        <div class="title" id="appTitle">Caisse du Ball-Trap de Vence</div>
+        <div class="date" id="todayLabel"></div>
+      </div>
+      <div class="pill" id="ticketNumberLabel"></div>
+    </div>
+
+    <div class="tabbar">
+      <button class="btn-secondary tabbtn active" id="tab-caisse" type="button">Caisse</button>
+      <button class="btn-secondary tabbtn" id="tab-gestion" type="button">Gestion</button>
+      <button class="btn-secondary tabbtn" id="tab-historique" type="button">Historique</button>
+    </div>
+
+    <div class="card">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Total jour</div>
+          <div class="stat-value" id="dayTotal">0,00 €</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Articles</div>
+          <div class="stat-value" id="dayCount">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Tickets</div>
+          <div class="stat-value" id="dayTickets">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">CB</div>
+          <div class="stat-value" id="dayCard">0,00 €</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Espèces / Chèque</div>
+          <div class="stat-value" id="dayOther">0,00 €</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="screen-caisse">
+      <div class="card">
+        <div class="section-title">Choisir un article</div>
+        <div class="grid" id="itemsGrid"></div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Ticket en cours</div>
+        <input type="text" id="ticketName" placeholder="Nom ou référence (facultatif)" />
+        <input type="email" id="ticketEmail" placeholder="Adresse e-mail (facultatif)" />
+
+        <div id="ticketLines"></div>
+        <div id="ticketEmpty" class="note">Aucun article sur le ticket en cours.</div>
+
+        <div class="summary-row">
+          <span class="muted">Mode d'encaissement</span>
+          <strong id="selectedPaymentLabel">ESPÈCES</strong>
+        </div>
+
+        <div class="pay-grid">
+          <button class="btn-accent pay-btn active" id="pay-cash" type="button">Espèces</button>
+          <button class="btn-blue pay-btn" id="pay-card" type="button">Carte bancaire</button>
+          <button class="btn-secondary pay-btn" id="pay-check" type="button">Chèque</button>
+        </div>
+
+        <div class="actions">
+          <button class="btn-secondary" id="undoLineBtn" type="button">Annuler dernière ligne</button>
+          <button class="btn-success" id="validateBtn" type="button">Valider et encaisser</button>
+        </div>
+      </div>
+
+      <div id="afterSaleView" class="card hidden">
+        <div class="section-title">Ticket validé</div>
+        <div id="lastTicketPreview" class="note"></div>
+        <div class="actions-3">
+          <button class="btn-secondary" id="printTicketBtn" type="button">Imprimer</button>
+          <button class="btn-accent" id="copyTicketBtn" type="button">Copier le ticket</button>
+          <button class="btn-secondary" id="closeAfterSaleBtn" type="button">Fermer</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Clôture du jour</div>
+        <div class="note">La clôture enregistre le résumé du jour. Les ventes restent conservées.</div>
+        <div class="actions">
+          <button class="btn-danger" id="closeDayBtn" type="button">Clôturer la journée</button>
+          <button class="btn-secondary" id="historyShortcutBtn" type="button">Voir l'historique</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="screen-gestion" class="hidden">
+      <div class="card">
+        <div class="section-title">Créer un article</div>
+        <input type="text" id="newItemName" placeholder="Nom de l'article" />
+        <input type="number" id="newItemPrice" step="0.01" placeholder="Prix" />
+        <div class="actions">
+          <button class="btn-success" id="addItemBtn" type="button">Ajouter l'article</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Liste actuelle des articles</div>
+        <div id="catalogList"></div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Réglages</div>
+        <input type="text" id="associationName" placeholder="Nom affiché (facultatif)" />
+        <div class="actions">
+          <button class="btn-secondary" id="saveSettingsBtn" type="button">Enregistrer le nom</button>
+          <button class="btn-danger" id="resetDataBtn" type="button">Tout remettre à zéro</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="screen-historique" class="hidden">
+      <div class="card">
+        <div class="section-title">Historique du jour</div>
+        <div id="historyContent"></div>
+        <div class="actions">
+          <button class="btn-secondary" id="exportBtn" type="button">Exporter les données</button>
+          <button class="btn-secondary" id="showClosuresBtn" type="button">Voir les clôtures</button>
+        </div>
+      </div>
+
+      <div id="closuresView" class="card hidden">
+        <div class="section-title">Clôtures enregistrées</div>
+        <div id="closuresContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-inner">
+      <div>
+        <div class="muted small">Ticket en cours</div>
+        <div class="footer-total" id="currentTicketTotal">0,00 €</div>
+      </div>
+      <button class="btn-success" id="footerValidateBtn" type="button">Encaisser</button>
+    </div>
+  </div>
+
+  <script>
+    const sampleItems = [
+      { name: 'Série de 25 cartouches', price: 9 },
+      { name: 'Jeton fosse', price: 6 },
+      { name: 'Boisson', price: 2 },
+      { name: 'Sandwich', price: 4 }
+    ];
+
+    const STORAGE_KEYS = {
+      items: 'balltrap_items_v4',
+      sales: 'balltrap_sales_v4',
+      currentTicket: 'balltrap_current_ticket_v4',
+      ticketCounter: 'balltrap_ticket_counter_v4',
+      closures: 'balltrap_closures_v4',
+      settings: 'balltrap_settings_v4',
+      lastTicket: 'balltrap_last_ticket_v4'
+    };
+
+    let items = load(STORAGE_KEYS.items, sampleItems);
+    let sales = load(STORAGE_KEYS.sales, []);
+    let currentTicket = load(STORAGE_KEYS.currentTicket, []);
+    let ticketCounter = load(STORAGE_KEYS.ticketCounter, {});
+    let closures = load(STORAGE_KEYS.closures, []);
+    let settings = load(STORAGE_KEYS.settings, { associationName: '' });
+    let lastTicket = load(STORAGE_KEYS.lastTicket, null);
+    let selectedPaymentMethod = 'ESPÈCES';
+
+    function load(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function save(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function formatMoney(value) {
+      return Number(value || 0).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+    }
+
+    function formatDate(dateStr = null) {
+      const d = dateStr ? new Date(dateStr) : new Date();
+      return d.toLocaleDateString('fr-FR');
+    }
+
+    function formatDateTime(dateStr) {
+      return new Date(dateStr).toLocaleString('fr-FR');
+    }
+
+    function getTodayKey() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function getTodaySales() {
+      const today = getTodayKey();
+      return sales.filter(s => s.dayKey === today);
+    }
+
+    function getTodayTicketsCount() {
+      return new Set(getTodaySales().map(s => s.ticketNumber)).size;
+    }
+
+    function getNextTicketNumber() {
+      const today = getTodayKey();
+      if (!ticketCounter[today]) {
+        ticketCounter[today] = 1;
+      }
+      return ticketCounter[today];
+    }
+
+    function incrementTicketNumber() {
+      const today = getTodayKey();
+      if (!ticketCounter[today]) {
+        ticketCounter[today] = 1;
+      }
+      ticketCounter[today] += 1;
+      save(STORAGE_KEYS.ticketCounter, ticketCounter);
+    }
+
+    function switchTab(tab) {
+      document.getElementById('screen-caisse').classList.toggle('hidden', tab !== 'caisse');
+      document.getElementById('screen-gestion').classList.toggle('hidden', tab !== 'gestion');
+      document.getElementById('screen-historique').classList.toggle('hidden', tab !== 'historique');
+
+      document.getElementById('tab-caisse').classList.toggle('active', tab === 'caisse');
+      document.getElementById('tab-gestion').classList.toggle('active', tab === 'gestion');
+      document.getElementById('tab-historique').classList.toggle('active', tab === 'historique');
+
+      if (tab === 'gestion') {
+        renderItemsManagement();
+      }
+      if (tab === 'historique') {
+        renderHistory();
+      }
+    }
+
+    function renderHeader() {
+      const customName = settings.associationName && settings.associationName.trim() !== ''
+        ? settings.associationName.trim()
+        : 'Caisse du Ball-Trap de Vence';
+
+      document.getElementById('appTitle').textContent = customName;
+      document.getElementById('todayLabel').textContent = formatDate();
+      document.getElementById('ticketNumberLabel').textContent = 'Ticket n° ' + getNextTicketNumber();
+      document.getElementById('associationName').value = settings.associationName || '';
+    }
+
+    function renderItemsGrid() {
+      const grid = document.getElementById('itemsGrid');
+      grid.innerHTML = '';
+
+      if (items.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'note';
+        empty.textContent = 'Aucun article. Va dans Gestion pour en créer.';
+        grid.appendChild(empty);
+        return;
+      }
+
+      items.forEach(item => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-item';
+        btn.type = 'button';
+        btn.innerHTML = `${escapeHtml(item.name)}<small>${formatMoney(item.price)}</small>`;
+        btn.addEventListener('click', () => addItemToTicket(item));
+        grid.appendChild(btn);
+      });
+    }
+
+    function addItemToTicket(item) {
+      currentTicket.push({
+        name: item.name,
+        price: Number(item.price),
+        quantity: 1,
+        total: Number(item.price)
+      });
+      save(STORAGE_KEYS.currentTicket, currentTicket);
+      renderCurrentTicket();
+    }
+
+    function undoLastLine() {
+      if (currentTicket.length === 0) {
+        return;
+      }
+      currentTicket.pop();
+      save(STORAGE_KEYS.currentTicket, currentTicket);
+      renderCurrentTicket();
+    }
+
+    function renderCurrentTicket() {
+      const box = document.getElementById('ticketLines');
+      const empty = document.getElementById('ticketEmpty');
+      box.innerHTML = '';
+
+      if (currentTicket.length === 0) {
+        empty.classList.remove('hidden');
+      } else {
+        empty.classList.add('hidden');
+      }
+
+      currentTicket.forEach((line, index) => {
+        const div = document.createElement('div');
+        div.className = 'ticket-line';
+        div.innerHTML = `
+          <div>
+            <div><strong>${index + 1}. ${escapeHtml(line.name)}</strong></div>
+          </div>
+          <div><strong>${formatMoney(line.total)}</strong></div>
+        `;
+        box.appendChild(div);
+      });
+
+      const total = currentTicket.reduce((sum, line) => sum + Number(line.total), 0);
+      document.getElementById('currentTicketTotal').textContent = formatMoney(total);
+      document.getElementById('selectedPaymentLabel').textContent = selectedPaymentMethod;
+      document.getElementById('ticketNumberLabel').textContent = 'Ticket n° ' + getNextTicketNumber();
+    }
+
+    function setPaymentMethod(method) {
+      selectedPaymentMethod = method;
+      document.getElementById('pay-cash').classList.toggle('active', method === 'ESPÈCES');
+      document.getElementById('pay-card').classList.toggle('active', method === 'CB');
+      document.getElementById('pay-check').classList.toggle('active', method === 'CHÈQUE');
+      document.getElementById('selectedPaymentLabel').textContent = method;
+    }
+
+    function validateTicket() {
+      if (currentTicket.length === 0) {
+        alert('Le ticket est vide.');
+        return;
+      }
+
+      const ticketNumber = getNextTicketNumber();
+      const createdAt = new Date().toISOString();
+      const dayKey = getTodayKey();
+      const customerName = document.getElementById('ticketName').value.trim();
+      const customerEmail = document.getElementById('ticketEmail').value.trim();
+      const total = currentTicket.reduce((sum, line) => sum + Number(line.total), 0);
+
+      currentTicket.forEach(line => {
+        sales.push({
+          name: line.name,
+          price: Number(line.price),
+          quantity: Number(line.quantity),
+          total: Number(line.total),
+          createdAt,
+          dayKey,
+          ticketNumber,
+          paymentMethod: selectedPaymentMethod,
+          customerName,
+          customerEmail
+        });
+      });
+
+      lastTicket = {
+        ticketNumber,
+        createdAt,
+        dayKey,
+        paymentMethod: selectedPaymentMethod,
+        customerName,
+        customerEmail,
+        lines: JSON.parse(JSON.stringify(currentTicket)),
+        total
+      };
+
+      save(STORAGE_KEYS.sales, sales);
+      save(STORAGE_KEYS.lastTicket, lastTicket);
+      incrementTicketNumber();
+
+      currentTicket = [];
+      save(STORAGE_KEYS.currentTicket, currentTicket);
+
+      document.getElementById('ticketName').value = '';
+      document.getElementById('ticketEmail').value = '';
+
+      renderLastTicketPreview();
+      document.getElementById('afterSaleView').classList.remove('hidden');
+      renderAll();
+    }
+
+    function buildTicketText(ticket) {
+      let txt = 'Fédération Française de Ball-Trap\n';
+      txt += 'Club de Vence\n\n';
+      txt += 'Ticket n° ' + ticket.ticketNumber + '\n';
+      txt += 'Date : ' + formatDateTime(ticket.createdAt) + '\n';
+      if (ticket.customerName) {
+        txt += 'Nom / Référence : ' + ticket.customerName + '\n';
+      }
+      txt += 'Encaissement : ' + ticket.paymentMethod + '\n\n';
+      ticket.lines.forEach(line => {
+        txt += '- ' + line.name + ' : ' + formatMoney(line.total) + '\n';
+      });
+      txt += '\nTotal : ' + formatMoney(ticket.total) + '\n\n';
+      txt += 'Merci pour votre visite';
+      return txt;
+    }
+
+    function renderLastTicketPreview() {
+      const box = document.getElementById('lastTicketPreview');
+      if (!lastTicket) {
+        box.innerHTML = 'Aucun ticket récent.';
+        return;
+      }
+      box.innerHTML = `<strong>Ticket n° ${lastTicket.ticketNumber}</strong><br>${escapeHtml(lastTicket.customerName || 'Sans nom')}<br>${formatMoney(lastTicket.total)} - ${lastTicket.paymentMethod}`;
+    }
+
+    function closeAfterSaleView() {
+      document.getElementById('afterSaleView').classList.add('hidden');
+    }
+
+    function printLastTicket() {
+      if (!lastTicket) {
+        return;
+      }
+      const content = escapeHtml(buildTicketText(lastTicket)).replace(/\n/g, '<br>');
+      const w = window.open('', '_blank');
+      if (!w) {
+        alert('Impossible d’ouvrir la fenêtre d’impression.');
+        return;
+      }
+      w.document.write(`<html><head><title>Ticket</title></head><body style="font-family:Arial;padding:20px;white-space:normal;">${content}</body></html>`);
+      w.document.close();
+      w.focus();
+      w.print();
+    }
+
+    function copyLastTicket() {
+      if (!lastTicket) {
+        return;
+      }
+      const text = buildTicketText(lastTicket);
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => alert('Ticket copié'))
+          .catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      alert('Ticket copié');
+    }
+
+    function renderDashboard() {
+      const todaySales = getTodaySales();
+      const total = todaySales.reduce((sum, line) => sum + Number(line.total), 0);
+      const count = todaySales.length;
+      const tickets = getTodayTicketsCount();
+      const cb = todaySales.filter(x => x.paymentMethod === 'CB').reduce((s, x) => s + Number(x.total), 0);
+      const cash = todaySales.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s, x) => s + Number(x.total), 0);
+      const check = todaySales.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s, x) => s + Number(x.total), 0);
+
+      document.getElementById('dayTotal').textContent = formatMoney(total);
+      document.getElementById('dayCount').textContent = count;
+      document.getElementById('dayTickets').textContent = tickets;
+      document.getElementById('dayCard').textContent = formatMoney(cb);
+      document.getElementById('dayOther').textContent = formatMoney(cash + check);
+    }
+
+    function addItem() {
+      const name = document.getElementById('newItemName').value.trim();
+      const priceRaw = document.getElementById('newItemPrice').value;
+      const price = Number(priceRaw);
+
+      if (!name || !priceRaw || Number.isNaN(price)) {
+        alert('Complète le nom et le prix.');
+        return;
+      }
+
+      items.push({ name, price });
+      save(STORAGE_KEYS.items, items);
+      document.getElementById('newItemName').value = '';
+      document.getElementById('newItemPrice').value = '';
+      renderAll();
+      switchTab('gestion');
+    }
+
+    function deleteItem(index) {
+      if (index < 0 || index >= items.length) {
+        return;
+      }
+      items.splice(index, 1);
+      save(STORAGE_KEYS.items, items);
+      renderAll();
+      switchTab('gestion');
+    }
+
+    function renderItemsManagement() {
+      const box = document.getElementById('catalogList');
+      box.innerHTML = '';
+
+      if (items.length === 0) {
+        box.innerHTML = '<div class="note">Aucun article.</div>';
+        return;
+      }
+
+      items.forEach((item, index) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'list-line';
+        wrap.innerHTML = `
+          <div>${escapeHtml(item.name)} <span class="muted">- ${formatMoney(item.price)}</span></div>
+          <div><button class="btn-secondary" type="button">Retirer</button></div>
+        `;
+        wrap.querySelector('button').addEventListener('click', () => deleteItem(index));
+        box.appendChild(wrap);
+      });
+    }
+
+    function renderHistory() {
+      const content = document.getElementById('historyContent');
+      const todaySales = getTodaySales();
+
+      if (todaySales.length === 0) {
+        content.innerHTML = '<div class="note">Aucune vente aujourd’hui.</div>';
+        return;
+      }
+
+      const grouped = {};
+      todaySales.forEach(line => {
+        if (!grouped[line.ticketNumber]) {
+          grouped[line.ticketNumber] = [];
+        }
+        grouped[line.ticketNumber].push(line);
+      });
+
+      const keys = Object.keys(grouped).sort((a, b) => Number(a) - Number(b));
+      let html = '';
+
+      keys.forEach(ticketNo => {
+        const lines = grouped[ticketNo];
+        const total = lines.reduce((sum, line) => sum + Number(line.total), 0);
+        const payment = lines[0].paymentMethod || '';
+        const name = lines[0].customerName || 'Sans nom';
+        html += `<div style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.08)">`;
+        html += `<div><strong>Ticket n° ${ticketNo}</strong> - ${formatMoney(total)}</div>`;
+        html += `<div class="muted small">${escapeHtml(name)} - ${payment}</div>`;
+        lines.forEach(line => {
+          html += `<div class="muted small">${escapeHtml(line.name)} - ${formatMoney(line.total)}</div>`;
+        });
+        html += `</div>`;
+      });
+
+      content.innerHTML = html;
+    }
+
+    function showClosures() {
+      const view = document.getElementById('closuresView');
+      const box = document.getElementById('closuresContent');
+      view.classList.remove('hidden');
+
+      if (closures.length === 0) {
+        box.innerHTML = '<div class="note">Aucune clôture enregistrée.</div>';
+        return;
+      }
+
+      box.innerHTML = closures.slice().reverse().map(c => `
+        <div class="list-line">
+          <div>
+            <strong>${c.dayKey}</strong><br>
+            <span class="muted small">Tickets : ${c.tickets} - Articles : ${c.lines}</span>
+          </div>
+          <div><strong>${formatMoney(c.total)}</strong></div>
+        </div>
+      `).join('');
+    }
+
+    function closeDay() {
+      const today = getTodayKey();
+      const todaySales = getTodaySales();
+
+      if (todaySales.length === 0) {
+        alert('Aucune vente à clôturer aujourd’hui.');
+        return;
+      }
+
+      const total = todaySales.reduce((sum, line) => sum + Number(line.total), 0);
+      const tickets = getTodayTicketsCount();
+      const lines = todaySales.length;
+      const card = todaySales.filter(x => x.paymentMethod === 'CB').reduce((s, x) => s + Number(x.total), 0);
+      const cash = todaySales.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s, x) => s + Number(x.total), 0);
+      const check = todaySales.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s, x) => s + Number(x.total), 0);
+
+      closures.push({
+        dayKey: today,
+        closedAt: new Date().toISOString(),
+        total,
+        tickets,
+        lines,
+        card,
+        cash,
+        check
+      });
+
+      save(STORAGE_KEYS.closures, closures);
+      alert(`Clôture enregistrée.\nTotal : ${formatMoney(total)}\nCB : ${formatMoney(card)}\nEspèces : ${formatMoney(cash)}\nChèque : ${formatMoney(check)}`);
+      renderAll();
+    }
+
+    function exportData() {
+      const data = { settings, items, sales, closures };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'caisse-balltrap-export.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function saveSettings() {
+      settings.associationName = document.getElementById('associationName').value.trim();
+      save(STORAGE_KEYS.settings, settings);
+      renderHeader();
+      alert('Nom enregistré.');
+    }
+
+    function resetAllData() {
+      const ok = confirm('Tout remettre à zéro ? Cela efface les ventes, clôtures et tickets en cours.');
+      if (!ok) {
+        return;
+      }
+
+      sales = [];
+      currentTicket = [];
+      ticketCounter = {};
+      closures = [];
+      lastTicket = null;
+
+      save(STORAGE_KEYS.sales, sales);
+      save(STORAGE_KEYS.currentTicket, currentTicket);
+      save(STORAGE_KEYS.ticketCounter, ticketCounter);
+      save(STORAGE_KEYS.closures, closures);
+      save(STORAGE_KEYS.lastTicket, lastTicket);
+
+      renderAll();
+      switchTab('gestion');
+    }
+
+    function renderAll() {
+      renderHeader();
+      renderItemsGrid();
+      renderCurrentTicket();
+      renderDashboard();
+      renderItemsManagement();
+      renderHistory();
+      renderLastTicketPreview();
+      save(STORAGE_KEYS.items, items);
+      save(STORAGE_KEYS.currentTicket, currentTicket);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function bindEvents() {
+      document.getElementById('tab-caisse').addEventListener('click', () => switchTab('caisse'));
+      document.getElementById('tab-gestion').addEventListener('click', () => switchTab('gestion'));
+      document.getElementById('tab-historique').addEventListener('click', () => switchTab('historique'));
+
+      document.getElementById('pay-cash').addEventListener('click', () => setPaymentMethod('ESPÈCES'));
+      document.getElementById('pay-card').addEventListener('click', () => setPaymentMethod('CB'));
+      document.getElementById('pay-check').addEventListener('click', () => setPaymentMethod('CHÈQUE'));
+
+      document.getElementById('undoLineBtn').addEventListener('click', undoLastLine);
+      document.getElementById('validateBtn').addEventListener('click', validateTicket);
+      document.getElementById('footerValidateBtn').addEventListener('click', validateTicket);
+      document.getElementById('printTicketBtn').addEventListener('click', printLastTicket);
+      document.getElementById('copyTicketBtn').addEventListener('click', copyLastTicket);
+      document.getElementById('closeAfterSaleBtn').addEventListener('click', closeAfterSaleView);
+      document.getElementById('closeDayBtn').addEventListener('click', closeDay);
+      document.getElementById('historyShortcutBtn').addEventListener('click', () => switchTab('historique'));
+      document.getElementById('addItemBtn').addEventListener('click', addItem);
+      document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
+      document.getElementById('resetDataBtn').addEventListener('click', resetAllData);
+      document.getElementById('exportBtn').addEventListener('click', exportData);
+      document.getElementById('showClosuresBtn').addEventListener('click', showClosures);
+    }
+
+    bindEvents();
+    setPaymentMethod('ESPÈCES');
+    renderAll();
+  </script>
+</body>
+</html>
