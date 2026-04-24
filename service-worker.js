@@ -1,12 +1,15 @@
-const CACHE_NAME = "caisse-bt-v1";
+const CACHE_NAME = "caisse-bt-v2";
+
+const urlsToCache = [
+  "/caisse-balltrap-Vence/",
+  "/caisse-balltrap-Vence/index.html",
+  "/caisse-balltrap-Vence/manifest.json"
+];
 
 self.addEventListener("install", function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll([
-        "./",
-        "./index.html"
-      ]);
+      return cache.addAll(urlsToCache);
     })
   );
 });
