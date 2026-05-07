@@ -1168,6 +1168,26 @@
       return sales.filter(s => s.dayKey === todayKey());
     }
 
+    function deleteSale(saleId){
+      const sale = sales.find(s => s.id === saleId);
+      if(!sale){
+        alert('Ticket introuvable.');
+        return;
+      }
+
+      if(sale.dayKey !== todayKey()){
+        alert('Par sécurité, seul un ticket du jour peut être supprimé.');
+        return;
+      }
+
+      if(!confirm('Supprimer ce ticket ? Cette action supprimera uniquement cette vente.')) return;
+
+      sales = sales.filter(s => s.id !== saleId);
+      save(STORAGE.sales, sales);
+      renderAll();
+      alert('Ticket supprimé. Vous pouvez refaire la saisie correctement.');
+    }
+
     function renderHistory(){
       const host = document.getElementById('historyList');
       host.innerHTML = '';
@@ -1186,7 +1206,14 @@
             </div>
             <div class="history-sub">${escapeHtml(sale.customerName || 'Sans nom')} — ${sale.paymentMethod}</div>
             ${sale.lines.map(line => `<div class="history-line">${line.quantity} x ${escapeHtml(line.name)} — ${money(line.total)}</div>`).join('')}
+            <button class="small-btn delete-sale-btn" type="button" style="margin-top:10px;width:100%;background:#722020;border-color:#9a2f2f;">
+              SUPPRIMER CE TICKET
+            </button>
           `;
+          const deleteBtn = card.querySelector('.delete-sale-btn');
+          if(deleteBtn){
+            deleteBtn.addEventListener('click', () => deleteSale(sale.id));
+          }
           host.appendChild(card);
         });
       }
