@@ -1431,6 +1431,26 @@
       w.print();
     }
 
+    function deleteClosure(closureId){
+      const closure = closures.find(c => c.id === closureId);
+      if(!closure){
+        alert('Clôture introuvable.');
+        return;
+      }
+
+      if(closure.dayKey !== todayKey()){
+        alert('Par sécurité, seule une clôture du jour peut être supprimée. Les clôtures des jours précédents restent conservées.');
+        return;
+      }
+
+      if(!confirm('Supprimer cette clôture ? Les tickets et les ventes du jour seront conservés.')) return;
+
+      closures = closures.filter(c => c.id !== closureId);
+      save(STORAGE.closures, closures);
+      renderClosures();
+      alert('Clôture supprimée. Les tickets du jour sont conservés.');
+    }
+
     function renderClosures(){
       const day = todaySales();
       const closureStatsToday = buildClosureStats(day);
@@ -1497,6 +1517,9 @@
             <button class="small-btn print-closure-btn" type="button" style="margin-top:10px;width:100%;">
               IMPRIMER LA CLÔTURE A4
             </button>
+            <button class="small-btn delete-closure-btn" type="button" style="margin-top:8px;width:100%;background:#722020;border-color:#9a2f2f;">
+              SUPPRIMER CETTE CLÔTURE
+            </button>
 
             <div class="closure-detail">
               <div class="closure-row header">
@@ -1510,6 +1533,11 @@
           const printBtn = el.querySelector('.print-closure-btn');
           if(printBtn){
             printBtn.addEventListener('click', () => printClosureA4(c));
+          }
+
+          const deleteBtn = el.querySelector('.delete-closure-btn');
+          if(deleteBtn){
+            deleteBtn.addEventListener('click', () => deleteClosure(c.id));
           }
 
           host.appendChild(el);
