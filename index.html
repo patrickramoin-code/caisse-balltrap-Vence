@@ -1282,6 +1282,155 @@
       alert('Clôture enregistrée avec les statistiques de vente.');
     }
 
+    function printClosureA4(closure){
+      const closureStats = closure.closureStats || {};
+
+      function catTotal(key){
+        return Number(closureStats[key]?.total || 0);
+      }
+
+      const html = `
+        <html>
+        <head>
+          <title>Clôture journée</title>
+          <style>
+            body{
+              font-family:Arial, Helvetica, sans-serif;
+              padding:30px;
+              color:#000;
+            }
+
+            h1{
+              text-align:center;
+              margin-bottom:5px;
+            }
+
+            h2{
+              text-align:center;
+              margin-top:0;
+              font-size:16px;
+              font-weight:normal;
+            }
+
+            table{
+              width:100%;
+              border-collapse:collapse;
+              margin-top:20px;
+            }
+
+            td,th{
+              border:1px solid #000;
+              padding:8px;
+              font-size:14px;
+            }
+
+            th{
+              background:#efefef;
+            }
+
+            .right{text-align:right}
+            .bold{font-weight:bold}
+            .space{height:30px}
+          </style>
+        </head>
+        <body>
+          <h1>Ball-Trap Club de Vence</h1>
+          <h2>Clôture de journée</h2>
+
+          <table>
+            <tr>
+              <td class="bold">Date</td>
+              <td>${closure.dayKey}</td>
+            </tr>
+            <tr>
+              <td class="bold">Nom de l'équipe</td>
+              <td>........................................</td>
+            </tr>
+          </table>
+
+          <table>
+            <tr>
+              <th>Détail</th>
+              <th>Montant</th>
+            </tr>
+
+            <tr>
+              <td>Recettes fosses</td>
+              <td class="right">${money(catTotal('fosses'))}</td>
+            </tr>
+
+            <tr>
+              <td>Recettes parcours</td>
+              <td class="right">${money(catTotal('parcours'))}</td>
+            </tr>
+
+            <tr>
+              <td>Recettes cartouches</td>
+              <td class="right">${money(catTotal('munitions'))}</td>
+            </tr>
+
+            <tr>
+              <td>Recettes sanglier courant</td>
+              <td class="right">${money(catTotal('sanglier'))}</td>
+            </tr>
+
+            <tr>
+              <td>Licences / assurances journalières</td>
+              <td class="right">${money(catTotal('assurance'))}</td>
+            </tr>
+
+            <tr>
+              <td>Vente boissons</td>
+              <td class="right">${money(catTotal('bar'))}</td>
+            </tr>
+
+            <tr>
+              <td>Location de fusils</td>
+              <td class="right">${money(catTotal('services'))}</td>
+            </tr>
+
+            <tr>
+              <td class="bold">Sous-total</td>
+              <td class="right bold">${money(closure.total)}</td>
+            </tr>
+
+            <tr>
+              <td>Dépenses diverses</td>
+              <td class="right">${money(closure.expenses || 0)}</td>
+            </tr>
+
+            <tr>
+              <td class="bold">Résultat de la journée</td>
+              <td class="right bold">${money(closure.netTotal || 0)}</td>
+            </tr>
+          </table>
+
+          <div class="space"></div>
+
+          <table>
+            <tr>
+              <th>Observations</th>
+            </tr>
+            <tr>
+              <td style="height:120px"></td>
+            </tr>
+          </table>
+        </body>
+        </html>
+      `;
+
+      const w = window.open('', '_blank');
+      if(!w){
+        alert('Impossible d’ouvrir la fenêtre d’impression.');
+        return;
+      }
+
+      w.document.write(html);
+      w.document.close();
+      w.focus();
+      w.print();
+    }
+
     function renderClosures(){
       const day = todaySales();
       const closureStatsToday = buildClosureStats(day);
