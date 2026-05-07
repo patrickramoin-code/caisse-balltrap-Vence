@@ -1494,6 +1494,9 @@
             <div class="history-line">Total ventes : ${money(c.total)}</div>
             <div class="history-line negative">Dépenses diverses : ${money(c.expenses || 0)}</div>
             <div class="history-line positive">Total net final : ${money(c.netTotal ?? c.total)}</div>
+            <button class="small-btn print-closure-btn" type="button" style="margin-top:10px;width:100%;">
+              IMPRIMER LA CLÔTURE A4
+            </button>
 
             <div class="closure-detail">
               <div class="closure-row header">
@@ -1504,6 +1507,11 @@
               ${detailHtml || '<div class="history-line">Aucun détail enregistré.</div>'}
             </div>
           `;
+          const printBtn = el.querySelector('.print-closure-btn');
+          if(printBtn){
+            printBtn.addEventListener('click', () => printClosureA4(c));
+          }
+
           host.appendChild(el);
         });
       }
