@@ -6,11 +6,11 @@
   <title>Caisse Ball-Trap de Vence</title>
   <meta name="theme-color" content="#050506" />
   <link rel="manifest" href="manifest.json">
+
   <style>
     :root{
       --bg:#050506;
       --panel:#0c0d0f;
-      --panel2:#121316;
       --line:#2a2c31;
       --text:#f3f3f4;
       --muted:#a8adb6;
@@ -22,6 +22,10 @@
       --green2:#3f6f14;
       --blue:#0e58ac;
       --blue2:#0a4690;
+      --purple:#7447d8;
+      --purple2:#5d35b4;
+      --grey:#5f6670;
+      --grey2:#4d535b;
       --cash:#4f971d;
       --card:#0b57a7;
       --check:#5f6670;
@@ -90,38 +94,23 @@
       margin-bottom:6px;
     }
 
-    .top-pill{
+    .top-pill,
+    .top-total{
       background:#0d0e10;
       border:1px solid var(--line);
       border-radius:12px;
-      min-height:54px;
       display:flex;
       align-items:center;
       justify-content:center;
       padding:8px 12px;
       box-shadow:var(--shadow);
-      font-weight:800;
-      gap:10px;
-    }
-
-    .top-total{
-      background:#0d0e10;
-      border:1px solid var(--line);
-      border-radius:12px;
-      min-height:44px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      margin-bottom:10px;
-      box-shadow:var(--shadow);
       font-weight:900;
+      gap:8px;
     }
 
-    .top-total .value{
-      color:var(--orange);
-      font-size:1.05rem;
-    }
+    .top-pill{min-height:54px}
+    .top-total{min-height:44px;margin-bottom:10px}
+    .top-total .value{color:var(--orange);font-size:1.05rem}
 
     .screen{display:none}
     .screen.active{display:block}
@@ -135,10 +124,15 @@
       letter-spacing:.03em;
     }
 
-    .title-tir{color:var(--orange)}
+    .title-fosses{color:var(--orange)}
+    .title-parcours{color:#f4a330}
+    .title-sanglier{color:#b47b45}
+    .title-divers{color:#c5c8ce}
     .title-munitions{color:#ff3434}
     .title-services{color:#70c92c}
+    .title-assurance{color:#a987ff}
     .title-bar{color:#2e9fff}
+    .title-depenses{color:#ff7777}
 
     .grid{
       display:grid;
@@ -169,10 +163,15 @@
       background:rgba(0,0,0,.12);
     }
 
-    .item.tir{background:linear-gradient(180deg,var(--orange),var(--orange2))}
+    .item.fosses{background:linear-gradient(180deg,var(--orange),var(--orange2))}
+    .item.parcours{background:linear-gradient(180deg,#f0a12a,#c97d11)}
+    .item.sanglier{background:linear-gradient(180deg,#9b6b3d,#6e4828)}
+    .item.divers{background:linear-gradient(180deg,var(--grey),var(--grey2))}
     .item.munitions{background:linear-gradient(180deg,var(--red),var(--red2))}
     .item.services{background:linear-gradient(180deg,var(--green),var(--green2))}
+    .item.assurance{background:linear-gradient(180deg,var(--purple),var(--purple2))}
     .item.bar{background:linear-gradient(180deg,var(--blue),var(--blue2))}
+    .item.depenses{background:linear-gradient(180deg,#9a2f2f,#722020)}
 
     .item-top,.item-mid,.item-price{position:relative; z-index:1}
     .item-top{
@@ -258,15 +257,20 @@
       border:1px solid var(--line);
       border-radius:10px;
       padding:8px 10px;
-      min-height:390px;
+      min-height:330px;
       display:flex;
       flex-direction:column;
     }
 
-    .ticket-head{
+    .ticket-head,
+    .ticket-row{
       display:grid;
       grid-template-columns:40px 1fr 70px 70px 20px;
       gap:6px;
+      align-items:center;
+    }
+
+    .ticket-head{
       color:var(--muted);
       font-size:.8rem;
       padding-bottom:6px;
@@ -282,17 +286,12 @@
     }
 
     .ticket-row{
-      display:grid;
-      grid-template-columns:40px 1fr 70px 70px 20px;
-      gap:6px;
-      align-items:center;
       padding:4px 0;
       border-bottom:1px solid rgba(255,255,255,.04);
       font-size:.86rem;
     }
 
     .ticket-row:last-child{border-bottom:none}
-
     .qty,.unit,.total-line{white-space:nowrap}
 
     .trash{
@@ -368,11 +367,7 @@
       text-align:center;
     }
 
-    .big-btn{
-      min-height:52px;
-      background:var(--cash);
-    }
-
+    .big-btn{min-height:52px;background:var(--cash)}
     .small-btn{
       min-height:52px;
       background:#090a0b;
@@ -530,6 +525,36 @@
       padding:2px 0;
     }
 
+    .closure-detail{
+      margin-top:10px;
+      border-top:1px solid rgba(255,255,255,.12);
+      padding-top:8px;
+    }
+
+    .closure-row{
+      display:grid;
+      grid-template-columns:1fr 50px 80px;
+      gap:6px;
+      font-size:.86rem;
+      padding:3px 0;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .closure-row.header{
+      color:var(--muted);
+      font-weight:900;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+
+    .closure-row.category{
+      font-weight:900;
+      color:var(--orange);
+      margin-top:6px;
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+
+    .negative{color:#ff8b8b;font-weight:900}
+    .positive{color:#95e85d;font-weight:900}
     .hidden{display:none !important}
     svg{width:100%;height:100%;display:block}
 
@@ -539,6 +564,8 @@
       .stats-grid{grid-template-columns:repeat(2,1fr)}
       .manage-form{grid-template-columns:1fr 1fr}
       .manage-row{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(3,1fr)}
+      .action-row{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -656,7 +683,7 @@
         <div class="manage-title">Clôture du jour</div>
         <div class="stats-grid">
           <div class="stat">
-            <div class="stat-label">Total</div>
+            <div class="stat-label">Total ventes</div>
             <div class="stat-value" id="closeTotal">0,00 €</div>
           </div>
           <div class="stat">
@@ -672,9 +699,21 @@
             <div class="stat-value" id="closeCheck">0,00 €</div>
           </div>
         </div>
+
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-label">Dépenses</div>
+            <div class="stat-value negative" id="closeExpenses">0,00 €</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Total net</div>
+            <div class="stat-value positive" id="closeNetTotal">0,00 €</div>
+          </div>
+        </div>
+
         <button class="big-btn" id="btnCloseDay" style="margin-top:8px;">
           <span style="width:22px;height:22px;display:inline-block;" id="closeIcon"></span>
-          <span>CLOTURER LA JOURNÉE</span>
+          <span>CLÔTURER LA JOURNÉE</span>
         </button>
       </div>
 
@@ -689,10 +728,15 @@
         <div class="manage-title">Ajouter un article</div>
         <div class="manage-form">
           <select class="manage-select" id="newCategory">
-            <option value="tir">Tir / Séries</option>
+            <option value="fosses">Fosses</option>
+            <option value="parcours">Parcours</option>
+            <option value="sanglier">Sanglier courant</option>
+            <option value="divers">Divers</option>
             <option value="munitions">Munitions</option>
             <option value="services">Services</option>
+            <option value="assurance">Assurance</option>
             <option value="bar">Bar / Boissons</option>
+            <option value="depenses">Dépenses nourriture et boissons</option>
           </select>
           <input class="manage-input" id="newName" type="text" placeholder="Nom">
           <input class="manage-input" id="newPrice" type="number" step="0.01" placeholder="Prix">
@@ -729,46 +773,58 @@
 
   <script>
     const STORAGE = {
-      items: 'btv_items_v4b',
-      sales: 'btv_sales_v4b',
-      closures: 'btv_closures_v4b',
-      counter: 'btv_counter_v4b'
+      items: 'btv_items_v5_categories_cloture',
+      sales: 'btv_sales_v5_categories_cloture',
+      closures: 'btv_closures_v5_categories_cloture',
+      counter: 'btv_counter_v5_categories_cloture'
     };
 
     const CATEGORY_META = {
-      tir: { label: 'TIR / SÉRIES', css: 'tir', titleCss: 'title-tir' },
-      munitions: { label: 'MUNITIONS', css: 'munitions', titleCss: 'title-munitions' },
-      services: { label: 'SERVICES', css: 'services', titleCss: 'title-services' },
-      bar: { label: 'BAR / BOISSONS', css: 'bar', titleCss: 'title-bar' }
+      fosses: { label: 'FOSSES', css: 'fosses', titleCss: 'title-fosses', closureLabel: 'Total fosses' },
+      parcours: { label: 'PARCOURS', css: 'parcours', titleCss: 'title-parcours', closureLabel: 'Total parcours' },
+      sanglier: { label: 'SANGLIER COURANT', css: 'sanglier', titleCss: 'title-sanglier', closureLabel: 'Total sanglier courant' },
+      divers: { label: 'DIVERS', css: 'divers', titleCss: 'title-divers', closureLabel: 'Total divers' },
+      munitions: { label: 'MUNITIONS', css: 'munitions', titleCss: 'title-munitions', closureLabel: 'Total cartouches' },
+      services: { label: 'SERVICES', css: 'services', titleCss: 'title-services', closureLabel: 'Total location fusils' },
+      assurance: { label: 'ASSURANCE', css: 'assurance', titleCss: 'title-assurance', closureLabel: 'Total assurances' },
+      bar: { label: 'BAR / BOISSONS', css: 'bar', titleCss: 'title-bar', closureLabel: 'Total boissons' },
+      depenses: { label: 'DÉPENSES NOURRITURE ET BOISSONS', css: 'depenses', titleCss: 'title-depenses', closureLabel: 'Dépenses diverses' }
     };
+
+    const CATEGORY_ORDER = ['fosses','parcours','sanglier','divers','munitions','services','assurance','bar','depenses'];
 
     function makeId(){
       return 'id-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
     }
 
     const DEFAULT_ITEMS = [
-      { id: makeId(), category: 'tir', name: 'Jeton fosse', price: 6.00, iconKey: 'target' },
-      { id: makeId(), category: 'tir', name: 'Initiation', price: 35.00, iconKey: 'shells' },
-      { id: makeId(), category: 'tir', name: 'Fosse universelle', price: 7.00, iconKey: 'shooter' },
-      { id: makeId(), category: 'tir', name: 'Fosse américaine', price: 7.00, iconKey: 'shooter' },
-      { id: makeId(), category: 'tir', name: 'Parcours chasse', price: 7.00, iconKey: 'shooter2' },
-      { id: makeId(), category: 'tir', name: 'Sanglier courant', price: 15.00, iconKey: 'boar' },
-      { id: makeId(), category: 'tir', name: 'Tir sur cible', price: 5.00, iconKey: 'targetplus' },
-      { id: makeId(), category: 'tir', name: 'Tarif bénévole', price: 6.00, iconKey: 'dot3' },
-      { id: makeId(), category: 'tir', name: 'Série supplémentaire', price: 1.00, iconKey: 'targetplus' },
+      { id: makeId(), category: 'fosses', name: 'Fosse Universelle', price: 6.00, iconKey: 'target', variablePrice: false },
+      { id: makeId(), category: 'fosses', name: 'Fosse Américaine', price: 7.00, iconKey: 'target', variablePrice: false },
+      { id: makeId(), category: 'fosses', name: 'Fosse Bénévole', price: 6.00, iconKey: 'target', variablePrice: false },
 
-      { id: makeId(), category: 'munitions', name: 'Boîte cart. type 2', price: 8.50, iconKey: 'boxshell' },
-      { id: makeId(), category: 'munitions', name: 'Carton cart. type 2', price: 83.00, iconKey: 'box' },
-      { id: makeId(), category: 'munitions', name: 'Boîte cart. type 3', price: 9.00, iconKey: 'boxshell2' },
-      { id: makeId(), category: 'munitions', name: 'Carton cart. type 3', price: 85.00, iconKey: 'box' },
+      { id: makeId(), category: 'parcours', name: 'Parcours chasse', price: 7.00, iconKey: 'shooter2', variablePrice: false },
+      { id: makeId(), category: 'parcours', name: 'Parcours bénévole', price: 6.00, iconKey: 'shooter2', variablePrice: false },
 
-      { id: makeId(), category: 'services', name: 'Location fusil', price: 5.00, iconKey: 'rifle' },
-      { id: makeId(), category: 'services', name: 'Assurance + participation', price: 15.00, iconKey: 'shield' },
+      { id: makeId(), category: 'sanglier', name: 'Sanglier courant', price: 15.00, iconKey: 'boar', variablePrice: false },
 
-      { id: makeId(), category: 'bar', name: 'Café', price: 1.00, iconKey: 'coffee' },
-      { id: makeId(), category: 'bar', name: 'Boisson soft', price: 2.00, iconKey: 'can' },
-      { id: makeId(), category: 'bar', name: 'Eau plate', price: 1.00, iconKey: 'water' },
-      { id: makeId(), category: 'bar', name: 'Eau pétillante', price: 1.50, iconKey: 'sparkling' }
+      { id: makeId(), category: 'divers', name: 'Cible', price: 5.00, iconKey: 'targetplus', variablePrice: false },
+      { id: makeId(), category: 'divers', name: 'Barre chocolatée', price: 1.00, iconKey: 'can', variablePrice: false },
+      { id: makeId(), category: 'divers', name: 'Série supplémentaire', price: 1.00, iconKey: 'targetplus', variablePrice: false },
+
+      { id: makeId(), category: 'munitions', name: 'Boîte cart. type 2', price: 9.00, iconKey: 'boxshell', variablePrice: false },
+      { id: makeId(), category: 'munitions', name: 'Carton cart. type 2', price: 85.00, iconKey: 'box', variablePrice: false },
+
+      { id: makeId(), category: 'services', name: 'Location fusil', price: 5.00, iconKey: 'rifle', variablePrice: false },
+
+      { id: makeId(), category: 'assurance', name: 'Assurance Journalière', price: 10.00, iconKey: 'shield', variablePrice: false },
+      { id: makeId(), category: 'assurance', name: 'Participation', price: 5.00, iconKey: 'shield', variablePrice: false },
+
+      { id: makeId(), category: 'bar', name: 'Café', price: 1.00, iconKey: 'coffee', variablePrice: false },
+      { id: makeId(), category: 'bar', name: 'Boisson soft', price: 2.00, iconKey: 'can', variablePrice: false },
+      { id: makeId(), category: 'bar', name: 'Eau plate', price: 1.00, iconKey: 'water', variablePrice: false },
+      { id: makeId(), category: 'bar', name: 'Eau pétillante', price: 1.50, iconKey: 'sparkling', variablePrice: false },
+
+      { id: makeId(), category: 'depenses', name: 'Dépense nourriture / boisson', price: 0.00, iconKey: 'cash', variablePrice: true }
     ];
 
     function svg(s){ return s.trim(); }
@@ -787,23 +843,19 @@
       trash: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M20 18h24M26 18v-4h12v4M22 22l2 28h16l2-28"/><path d="M30 28v16M34 28v16"/></svg>`),
       pie: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 8v24h24"/><path d="M28 12A20 20 0 1 0 52 36"/></svg>`),
       list: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M22 18h28M22 32h28M22 46h28"/><circle cx="12" cy="18" r="2"/><circle cx="12" cy="32" r="2"/><circle cx="12" cy="46" r="2"/></svg>`),
-
       target: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="5"/></svg>`),
       targetplus: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="26" cy="38" r="18"/><circle cx="26" cy="38" r="9"/><path d="M50 12v16M42 20h16"/></svg>`),
-      shells: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="14" width="12" height="34" rx="3"/><rect x="26" y="14" width="12" height="34" rx="3"/><rect x="42" y="14" width="12" height="34" rx="3"/><path d="M10 22h12M26 22h12M42 22h12"/></svg>`),
-      shooter: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="55" cy="16" r="4"/></svg>`),
       shooter2: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="50" cy="14" r="3"/><circle cx="58" cy="19" r="3"/></svg>`),
       boar: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M10 34c4-10 14-16 28-16l8-4 6 4-4 6c2 2 3 6 2 10l-6 6h-8l-4 6h-6l2-6H20l-4 6h-6l4-8c-3-1-5-2-6-4z"/></svg>`),
-      dot3: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="32" r="5"/><circle cx="32" cy="32" r="5"/><circle cx="46" cy="32" r="5"/></svg>`),
       box: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 20h40v28H12z"/><path d="M12 20 24 12h28M24 12v8"/></svg>`),
       boxshell: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="40" y="26" width="6" height="18" rx="2"/><rect x="50" y="26" width="6" height="18" rx="2"/></svg>`),
-      boxshell2: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="42" y="28" width="12" height="10" rx="2"/></svg>`),
       rifle: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M6 38h20l18-10h10v4L32 40H20v6H14v-6H6z"/></svg>`),
       shield: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 10 48 16v12c0 10-7 18-16 24-9-6-16-14-16-24V16z"/></svg>`),
       coffee: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M14 24h28v12a10 10 0 0 1-10 10H24A10 10 0 0 1 14 36z"/><path d="M42 28h6a6 6 0 0 1 0 12h-4"/><path d="M20 16c0-4 4-4 4-8M30 16c0-4 4-4 4-8"/></svg>`),
       can: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="20" y="12" width="24" height="40" rx="5"/><path d="M24 18h16"/><path d="M18 40c12 0 18-10 28-10"/></svg>`),
       water: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M24 34h16"/></svg>`),
-      sparkling: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M48 18v6M45 21h6M50 28v4M48 32h4M12 24v5M10 26h4"/></svg>`)
+      sparkling: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M48 18v6M45 21h6M50 28v4M48 32h4M12 24v5M10 26h4"/></svg>`),
+      dot3: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="32" r="5"/><circle cx="32" cy="32" r="5"/><circle cx="46" cy="32" r="5"/></svg>`)
     };
 
     function money(v){
@@ -886,14 +938,15 @@
     function groupedTicket(){
       const map = new Map();
       currentTicket.forEach(line => {
-        const key = line.itemId;
+        const key = line.itemId + '|' + line.unitPrice;
         if(!map.has(key)){
           map.set(key, {
             itemId: line.itemId,
             name: line.name,
             unitPrice: line.unitPrice,
             quantity: 1,
-            total: line.unitPrice
+            total: line.unitPrice,
+            category: line.category
           });
         } else {
           const row = map.get(key);
@@ -909,19 +962,32 @@
     }
 
     function addToTicket(item){
+      let price = Number(item.price);
+
+      if(item.variablePrice){
+        const entered = prompt('Montant de la dépense à déduire de la clôture. Saisis un montant positif, il sera automatiquement compté en négatif.');
+        if(entered === null) return;
+        const parsed = Number(String(entered).replace(',', '.'));
+        if(Number.isNaN(parsed) || parsed <= 0){
+          alert('Montant invalide.');
+          return;
+        }
+        price = -Math.abs(parsed);
+      }
+
       currentTicket.push({
         id: makeId(),
         itemId: item.id,
         name: item.name,
-        unitPrice: Number(item.price),
+        unitPrice: price,
         category: item.category
       });
       renderTicket();
       renderHeader();
     }
 
-    function removeGroupedLine(itemId){
-      const index = currentTicket.findIndex(x => x.itemId === itemId);
+    function removeGroupedLine(itemId, unitPrice){
+      const index = currentTicket.findIndex(x => x.itemId === itemId && Number(x.unitPrice) === Number(unitPrice));
       if(index >= 0) currentTicket.splice(index, 1);
       renderTicket();
       renderHeader();
@@ -937,7 +1003,7 @@
       const host = document.getElementById('categoriesHost');
       host.innerHTML = '';
 
-      Object.keys(CATEGORY_META).forEach(catKey => {
+      CATEGORY_ORDER.forEach(catKey => {
         const catItems = items.filter(x => x.category === catKey);
         if(catItems.length === 0) return;
 
@@ -955,10 +1021,11 @@
           const btn = document.createElement('button');
           btn.className = `item ${CATEGORY_META[item.category].css}`;
           btn.type = 'button';
+          const priceLabel = item.variablePrice ? 'PRIX LIBRE -' : money(item.price);
           btn.innerHTML = `
             <div class="item-top"><div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div></div>
             <div class="item-mid">${escapeHtml(item.name)}</div>
-            <div class="item-price">${money(item.price)}</div>
+            <div class="item-price">${priceLabel}</div>
           `;
           btn.addEventListener('click', () => addToTicket(item));
           grid.appendChild(btn);
@@ -988,7 +1055,7 @@
             <div class="total-line">${money(row.total)}</div>
             <button class="trash" title="Retirer une unité">${ICONS.trash}</button>
           `;
-          line.querySelector('.trash').addEventListener('click', () => removeGroupedLine(row.itemId));
+          line.querySelector('.trash').addEventListener('click', () => removeGroupedLine(row.itemId, row.unitPrice));
           list.appendChild(line);
         });
       }
@@ -1006,18 +1073,18 @@
     function currentTicketText(){
       const customerName = document.getElementById('customerName').value.trim();
       const rows = groupedTicket();
-      let txt = 'Fédération Française de Ball-Trap\\n';
-      txt += 'Club de Vence\\n\\n';
-      txt += 'Ticket n° ' + nextTicketNumber() + '\\n';
-      txt += 'Date : ' + nowDisplay() + '\\n';
-      if(customerName) txt += 'Nom / Référence : ' + customerName + '\\n';
-      txt += 'Encaissement : ' + paymentMethod + '\\n\\n';
+      let txt = 'Fédération Française de Ball-Trap\n';
+      txt += 'Club de Vence\n\n';
+      txt += 'Ticket n° ' + nextTicketNumber() + '\n';
+      txt += 'Date : ' + nowDisplay() + '\n';
+      if(customerName) txt += 'Nom / Référence : ' + customerName + '\n';
+      txt += 'Encaissement : ' + paymentMethod + '\n\n';
 
       rows.forEach(row => {
-        txt += row.quantity + ' x ' + row.name + '   ' + money(row.total) + '\\n';
+        txt += row.quantity + ' x ' + row.name + '   ' + money(row.total) + '\n';
       });
 
-      txt += '\\nTOTAL : ' + money(ticketTotal()) + '\\n';
+      txt += '\nTOTAL : ' + money(ticketTotal()) + '\n';
       return txt;
     }
 
@@ -1049,7 +1116,7 @@
         alert('Le ticket est vide.');
         return;
       }
-      const content = escapeHtml(currentTicketText()).replace(/\\n/g, '<br>');
+      const content = escapeHtml(currentTicketText()).replace(/\n/g, '<br>');
       const w = window.open('', '_blank');
       if(!w){
         alert('Impossible d’ouvrir la fenêtre d’impression.');
@@ -1084,7 +1151,8 @@
           name: r.name,
           quantity: r.quantity,
           unitPrice: r.unitPrice,
-          total: r.total
+          total: r.total,
+          category: r.category
         }))
       });
 
@@ -1092,10 +1160,7 @@
       incrementTicket();
       currentTicket = [];
       document.getElementById('customerName').value = '';
-      renderTicket();
-      renderHeader();
-      renderHistory();
-      renderClosures();
+      renderAll();
       alert('Vente enregistrée.');
     }
 
@@ -1137,6 +1202,50 @@
       document.getElementById('statOtherDay').textContent = money(other);
     }
 
+    function buildClosureStats(day){
+      const stats = {};
+
+      CATEGORY_ORDER.forEach(catKey => {
+        stats[catKey] = {
+          categoryKey: catKey,
+          categoryLabel: CATEGORY_META[catKey].closureLabel,
+          quantity: 0,
+          total: 0,
+          articles: {}
+        };
+      });
+
+      day.forEach(sale => {
+        sale.lines.forEach(line => {
+          const catKey = line.category || 'divers';
+          if(!stats[catKey]){
+            stats[catKey] = {
+              categoryKey: catKey,
+              categoryLabel: CATEGORY_META[catKey]?.closureLabel || 'Autres',
+              quantity: 0,
+              total: 0,
+              articles: {}
+            };
+          }
+
+          stats[catKey].quantity += Number(line.quantity);
+          stats[catKey].total += Number(line.total);
+
+          if(!stats[catKey].articles[line.name]){
+            stats[catKey].articles[line.name] = {
+              quantity: 0,
+              total: 0
+            };
+          }
+
+          stats[catKey].articles[line.name].quantity += Number(line.quantity);
+          stats[catKey].articles[line.name].total += Number(line.total);
+        });
+      });
+
+      return stats;
+    }
+
     function closeDay(){
       const day = todaySales();
       if(day.length === 0){
@@ -1149,33 +1258,46 @@
       const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
       const cash = day.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.total), 0);
       const check = day.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.total), 0);
+      const closureStats = buildClosureStats(day);
+      const expenses = closureStats.depenses ? Number(closureStats.depenses.total) : 0;
+      const netTotal = total;
+      const grossSales = total - expenses;
 
       closures.push({
         id: makeId(),
         dayKey: todayKey(),
-        total,
+        closedAt: new Date().toISOString(),
+        total: grossSales,
+        expenses,
+        netTotal,
         tickets,
         card,
         cash,
-        check
+        check,
+        closureStats
       });
 
       save(STORAGE.closures, closures);
       renderClosures();
-      alert('Clôture enregistrée.');
+      alert('Clôture enregistrée avec les statistiques de vente.');
     }
 
     function renderClosures(){
       const day = todaySales();
-      const total = day.reduce((s,x)=>s + Number(x.total), 0);
+      const closureStatsToday = buildClosureStats(day);
+      const totalNetToday = day.reduce((s,x)=>s + Number(x.total), 0);
+      const expensesToday = closureStatsToday.depenses ? Number(closureStatsToday.depenses.total) : 0;
+      const grossSalesToday = totalNetToday - expensesToday;
       const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
       const cash = day.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.total), 0);
       const check = day.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.total), 0);
 
-      document.getElementById('closeTotal').textContent = money(total);
+      document.getElementById('closeTotal').textContent = money(grossSalesToday);
       document.getElementById('closeCard').textContent = money(card);
       document.getElementById('closeCash').textContent = money(cash);
       document.getElementById('closeCheck').textContent = money(check);
+      document.getElementById('closeExpenses').textContent = money(expensesToday);
+      document.getElementById('closeNetTotal').textContent = money(totalNetToday);
 
       const host = document.getElementById('closuresList');
       host.innerHTML = '';
@@ -1184,17 +1306,54 @@
         host.innerHTML = `<div class="history-card">Aucune clôture enregistrée.</div>`;
       } else {
         closures.slice().reverse().forEach(c => {
+          const closureStats = c.closureStats || {};
+          const detailHtml = CATEGORY_ORDER.map(catKey => {
+            const data = closureStats[catKey];
+            if(!data) return '';
+            const articles = Object.entries(data.articles || {});
+            const categoryTotal = Number(data.total || 0);
+            const categoryQty = Number(data.quantity || 0);
+            if(categoryQty === 0 && categoryTotal === 0) return '';
+
+            return `
+              <div class="closure-row category">
+                <div>${escapeHtml(data.categoryLabel || CATEGORY_META[catKey].closureLabel)}</div>
+                <div>${categoryQty}</div>
+                <div>${money(categoryTotal)}</div>
+              </div>
+              ${articles.map(([article, detail]) => `
+                <div class="closure-row">
+                  <div>— ${escapeHtml(article)}</div>
+                  <div>${detail.quantity}</div>
+                  <div>${money(detail.total)}</div>
+                </div>
+              `).join('')}
+            `;
+          }).join('');
+
           const el = document.createElement('div');
           el.className = 'history-card';
           el.innerHTML = `
             <div class="history-head">
               <span>${c.dayKey}</span>
-              <span>${money(c.total)}</span>
+              <span>${money(c.netTotal ?? c.total)}</span>
             </div>
             <div class="history-sub">Tickets : ${c.tickets}</div>
             <div class="history-line">CB : ${money(c.card)}</div>
             <div class="history-line">Espèces : ${money(c.cash)}</div>
             <div class="history-line">Chèque : ${money(c.check)}</div>
+            <div class="history-line">Total ventes : ${money(c.total)}</div>
+            <div class="history-line negative">Dépenses diverses : ${money(c.expenses || 0)}</div>
+            <div class="history-line positive">Total net final : ${money(c.netTotal ?? c.total)}</div>
+
+            <div class="closure-detail">
+              <div class="closure-row header">
+                <div>Catégorie / article</div>
+                <div>Qté</div>
+                <div>Total</div>
+              </div>
+              ${detailHtml || '<div class="history-line">Aucun détail enregistré.</div>'}
+            </div>
           `;
           host.appendChild(el);
         });
@@ -1210,10 +1369,7 @@
         row.className = 'manage-row';
         row.innerHTML = `
           <select class="manage-select" data-k="category">
-            <option value="tir" ${item.category === 'tir' ? 'selected' : ''}>Tir</option>
-            <option value="munitions" ${item.category === 'munitions' ? 'selected' : ''}>Munitions</option>
-            <option value="services" ${item.category === 'services' ? 'selected' : ''}>Services</option>
-            <option value="bar" ${item.category === 'bar' ? 'selected' : ''}>Bar</option>
+            ${CATEGORY_ORDER.map(catKey => `<option value="${catKey}" ${item.category === catKey ? 'selected' : ''}>${CATEGORY_META[catKey].label}</option>`).join('')}
           </select>
           <input class="manage-input" data-k="name" type="text" value="${escapeAttr(item.name)}">
           <input class="manage-input" data-k="price" type="number" step="0.01" value="${Number(item.price).toFixed(2)}">
@@ -1237,6 +1393,7 @@
           item.name = name;
           item.price = price;
           item.iconKey = iconKey || 'dot3';
+          item.variablePrice = category === 'depenses';
           save(STORAGE.items, items);
           renderAll();
         });
@@ -1255,7 +1412,7 @@
     function addItem(){
       const category = document.getElementById('newCategory').value;
       const name = document.getElementById('newName').value.trim();
-      const price = Number(document.getElementById('newPrice').value);
+      const price = Number(document.getElementById('newPrice').value || 0);
       const iconKey = document.getElementById('newIconKey').value.trim() || 'dot3';
 
       if(!name || Number.isNaN(price)){
@@ -1268,7 +1425,8 @@
         category,
         name,
         price,
-        iconKey
+        iconKey,
+        variablePrice: category === 'depenses'
       });
 
       save(STORAGE.items, items);
@@ -1284,43 +1442,6 @@
 
       document.querySelectorAll('.footer-tab').forEach(x => x.classList.remove('active'));
       document.querySelector(`.footer-tab[data-screen="${name}"]`).classList.add('active');
-    }
-
-    function renderCategories(){
-      const host = document.getElementById('categoriesHost');
-      host.innerHTML = '';
-
-      Object.keys(CATEGORY_META).forEach(catKey => {
-        const catItems = items.filter(x => x.category === catKey);
-        if(catItems.length === 0) return;
-
-        const section = document.createElement('div');
-        section.className = 'section';
-
-        const title = document.createElement('div');
-        title.className = `section-title ${CATEGORY_META[catKey].titleCss}`;
-        title.textContent = CATEGORY_META[catKey].label;
-
-        const grid = document.createElement('div');
-        grid.className = 'grid';
-
-        catItems.forEach(item => {
-          const btn = document.createElement('button');
-          btn.className = `item ${CATEGORY_META[item.category].css}`;
-          btn.type = 'button';
-          btn.innerHTML = `
-            <div class="item-top"><div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div></div>
-            <div class="item-mid">${escapeHtml(item.name)}</div>
-            <div class="item-price">${money(item.price)}</div>
-          `;
-          btn.addEventListener('click', () => addToTicket(item));
-          grid.appendChild(btn);
-        });
-
-        section.appendChild(title);
-        section.appendChild(grid);
-        host.appendChild(section);
-      });
     }
 
     function renderAll(){
