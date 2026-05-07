@@ -34,6 +34,7 @@
     }
 
     *{box-sizing:border-box}
+
     html,body{
       margin:0;
       padding:0;
@@ -75,13 +76,13 @@
       background:transparent;
       color:#fff;
       cursor:pointer;
+      font-size:24px;
     }
 
     .title{
       text-align:center;
       font-size:1.05rem;
       font-weight:900;
-      letter-spacing:-.01em;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -116,6 +117,7 @@
     .screen.active{display:block}
 
     .section{margin-bottom:8px}
+
     .section-title{
       margin:0 0 6px 2px;
       font-size:.84rem;
@@ -144,8 +146,8 @@
       border:none;
       border-radius:12px;
       color:#fff;
-      min-height:90px;
-      padding:7px 5px 5px;
+      min-height:88px;
+      padding:8px 5px 6px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
@@ -158,7 +160,9 @@
     .item::after{
       content:"";
       position:absolute;
-      left:0; right:0; bottom:0;
+      left:0;
+      right:0;
+      bottom:0;
       height:25%;
       background:rgba(0,0,0,.12);
     }
@@ -173,27 +177,21 @@
     .item.bar{background:linear-gradient(180deg,var(--blue),var(--blue2))}
     .item.depenses{background:linear-gradient(180deg,#9a2f2f,#722020)}
 
-    .item-top,.item-mid,.item-price{position:relative; z-index:1}
-    .item-top{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:28px;
-      margin-top:1px;
+    .item-top,.item-mid,.item-price{
+      position:relative;
+      z-index:1;
     }
 
-    .item-icon{
-      width:30px;
-      height:30px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
+    .item-top{
+      text-align:center;
+      font-size:1.25rem;
+      font-weight:900;
+      min-height:24px;
     }
 
     .item-mid{
       text-align:center;
-      font-size:.62rem;
+      font-size:.64rem;
       font-weight:900;
       line-height:1.08;
       min-height:28px;
@@ -257,7 +255,7 @@
       border:1px solid var(--line);
       border-radius:10px;
       padding:8px 10px;
-      min-height:330px;
+      min-height:300px;
       display:flex;
       flex-direction:column;
     }
@@ -265,7 +263,7 @@
     .ticket-head,
     .ticket-row{
       display:grid;
-      grid-template-columns:40px 1fr 70px 70px 20px;
+      grid-template-columns:40px 1fr 70px 70px 24px;
       gap:6px;
       align-items:center;
     }
@@ -300,11 +298,12 @@
       color:#d1d4db;
       cursor:pointer;
       padding:0;
-      width:20px;
-      height:20px;
+      width:24px;
+      height:24px;
       display:flex;
       align-items:center;
       justify-content:center;
+      font-size:16px;
     }
 
     .ticket-total{
@@ -334,7 +333,6 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
       font-weight:900;
       border:2px solid transparent;
     }
@@ -342,6 +340,7 @@
     .pay.cash{background:var(--cash)}
     .pay.card{background:var(--card)}
     .pay.check{background:var(--check)}
+
     .pay.active{
       border-color:#95e85d;
       box-shadow:0 0 0 2px rgba(255,255,255,.05) inset;
@@ -354,7 +353,8 @@
       margin-top:8px;
     }
 
-    .big-btn,.small-btn{
+    .big-btn,
+    .small-btn{
       border:none;
       border-radius:12px;
       color:#fff;
@@ -363,16 +363,24 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
       text-align:center;
     }
 
-    .big-btn{min-height:52px;background:var(--cash)}
-    .small-btn{
+    .big-btn{
       min-height:52px;
+      background:var(--cash);
+    }
+
+    .small-btn{
+      min-height:48px;
       background:#090a0b;
       border:1px solid var(--line);
       font-size:.85rem;
+    }
+
+    .delete-btn{
+      background:#722020 !important;
+      border-color:#9a2f2f !important;
     }
 
     .footer-nav{
@@ -397,7 +405,6 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
       font-size:.84rem;
     }
 
@@ -445,7 +452,8 @@
       margin-bottom:10px;
     }
 
-    .manage-input,.manage-select{
+    .manage-input,
+    .manage-select{
       background:#090a0b;
       border:1px solid var(--line);
       color:#fff;
@@ -555,8 +563,6 @@
 
     .negative{color:#ff8b8b;font-weight:900}
     .positive{color:#95e85d;font-weight:900}
-    .hidden{display:none !important}
-    svg{width:100%;height:100%;display:block}
 
     @media (max-width:760px){
       .title{font-size:.98rem}
@@ -569,20 +575,21 @@
     }
   </style>
 </head>
+
 <body>
   <div class="app">
     <div class="topbar">
-      <div class="brand-mark" id="brandMark"></div>
+      <div class="brand-mark">◎</div>
       <div class="title">Caisse Ball-Trap de Vence</div>
-      <button class="gear-btn" id="openGestionTop"></button>
+      <button class="gear-btn" id="openGestionTop">⚙</button>
     </div>
 
     <div class="top-info">
       <div class="top-pill">
-        <span style="font-weight:900;">TICKET N° <span id="ticketNumber" style="color:var(--orange)"></span></span>
+        <span>TICKET N° <span id="ticketNumber" style="color:var(--orange)"></span></span>
       </div>
       <div class="top-pill">
-        <span id="clockIcon" style="width:22px;height:22px;display:inline-block;"></span>
+        <span>🕒</span>
         <span id="headerDate"></span>
       </div>
     </div>
@@ -597,7 +604,7 @@
 
       <div class="card">
         <div class="field-label">
-          <span id="customerIcon" style="width:22px;height:22px;display:inline-block;"></span>
+          <span>👤</span>
           <span>Nom du client <span class="muted">(facultatif)</span></span>
         </div>
         <input class="customer-input" id="customerName" type="text" placeholder="Saisie libre du nom du client">
@@ -605,6 +612,7 @@
 
       <div class="card">
         <div class="ticket-title">Ticket en cours</div>
+
         <div class="ticket-box">
           <div class="ticket-head">
             <div>Qté</div>
@@ -621,33 +629,15 @@
         </div>
 
         <div class="pay-grid">
-          <button class="pay cash active" id="btnCash">
-            <span style="width:20px;height:20px;display:inline-block;" id="cashIcon"></span>
-            <span>ESPÈCES</span>
-          </button>
-          <button class="pay card" id="btnCard">
-            <span style="width:20px;height:20px;display:inline-block;" id="cardIcon"></span>
-            <span>CB</span>
-          </button>
-          <button class="pay check" id="btnCheck">
-            <span style="width:20px;height:20px;display:inline-block;" id="checkIcon"></span>
-            <span>CHÈQUE</span>
-          </button>
+          <button class="pay cash active" id="btnCash">ESPÈCES</button>
+          <button class="pay card" id="btnCard">CB</button>
+          <button class="pay check" id="btnCheck">CHÈQUE</button>
         </div>
 
         <div class="action-row">
-          <button class="big-btn" id="btnValidate">
-            <span style="width:22px;height:22px;display:inline-block;" id="validateIcon"></span>
-            <span>VALIDER LA VENTE</span>
-          </button>
-          <button class="small-btn" id="btnPrint">
-            <span style="width:20px;height:20px;display:inline-block;" id="printIcon"></span>
-            <span>IMPRIMER</span>
-          </button>
-          <button class="small-btn" id="btnCopy">
-            <span style="width:20px;height:20px;display:inline-block;" id="copyIcon"></span>
-            <span>COPIER LE TICKET</span>
-          </button>
+          <button class="big-btn" id="btnValidate">VALIDER LA VENTE</button>
+          <button class="small-btn" id="btnPrint">IMPRIMER</button>
+          <button class="small-btn" id="btnCopy">COPIER LE TICKET</button>
         </div>
       </div>
     </section>
@@ -681,6 +671,7 @@
     <section id="screen-cloture" class="screen">
       <div class="card">
         <div class="manage-title">Clôture du jour</div>
+
         <div class="stats-grid">
           <div class="stat">
             <div class="stat-label">Total ventes</div>
@@ -711,10 +702,7 @@
           </div>
         </div>
 
-        <button class="big-btn" id="btnCloseDay" style="margin-top:8px;">
-          <span style="width:22px;height:22px;display:inline-block;" id="closeIcon"></span>
-          <span>CLÔTURER LA JOURNÉE</span>
-        </button>
+        <button class="big-btn" id="btnCloseDay">CLÔTURER LA JOURNÉE</button>
       </div>
 
       <div class="card">
@@ -726,6 +714,7 @@
     <section id="screen-gestion" class="screen">
       <div class="card">
         <div class="manage-title">Ajouter un article</div>
+
         <div class="manage-form">
           <select class="manage-select" id="newCategory">
             <option value="fosses">Fosses</option>
@@ -738,6 +727,7 @@
             <option value="bar">Bar / Boissons</option>
             <option value="depenses">Dépenses nourriture et boissons</option>
           </select>
+
           <input class="manage-input" id="newName" type="text" placeholder="Nom">
           <input class="manage-input" id="newPrice" type="number" step="0.01" placeholder="Prix">
           <input class="manage-input" id="newIconKey" type="text" placeholder="Icône">
@@ -752,42 +742,30 @@
     </section>
 
     <div class="footer-nav">
-      <button class="footer-tab active" data-screen="caisse">
-        <span style="width:18px;height:18px;display:inline-block;" id="navCashIcon"></span>
-        <span>CAISSE</span>
-      </button>
-      <button class="footer-tab" data-screen="historique">
-        <span style="width:18px;height:18px;display:inline-block;" id="navHistoryIcon"></span>
-        <span>HISTORIQUE</span>
-      </button>
-      <button class="footer-tab" data-screen="cloture">
-        <span style="width:18px;height:18px;display:inline-block;" id="navCloseIcon"></span>
-        <span>CLÔTURE</span>
-      </button>
-      <button class="footer-tab" data-screen="gestion">
-        <span style="width:18px;height:18px;display:inline-block;" id="navManageIcon"></span>
-        <span>GESTION</span>
-      </button>
+      <button class="footer-tab active" data-screen="caisse">CAISSE</button>
+      <button class="footer-tab" data-screen="historique">HISTORIQUE</button>
+      <button class="footer-tab" data-screen="cloture">CLÔTURE</button>
+      <button class="footer-tab" data-screen="gestion">GESTION</button>
     </div>
   </div>
 
   <script>
     const STORAGE = {
-      items: 'btv_items_v5_categories_cloture',
-      sales: 'btv_sales_v5_categories_cloture',
-      closures: 'btv_closures_v5_categories_cloture',
-      counter: 'btv_counter_v5_categories_cloture'
+      items: 'btv_items_v7_delete_tickets',
+      sales: 'btv_sales_v7_delete_tickets',
+      closures: 'btv_closures_v7_delete_tickets',
+      counter: 'btv_counter_v7_delete_tickets'
     };
 
     const CATEGORY_META = {
-      fosses: { label: 'FOSSES', css: 'fosses', titleCss: 'title-fosses', closureLabel: 'Total fosses' },
-      parcours: { label: 'PARCOURS', css: 'parcours', titleCss: 'title-parcours', closureLabel: 'Total parcours' },
-      sanglier: { label: 'SANGLIER COURANT', css: 'sanglier', titleCss: 'title-sanglier', closureLabel: 'Total sanglier courant' },
-      divers: { label: 'DIVERS', css: 'divers', titleCss: 'title-divers', closureLabel: 'Total divers' },
-      munitions: { label: 'MUNITIONS', css: 'munitions', titleCss: 'title-munitions', closureLabel: 'Total cartouches' },
-      services: { label: 'SERVICES', css: 'services', titleCss: 'title-services', closureLabel: 'Total location fusils' },
-      assurance: { label: 'ASSURANCE', css: 'assurance', titleCss: 'title-assurance', closureLabel: 'Total assurances' },
-      bar: { label: 'BAR / BOISSONS', css: 'bar', titleCss: 'title-bar', closureLabel: 'Total boissons' },
+      fosses: { label: 'FOSSES', css: 'fosses', titleCss: 'title-fosses', closureLabel: 'Recettes fosses' },
+      parcours: { label: 'PARCOURS', css: 'parcours', titleCss: 'title-parcours', closureLabel: 'Recettes parcours' },
+      sanglier: { label: 'SANGLIER COURANT', css: 'sanglier', titleCss: 'title-sanglier', closureLabel: 'Recettes sanglier courant' },
+      divers: { label: 'DIVERS', css: 'divers', titleCss: 'title-divers', closureLabel: 'Recettes divers' },
+      munitions: { label: 'MUNITIONS', css: 'munitions', titleCss: 'title-munitions', closureLabel: 'Recettes cartouches' },
+      services: { label: 'SERVICES', css: 'services', titleCss: 'title-services', closureLabel: 'Location de fusils' },
+      assurance: { label: 'ASSURANCE', css: 'assurance', titleCss: 'title-assurance', closureLabel: 'Licences / assurances journalières' },
+      bar: { label: 'BAR / BOISSONS', css: 'bar', titleCss: 'title-bar', closureLabel: 'Vente boissons' },
       depenses: { label: 'DÉPENSES NOURRITURE ET BOISSONS', css: 'depenses', titleCss: 'title-depenses', closureLabel: 'Dépenses diverses' }
     };
 
@@ -798,72 +776,45 @@
     }
 
     const DEFAULT_ITEMS = [
-      { id: makeId(), category: 'fosses', name: 'Fosse Universelle', price: 6.00, iconKey: 'target', variablePrice: false },
-      { id: makeId(), category: 'fosses', name: 'Fosse Américaine', price: 7.00, iconKey: 'target', variablePrice: false },
-      { id: makeId(), category: 'fosses', name: 'Fosse Bénévole', price: 6.00, iconKey: 'target', variablePrice: false },
+      { id: makeId(), category: 'fosses', name: 'Fosse Universelle', price: 6.00, icon: '◎', variablePrice: false },
+      { id: makeId(), category: 'fosses', name: 'Fosse Américaine', price: 7.00, icon: '◎', variablePrice: false },
+      { id: makeId(), category: 'fosses', name: 'Fosse Bénévole', price: 6.00, icon: '◎', variablePrice: false },
 
-      { id: makeId(), category: 'parcours', name: 'Parcours chasse', price: 7.00, iconKey: 'shooter2', variablePrice: false },
-      { id: makeId(), category: 'parcours', name: 'Parcours bénévole', price: 6.00, iconKey: 'shooter2', variablePrice: false },
+      { id: makeId(), category: 'parcours', name: 'Parcours chasse', price: 7.00, icon: '◉', variablePrice: false },
+      { id: makeId(), category: 'parcours', name: 'Parcours bénévole', price: 6.00, icon: '◉', variablePrice: false },
 
-      { id: makeId(), category: 'sanglier', name: 'Sanglier courant', price: 15.00, iconKey: 'boar', variablePrice: false },
+      { id: makeId(), category: 'sanglier', name: 'Sanglier courant', price: 15.00, icon: '◆', variablePrice: false },
 
-      { id: makeId(), category: 'divers', name: 'Cible', price: 5.00, iconKey: 'targetplus', variablePrice: false },
-      { id: makeId(), category: 'divers', name: 'Barre chocolatée', price: 1.00, iconKey: 'can', variablePrice: false },
-      { id: makeId(), category: 'divers', name: 'Série supplémentaire', price: 1.00, iconKey: 'targetplus', variablePrice: false },
+      { id: makeId(), category: 'divers', name: 'Cible', price: 5.00, icon: '⊕', variablePrice: false },
+      { id: makeId(), category: 'divers', name: 'Barre chocolatée', price: 1.00, icon: '▣', variablePrice: false },
+      { id: makeId(), category: 'divers', name: 'Série supplémentaire', price: 1.00, icon: '+', variablePrice: false },
 
-      { id: makeId(), category: 'munitions', name: 'Boîte cart. type 2', price: 9.00, iconKey: 'boxshell', variablePrice: false },
-      { id: makeId(), category: 'munitions', name: 'Carton cart. type 2', price: 85.00, iconKey: 'box', variablePrice: false },
+      { id: makeId(), category: 'munitions', name: 'Boîte cart. type 2', price: 9.00, icon: '▤', variablePrice: false },
+      { id: makeId(), category: 'munitions', name: 'Carton cart. type 2', price: 85.00, icon: '▥', variablePrice: false },
 
-      { id: makeId(), category: 'services', name: 'Location fusil', price: 5.00, iconKey: 'rifle', variablePrice: false },
+      { id: makeId(), category: 'services', name: 'Location fusil', price: 5.00, icon: '⌁', variablePrice: false },
 
-      { id: makeId(), category: 'assurance', name: 'Assurance Journalière', price: 10.00, iconKey: 'shield', variablePrice: false },
-      { id: makeId(), category: 'assurance', name: 'Participation', price: 5.00, iconKey: 'shield', variablePrice: false },
+      { id: makeId(), category: 'assurance', name: 'Assurance Journalière', price: 10.00, icon: '⬟', variablePrice: false },
+      { id: makeId(), category: 'assurance', name: 'Participation', price: 5.00, icon: '⬟', variablePrice: false },
 
-      { id: makeId(), category: 'bar', name: 'Café', price: 1.00, iconKey: 'coffee', variablePrice: false },
-      { id: makeId(), category: 'bar', name: 'Boisson soft', price: 2.00, iconKey: 'can', variablePrice: false },
-      { id: makeId(), category: 'bar', name: 'Eau plate', price: 1.00, iconKey: 'water', variablePrice: false },
-      { id: makeId(), category: 'bar', name: 'Eau pétillante', price: 1.50, iconKey: 'sparkling', variablePrice: false },
+      { id: makeId(), category: 'bar', name: 'Café', price: 1.00, icon: '☕', variablePrice: false },
+      { id: makeId(), category: 'bar', name: 'Boisson soft', price: 2.00, icon: '▣', variablePrice: false },
+      { id: makeId(), category: 'bar', name: 'Eau plate', price: 1.00, icon: '◌', variablePrice: false },
+      { id: makeId(), category: 'bar', name: 'Eau pétillante', price: 1.50, icon: '✦', variablePrice: false },
 
-      { id: makeId(), category: 'depenses', name: 'Dépense nourriture / boisson', price: 0.00, iconKey: 'cash', variablePrice: true }
+      { id: makeId(), category: 'depenses', name: 'Dépense nourriture / boisson', price: 0.00, icon: '−', variablePrice: true }
     ];
-
-    function svg(s){ return s.trim(); }
-
-    const ICONS = {
-      brand: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="32" r="18"/><circle cx="28" cy="32" r="8"/><path d="M28 14V6M10 32H2M16 16l-6-6"/><path d="M36 24 58 6"/><path d="m52 6 6 6-18 6z"/></svg>`),
-      manage: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="6"/><path d="M32 10v8M32 46v8M10 32h8M46 32h8"/></svg>`),
-      clock: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="32" cy="32" r="24"/><path d="M32 20v14l10 6"/></svg>`),
-      customer: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="32" cy="22" r="10"/><path d="M14 54c2-10 10-16 18-16s16 6 18 16z"/></svg>`),
-      cash: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="16" width="48" height="32" rx="4"/><circle cx="32" cy="32" r="7"/></svg>`),
-      card: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="8" y="14" width="48" height="36" rx="5"/><path d="M8 24h48M18 40h10"/></svg>`),
-      check: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M12 50h40"/><path d="M20 42 42 20"/><path d="M30 20h12v12"/></svg>`),
-      validate: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34 26 46 50 18"/></svg>`),
-      print: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M18 22V10h28v12"/><rect x="12" y="22" width="40" height="22" rx="4"/><path d="M18 38h28v16H18z"/></svg>`),
-      copy: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><rect x="22" y="18" width="24" height="30" rx="3"/><path d="M18 42H14V14h24v4"/></svg>`),
-      trash: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M20 18h24M26 18v-4h12v4M22 22l2 28h16l2-28"/><path d="M30 28v16M34 28v16"/></svg>`),
-      pie: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 8v24h24"/><path d="M28 12A20 20 0 1 0 52 36"/></svg>`),
-      list: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M22 18h28M22 32h28M22 46h28"/><circle cx="12" cy="18" r="2"/><circle cx="12" cy="32" r="2"/><circle cx="12" cy="46" r="2"/></svg>`),
-      target: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="5"/></svg>`),
-      targetplus: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="26" cy="38" r="18"/><circle cx="26" cy="38" r="9"/><path d="M50 12v16M42 20h16"/></svg>`),
-      shooter2: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="20" r="4"/><path d="M14 28l8-4 8 4 8-2 12 6-2 4-10-4-10 4 2 16h-6l-2-12-8-6z"/><circle cx="50" cy="14" r="3"/><circle cx="58" cy="19" r="3"/></svg>`),
-      boar: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M10 34c4-10 14-16 28-16l8-4 6 4-4 6c2 2 3 6 2 10l-6 6h-8l-4 6h-6l2-6H20l-4 6h-6l4-8c-3-1-5-2-6-4z"/></svg>`),
-      box: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 20h40v28H12z"/><path d="M12 20 24 12h28M24 12v8"/></svg>`),
-      boxshell: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 20h24v22H8z"/><path d="M8 20l8-8h20M16 12v8"/><rect x="40" y="26" width="6" height="18" rx="2"/><rect x="50" y="26" width="6" height="18" rx="2"/></svg>`),
-      rifle: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M6 38h20l18-10h10v4L32 40H20v6H14v-6H6z"/></svg>`),
-      shield: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M32 10 48 16v12c0 10-7 18-16 24-9-6-16-14-16-24V16z"/></svg>`),
-      coffee: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M14 24h28v12a10 10 0 0 1-10 10H24A10 10 0 0 1 14 36z"/><path d="M42 28h6a6 6 0 0 1 0 12h-4"/><path d="M20 16c0-4 4-4 4-8M30 16c0-4 4-4 4-8"/></svg>`),
-      can: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><rect x="20" y="12" width="24" height="40" rx="5"/><path d="M24 18h16"/><path d="M18 40c12 0 18-10 28-10"/></svg>`),
-      water: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M24 34h16"/></svg>`),
-      sparkling: svg(`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 14h16M28 14v6l-6 8v20c0 2 2 4 4 4h12c2 0 4-2 4-4V28l-6-8v-6"/><path d="M48 18v6M45 21h6M50 28v4M48 32h4M12 24v5M10 26h4"/></svg>`),
-      dot3: svg(`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="18" cy="32" r="5"/><circle cx="32" cy="32" r="5"/><circle cx="46" cy="32" r="5"/></svg>`)
-    };
 
     function money(v){
       return Number(v || 0).toLocaleString('fr-FR', { style:'currency', currency:'EUR' });
     }
 
     function todayKey(){
-      return new Date().toISOString().slice(0,10);
+      const d = new Date();
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return year + '-' + month + '-' + day;
     }
 
     function nowDisplay(){
@@ -885,7 +836,7 @@
     }
 
     function escapeHtml(str){
-      return String(str)
+      return String(str ?? '')
         .replace(/&/g,'&amp;')
         .replace(/</g,'&lt;')
         .replace(/>/g,'&gt;')
@@ -917,28 +868,12 @@
       save(STORAGE.counter, counters);
     }
 
-    function setFixedIcons(){
-      document.getElementById('brandMark').innerHTML = ICONS.brand;
-      document.getElementById('openGestionTop').innerHTML = ICONS.manage;
-      document.getElementById('clockIcon').innerHTML = ICONS.clock;
-      document.getElementById('customerIcon').innerHTML = ICONS.customer;
-      document.getElementById('cashIcon').innerHTML = ICONS.cash;
-      document.getElementById('cardIcon').innerHTML = ICONS.card;
-      document.getElementById('checkIcon').innerHTML = ICONS.check;
-      document.getElementById('validateIcon').innerHTML = ICONS.validate;
-      document.getElementById('printIcon').innerHTML = ICONS.print;
-      document.getElementById('copyIcon').innerHTML = ICONS.copy;
-      document.getElementById('closeIcon').innerHTML = ICONS.pie;
-      document.getElementById('navCashIcon').innerHTML = ICONS.cash;
-      document.getElementById('navHistoryIcon').innerHTML = ICONS.list;
-      document.getElementById('navCloseIcon').innerHTML = ICONS.pie;
-      document.getElementById('navManageIcon').innerHTML = ICONS.manage;
-    }
-
     function groupedTicket(){
       const map = new Map();
+
       currentTicket.forEach(line => {
         const key = line.itemId + '|' + line.unitPrice;
+
         if(!map.has(key)){
           map.set(key, {
             itemId: line.itemId,
@@ -954,6 +889,7 @@
           row.total += line.unitPrice;
         }
       });
+
       return Array.from(map.values());
     }
 
@@ -964,14 +900,17 @@
     function addToTicket(item){
       let price = Number(item.price);
 
-      if(item.variablePrice){
-        const entered = prompt('Montant de la dépense à déduire de la clôture. Saisis un montant positif, il sera automatiquement compté en négatif.');
+      if(item.variablePrice || item.category === 'depenses'){
+        const entered = prompt('Montant de la dépense à déduire de la clôture. Saisissez un montant positif, il sera compté en négatif.');
         if(entered === null) return;
+
         const parsed = Number(String(entered).replace(',', '.'));
+
         if(Number.isNaN(parsed) || parsed <= 0){
           alert('Montant invalide.');
           return;
         }
+
         price = -Math.abs(parsed);
       }
 
@@ -982,6 +921,7 @@
         unitPrice: price,
         category: item.category
       });
+
       renderTicket();
       renderHeader();
     }
@@ -989,6 +929,7 @@
     function removeGroupedLine(itemId, unitPrice){
       const index = currentTicket.findIndex(x => x.itemId === itemId && Number(x.unitPrice) === Number(unitPrice));
       if(index >= 0) currentTicket.splice(index, 1);
+
       renderTicket();
       renderHeader();
     }
@@ -1021,12 +962,15 @@
           const btn = document.createElement('button');
           btn.className = `item ${CATEGORY_META[item.category].css}`;
           btn.type = 'button';
-          const priceLabel = item.variablePrice ? 'PRIX LIBRE -' : money(item.price);
+
+          const priceLabel = (item.variablePrice || item.category === 'depenses') ? 'PRIX LIBRE -' : money(item.price);
+
           btn.innerHTML = `
-            <div class="item-top"><div class="item-icon">${ICONS[item.iconKey] || ICONS.dot3}</div></div>
+            <div class="item-top">${escapeHtml(item.icon || '•')}</div>
             <div class="item-mid">${escapeHtml(item.name)}</div>
             <div class="item-price">${priceLabel}</div>
           `;
+
           btn.addEventListener('click', () => addToTicket(item));
           grid.appendChild(btn);
         });
@@ -1040,6 +984,7 @@
     function renderTicket(){
       const list = document.getElementById('ticketList');
       list.innerHTML = '';
+
       const rows = groupedTicket();
 
       if(rows.length === 0){
@@ -1048,13 +993,15 @@
         rows.forEach(row => {
           const line = document.createElement('div');
           line.className = 'ticket-row';
+
           line.innerHTML = `
             <div class="qty">${row.quantity}</div>
             <div>${escapeHtml(row.name)}</div>
             <div class="unit">${money(row.unitPrice)}</div>
             <div class="total-line">${money(row.total)}</div>
-            <button class="trash" title="Retirer une unité">${ICONS.trash}</button>
+            <button class="trash" title="Retirer une unité">✕</button>
           `;
+
           line.querySelector('.trash').addEventListener('click', () => removeGroupedLine(row.itemId, row.unitPrice));
           list.appendChild(line);
         });
@@ -1073,11 +1020,14 @@
     function currentTicketText(){
       const customerName = document.getElementById('customerName').value.trim();
       const rows = groupedTicket();
+
       let txt = 'Fédération Française de Ball-Trap\n';
       txt += 'Club de Vence\n\n';
       txt += 'Ticket n° ' + nextTicketNumber() + '\n';
       txt += 'Date : ' + nowDisplay() + '\n';
+
       if(customerName) txt += 'Nom / Référence : ' + customerName + '\n';
+
       txt += 'Encaissement : ' + paymentMethod + '\n\n';
 
       rows.forEach(row => {
@@ -1085,6 +1035,7 @@
       });
 
       txt += '\nTOTAL : ' + money(ticketTotal()) + '\n';
+
       return txt;
     }
 
@@ -1093,9 +1044,13 @@
         alert('Le ticket est vide.');
         return;
       }
+
       const text = currentTicketText();
+
       if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(() => alert('Ticket copié')).catch(() => fallbackCopy(text));
+        navigator.clipboard.writeText(text)
+          .then(() => alert('Ticket copié'))
+          .catch(() => fallbackCopy(text));
       } else {
         fallbackCopy(text);
       }
@@ -1116,12 +1071,15 @@
         alert('Le ticket est vide.');
         return;
       }
+
       const content = escapeHtml(currentTicketText()).replace(/\n/g, '<br>');
       const w = window.open('', '_blank');
+
       if(!w){
         alert('Impossible d’ouvrir la fenêtre d’impression.');
         return;
       }
+
       w.document.write(`<html><head><title>Ticket</title></head><body style="font-family:Arial;padding:20px;background:#fff;color:#000">${content}</body></html>`);
       w.document.close();
       w.focus();
@@ -1158,8 +1116,10 @@
 
       save(STORAGE.sales, sales);
       incrementTicket();
+
       currentTicket = [];
       document.getElementById('customerName').value = '';
+
       renderAll();
       alert('Vente enregistrée.');
     }
@@ -1170,20 +1130,19 @@
 
     function deleteSale(saleId){
       const sale = sales.find(s => s.id === saleId);
+
       if(!sale){
         alert('Ticket introuvable.');
         return;
       }
 
-      if(sale.dayKey !== todayKey()){
-        alert('Par sécurité, seul un ticket du jour peut être supprimé.');
+      if(!confirm('Supprimer ce ticket ? Cette action sert uniquement à corriger une erreur de saisie.')){
         return;
       }
 
-      if(!confirm('Supprimer ce ticket ? Cette action supprimera uniquement cette vente.')) return;
-
       sales = sales.filter(s => s.id !== saleId);
       save(STORAGE.sales, sales);
+
       renderAll();
       alert('Ticket supprimé. Vous pouvez refaire la saisie correctement.');
     }
@@ -1191,6 +1150,7 @@
     function renderHistory(){
       const host = document.getElementById('historyList');
       host.innerHTML = '';
+
       const day = todaySales();
 
       if(day.length === 0){
@@ -1199,6 +1159,7 @@
         day.slice().reverse().forEach(sale => {
           const card = document.createElement('div');
           card.className = 'history-card';
+
           card.innerHTML = `
             <div class="history-head">
               <span>Ticket n° ${sale.ticketNumber}</span>
@@ -1206,14 +1167,16 @@
             </div>
             <div class="history-sub">${escapeHtml(sale.customerName || 'Sans nom')} — ${sale.paymentMethod}</div>
             ${sale.lines.map(line => `<div class="history-line">${line.quantity} x ${escapeHtml(line.name)} — ${money(line.total)}</div>`).join('')}
-            <button class="small-btn delete-sale-btn" type="button" style="margin-top:10px;width:100%;background:#722020;border-color:#9a2f2f;">
+            <button class="small-btn delete-btn delete-sale-btn" type="button" style="margin-top:10px;width:100%;">
               SUPPRIMER CE TICKET
             </button>
           `;
+
           const deleteBtn = card.querySelector('.delete-sale-btn');
           if(deleteBtn){
             deleteBtn.addEventListener('click', () => deleteSale(sale.id));
           }
+
           host.appendChild(card);
         });
       }
@@ -1245,10 +1208,11 @@
       day.forEach(sale => {
         sale.lines.forEach(line => {
           const catKey = line.category || 'divers';
+
           if(!stats[catKey]){
             stats[catKey] = {
               categoryKey: catKey,
-              categoryLabel: CATEGORY_META[catKey]?.closureLabel || 'Autres',
+              categoryLabel: 'Autres',
               quantity: 0,
               total: 0,
               articles: {}
@@ -1275,20 +1239,21 @@
 
     function closeDay(){
       const day = todaySales();
+
       if(day.length === 0){
         alert('Aucune vente à clôturer aujourd’hui.');
         return;
       }
 
-      const total = day.reduce((s,x)=>s + Number(x.total), 0);
-      const tickets = day.length;
+      const closureStats = buildClosureStats(day);
+
+      const totalNet = day.reduce((s,x)=>s + Number(x.total), 0);
+      const expenses = closureStats.depenses ? Number(closureStats.depenses.total) : 0;
+      const grossSales = totalNet - expenses;
+
       const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
       const cash = day.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.total), 0);
       const check = day.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.total), 0);
-      const closureStats = buildClosureStats(day);
-      const expenses = closureStats.depenses ? Number(closureStats.depenses.total) : 0;
-      const netTotal = total;
-      const grossSales = total - expenses;
 
       closures.push({
         id: makeId(),
@@ -1296,8 +1261,8 @@
         closedAt: new Date().toISOString(),
         total: grossSales,
         expenses,
-        netTotal,
-        tickets,
+        netTotal: totalNet,
+        tickets: day.length,
         card,
         cash,
         check,
@@ -1306,7 +1271,27 @@
 
       save(STORAGE.closures, closures);
       renderClosures();
+
       alert('Clôture enregistrée avec les statistiques de vente.');
+    }
+
+    function deleteClosure(closureId){
+      const closure = closures.find(c => c.id === closureId);
+
+      if(!closure){
+        alert('Clôture introuvable.');
+        return;
+      }
+
+      if(!confirm('Supprimer cette clôture ? Les tickets et ventes resteront conservés.')){
+        return;
+      }
+
+      closures = closures.filter(c => c.id !== closureId);
+      save(STORAGE.closures, closures);
+
+      renderClosures();
+      alert('Clôture supprimée. Les tickets restent conservés.');
     }
 
     function printClosureA4(closure){
@@ -1321,43 +1306,16 @@
         <head>
           <title>Clôture journée</title>
           <style>
-            body{
-              font-family:Arial, Helvetica, sans-serif;
-              padding:30px;
-              color:#000;
-            }
-
-            h1{
-              text-align:center;
-              margin-bottom:5px;
-            }
-
-            h2{
-              text-align:center;
-              margin-top:0;
-              font-size:16px;
-              font-weight:normal;
-            }
-
-            table{
-              width:100%;
-              border-collapse:collapse;
-              margin-top:20px;
-            }
-
-            td,th{
-              border:1px solid #000;
-              padding:8px;
-              font-size:14px;
-            }
-
-            th{
-              background:#efefef;
-            }
-
+            @page{size:A4;margin:18mm}
+            body{font-family:Arial,Helvetica,sans-serif;color:#000}
+            h1{text-align:center;margin-bottom:4px;font-size:24px}
+            h2{text-align:center;margin-top:0;font-size:16px;font-weight:normal}
+            table{width:100%;border-collapse:collapse;margin-top:18px}
+            td,th{border:1px solid #000;padding:8px;font-size:14px}
+            th{background:#efefef}
             .right{text-align:right}
             .bold{font-weight:bold}
-            .space{height:30px}
+            .space{height:28px}
           </style>
         </head>
         <body>
@@ -1380,73 +1338,30 @@
               <th>Détail</th>
               <th>Montant</th>
             </tr>
-
-            <tr>
-              <td>Recettes fosses</td>
-              <td class="right">${money(catTotal('fosses'))}</td>
-            </tr>
-
-            <tr>
-              <td>Recettes parcours</td>
-              <td class="right">${money(catTotal('parcours'))}</td>
-            </tr>
-
-            <tr>
-              <td>Recettes cartouches</td>
-              <td class="right">${money(catTotal('munitions'))}</td>
-            </tr>
-
-            <tr>
-              <td>Recettes sanglier courant</td>
-              <td class="right">${money(catTotal('sanglier'))}</td>
-            </tr>
-
-            <tr>
-              <td>Licences / assurances journalières</td>
-              <td class="right">${money(catTotal('assurance'))}</td>
-            </tr>
-
-            <tr>
-              <td>Vente boissons</td>
-              <td class="right">${money(catTotal('bar'))}</td>
-            </tr>
-
-            <tr>
-              <td>Location de fusils</td>
-              <td class="right">${money(catTotal('services'))}</td>
-            </tr>
-
-            <tr>
-              <td class="bold">Sous-total</td>
-              <td class="right bold">${money(closure.total)}</td>
-            </tr>
-
-            <tr>
-              <td>Dépenses diverses</td>
-              <td class="right">${money(closure.expenses || 0)}</td>
-            </tr>
-
-            <tr>
-              <td class="bold">Résultat de la journée</td>
-              <td class="right bold">${money(closure.netTotal || 0)}</td>
-            </tr>
+            <tr><td>Recettes fosses</td><td class="right">${money(catTotal('fosses'))}</td></tr>
+            <tr><td>Recettes parcours</td><td class="right">${money(catTotal('parcours'))}</td></tr>
+            <tr><td>Recettes cartouches</td><td class="right">${money(catTotal('munitions'))}</td></tr>
+            <tr><td>Recettes sanglier courant</td><td class="right">${money(catTotal('sanglier'))}</td></tr>
+            <tr><td>Licences / assurances journalières</td><td class="right">${money(catTotal('assurance'))}</td></tr>
+            <tr><td>Vente boissons</td><td class="right">${money(catTotal('bar'))}</td></tr>
+            <tr><td>Location de fusils</td><td class="right">${money(catTotal('services'))}</td></tr>
+            <tr><td class="bold">Sous-total</td><td class="right bold">${money(closure.total)}</td></tr>
+            <tr><td>Dépenses diverses</td><td class="right">${money(closure.expenses || 0)}</td></tr>
+            <tr><td class="bold">Résultat de la journée</td><td class="right bold">${money(closure.netTotal || 0)}</td></tr>
           </table>
 
           <div class="space"></div>
 
           <table>
-            <tr>
-              <th>Observations</th>
-            </tr>
-            <tr>
-              <td style="height:120px"></td>
-            </tr>
+            <tr><th>Observations</th></tr>
+            <tr><td style="height:120px"></td></tr>
           </table>
         </body>
         </html>
       `;
 
       const w = window.open('', '_blank');
+
       if(!w){
         alert('Impossible d’ouvrir la fenêtre d’impression.');
         return;
@@ -1458,32 +1373,14 @@
       w.print();
     }
 
-    function deleteClosure(closureId){
-      const closure = closures.find(c => c.id === closureId);
-      if(!closure){
-        alert('Clôture introuvable.');
-        return;
-      }
-
-      if(closure.dayKey !== todayKey()){
-        alert('Par sécurité, seule une clôture du jour peut être supprimée. Les clôtures des jours précédents restent conservées.');
-        return;
-      }
-
-      if(!confirm('Supprimer cette clôture ? Les tickets et les ventes du jour seront conservés.')) return;
-
-      closures = closures.filter(c => c.id !== closureId);
-      save(STORAGE.closures, closures);
-      renderClosures();
-      alert('Clôture supprimée. Les tickets du jour sont conservés.');
-    }
-
     function renderClosures(){
       const day = todaySales();
       const closureStatsToday = buildClosureStats(day);
+
       const totalNetToday = day.reduce((s,x)=>s + Number(x.total), 0);
       const expensesToday = closureStatsToday.depenses ? Number(closureStatsToday.depenses.total) : 0;
       const grossSalesToday = totalNetToday - expensesToday;
+
       const card = day.filter(x => x.paymentMethod === 'CB').reduce((s,x)=>s + Number(x.total), 0);
       const cash = day.filter(x => x.paymentMethod === 'ESPÈCES').reduce((s,x)=>s + Number(x.total), 0);
       const check = day.filter(x => x.paymentMethod === 'CHÈQUE').reduce((s,x)=>s + Number(x.total), 0);
@@ -1503,12 +1400,15 @@
       } else {
         closures.slice().reverse().forEach(c => {
           const closureStats = c.closureStats || {};
+
           const detailHtml = CATEGORY_ORDER.map(catKey => {
             const data = closureStats[catKey];
             if(!data) return '';
+
             const articles = Object.entries(data.articles || {});
             const categoryTotal = Number(data.total || 0);
             const categoryQty = Number(data.quantity || 0);
+
             if(categoryQty === 0 && categoryTotal === 0) return '';
 
             return `
@@ -1529,6 +1429,7 @@
 
           const el = document.createElement('div');
           el.className = 'history-card';
+
           el.innerHTML = `
             <div class="history-head">
               <span>${c.dayKey}</span>
@@ -1541,10 +1442,12 @@
             <div class="history-line">Total ventes : ${money(c.total)}</div>
             <div class="history-line negative">Dépenses diverses : ${money(c.expenses || 0)}</div>
             <div class="history-line positive">Total net final : ${money(c.netTotal ?? c.total)}</div>
+
             <button class="small-btn print-closure-btn" type="button" style="margin-top:10px;width:100%;">
               IMPRIMER LA CLÔTURE A4
             </button>
-            <button class="small-btn delete-closure-btn" type="button" style="margin-top:8px;width:100%;background:#722020;border-color:#9a2f2f;">
+
+            <button class="small-btn delete-btn delete-closure-btn" type="button" style="margin-top:8px;width:100%;">
               SUPPRIMER CETTE CLÔTURE
             </button>
 
@@ -1557,6 +1460,7 @@
               ${detailHtml || '<div class="history-line">Aucun détail enregistré.</div>'}
             </div>
           `;
+
           const printBtn = el.querySelector('.print-closure-btn');
           if(printBtn){
             printBtn.addEventListener('click', () => printClosureA4(c));
@@ -1579,13 +1483,14 @@
       items.forEach(item => {
         const row = document.createElement('div');
         row.className = 'manage-row';
+
         row.innerHTML = `
           <select class="manage-select" data-k="category">
             ${CATEGORY_ORDER.map(catKey => `<option value="${catKey}" ${item.category === catKey ? 'selected' : ''}>${CATEGORY_META[catKey].label}</option>`).join('')}
           </select>
           <input class="manage-input" data-k="name" type="text" value="${escapeAttr(item.name)}">
           <input class="manage-input" data-k="price" type="number" step="0.01" value="${Number(item.price).toFixed(2)}">
-          <input class="manage-input" data-k="iconKey" type="text" value="${escapeAttr(item.iconKey)}">
+          <input class="manage-input" data-k="icon" type="text" value="${escapeAttr(item.icon || '')}">
           <button class="row-btn save" type="button">OK</button>
           <button class="row-btn del" type="button">X</button>
         `;
@@ -1594,7 +1499,7 @@
           const category = row.querySelector('[data-k="category"]').value;
           const name = row.querySelector('[data-k="name"]').value.trim();
           const price = Number(row.querySelector('[data-k="price"]').value);
-          const iconKey = row.querySelector('[data-k="iconKey"]').value.trim();
+          const icon = row.querySelector('[data-k="icon"]').value.trim();
 
           if(!name || Number.isNaN(price)){
             alert('Nom ou prix invalide.');
@@ -1604,14 +1509,16 @@
           item.category = category;
           item.name = name;
           item.price = price;
-          item.iconKey = iconKey || 'dot3';
+          item.icon = icon || '•';
           item.variablePrice = category === 'depenses';
+
           save(STORAGE.items, items);
           renderAll();
         });
 
         row.querySelector('.del').addEventListener('click', () => {
           if(!confirm('Supprimer cet article ?')) return;
+
           items = items.filter(x => x.id !== item.id);
           save(STORAGE.items, items);
           renderAll();
@@ -1625,10 +1532,10 @@
       const category = document.getElementById('newCategory').value;
       const name = document.getElementById('newName').value.trim();
       const price = Number(document.getElementById('newPrice').value || 0);
-      const iconKey = document.getElementById('newIconKey').value.trim() || 'dot3';
+      const icon = document.getElementById('newIconKey').value.trim() || '•';
 
       if(!name || Number.isNaN(price)){
-        alert('Complète le nom et le prix.');
+        alert('Complétez le nom et le prix.');
         return;
       }
 
@@ -1637,14 +1544,16 @@
         category,
         name,
         price,
-        iconKey,
+        icon,
         variablePrice: category === 'depenses'
       });
 
       save(STORAGE.items, items);
+
       document.getElementById('newName').value = '';
       document.getElementById('newPrice').value = '';
       document.getElementById('newIconKey').value = '';
+
       renderAll();
     }
 
@@ -1668,9 +1577,11 @@
     document.getElementById('btnCash').addEventListener('click', () => setPayment('ESPÈCES'));
     document.getElementById('btnCard').addEventListener('click', () => setPayment('CB'));
     document.getElementById('btnCheck').addEventListener('click', () => setPayment('CHÈQUE'));
+
     document.getElementById('btnValidate').addEventListener('click', validateSale);
     document.getElementById('btnCopy').addEventListener('click', copyTicket);
     document.getElementById('btnPrint').addEventListener('click', printTicket);
+
     document.getElementById('btnCloseDay').addEventListener('click', closeDay);
     document.getElementById('btnAddItem').addEventListener('click', addItem);
     document.getElementById('openGestionTop').addEventListener('click', () => switchScreen('gestion'));
@@ -1679,7 +1590,6 @@
       btn.addEventListener('click', () => switchScreen(btn.dataset.screen));
     });
 
-    setFixedIcons();
     renderAll();
   </script>
 </body>
