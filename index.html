@@ -95,6 +95,33 @@
       margin-bottom:6px;
     }
 
+    .exercise-date-box{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      width:100%;
+    }
+
+    .exercise-date-label{
+      color:var(--muted);
+      font-size:.74rem;
+      font-weight:900;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .exercise-date-input{
+      width:100%;
+      min-width:0;
+      background:#090a0b;
+      border:1px solid var(--line);
+      color:#fff;
+      border-radius:9px;
+      padding:8px 9px;
+      outline:none;
+      font-weight:900;
+    }
+
     .top-pill,
     .top-total{
       background:#0d0e10;
@@ -589,8 +616,10 @@
         <span>TICKET N° <span id="ticketNumber" style="color:var(--orange)"></span></span>
       </div>
       <div class="top-pill">
-        <span>🕒</span>
-        <span id="headerDate"></span>
+        <div class="exercise-date-box">
+          <span class="exercise-date-label">Date d’exercice</span>
+          <input class="exercise-date-input" id="exerciseDate" type="date">
+        </div>
       </div>
     </div>
 
@@ -645,7 +674,7 @@
     <section id="screen-historique" class="screen">
       <div class="stats-grid">
         <div class="stat">
-          <div class="stat-label">Total du jour</div>
+          <div class="stat-label">Total date choisie</div>
           <div class="stat-value" id="statTotalDay">0,00 €</div>
         </div>
         <div class="stat">
@@ -663,14 +692,14 @@
       </div>
 
       <div class="card">
-        <div class="manage-title">Historique du jour</div>
+        <div class="manage-title">Historique de la date choisie</div>
         <div class="history-list" id="historyList"></div>
       </div>
     </section>
 
     <section id="screen-cloture" class="screen">
       <div class="card">
-        <div class="manage-title">Clôture du jour</div>
+        <div class="manage-title">Clôture de la date choisie</div>
 
         <div class="stats-grid">
           <div class="stat">
@@ -702,7 +731,7 @@
           </div>
         </div>
 
-        <button class="big-btn" id="btnCloseDay">CLÔTURER LA JOURNÉE</button>
+        <button class="big-btn" id="btnCloseDay">CLÔTURER LA DATE CHOISIE</button>
       </div>
 
       <div class="card">
@@ -817,9 +846,22 @@
       return year + '-' + month + '-' + day;
     }
 
-    function nowDisplay(){
-      const d = new Date();
-      return d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+    function formatDayKey(dayKey){
+      if(!dayKey || !/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) return dayKey || '';
+      const parts = dayKey.split('-');
+      return parts[2] + '/' + parts[1] + '/' + parts[0];
+    }
+
+    function setDefaultExerciseDate(){
+      const input = document.getElementById('exerciseDate');
+      if(input && !input.value){
+        input.value = todayKey();
+      }
+    }
+
+    function selectedDayKey(){
+      const input = document.getElementById('exerciseDate');
+      return input && input.value ? input.value : todayKey();
     }
 
     function load(key, fallback){
@@ -856,13 +898,13 @@
     let paymentMethod = 'ESPÈCES';
 
     function nextTicketNumber(){
-      const key = todayKey();
+      const key = selectedDayKey();
       if(!counters[key]) counters[key] = 1;
       return counters[key];
     }
 
     function incrementTicket(){
-      const key = todayKey();
+      const key = selectedDayKey();
       if(!counters[key]) counters[key] = 1;
       counters[key] += 1;
       save(STORAGE.counter, counters);
@@ -936,7 +978,6 @@
 
     function renderHeader(){
       document.getElementById('ticketNumber').textContent = nextTicketNumber();
-      document.getElementById('headerDate').textContent = nowDisplay();
       document.getElementById('headerTotal').textContent = money(ticketTotal());
     }
 
@@ -1024,7 +1065,7 @@
       let txt = 'Fédération Française de Ball-Trap\n';
       txt += 'Club de Vence\n\n';
       txt += 'Ticket n° ' + nextTicketNumber() + '\n';
-      txt += 'Date : ' + nowDisplay() + '\n';
+      txt += 'Date d’exercice : ' + formatDayKey(selectedDayKey()) + '\n';
 
       if(customerName) txt += 'Nom / Référence : ' + customerName + '\n';
 
@@ -1099,7 +1140,7 @@
 
       sales.push({
         id: makeId(),
-        dayKey: todayKey(),
+        dayKey: selectedDayKey(),
         ticketNumber,
         createdAt,
         customerName,
@@ -1125,7 +1166,7 @@
     }
 
     function todaySales(){
-      return sales.filter(s => s.dayKey === todayKey());
+      return sales.filter(s => s.dayKey === selectedDayKey());
     }
 
     function deleteSale(saleId){
@@ -1154,7 +1195,7 @@
       const day = todaySales();
 
       if(day.length === 0){
-        host.innerHTML = `<div class="history-card">Aucune vente aujourd’hui.</div>`;
+        host.innerHTML = `<div class="history-card">Aucune vente pour la date choisie.</div>`;
       } else {
         day.slice().reverse().forEach(sale => {
           const card = document.createElement('div');
@@ -1241,7 +1282,7 @@
       const day = todaySales();
 
       if(day.length === 0){
-        alert('Aucune vente à clôturer aujourd’hui.');
+        alert('Aucune vente à clôturer pour la date choisie.');
         return;
       }
 
@@ -1257,7 +1298,7 @@
 
       closures.push({
         id: makeId(),
-        dayKey: todayKey(),
+        dayKey: selectedDayKey(),
         closedAt: new Date().toISOString(),
         total: grossSales,
         expenses,
@@ -1324,8 +1365,8 @@
 
           <table>
             <tr>
-              <td class="bold">Date</td>
-              <td>${closure.dayKey}</td>
+              <td class="bold">Date d’exercice</td>
+              <td>${formatDayKey(closure.dayKey)}</td>
             </tr>
             <tr>
               <td class="bold">Nom de l'équipe</td>
@@ -1432,7 +1473,7 @@
 
           el.innerHTML = `
             <div class="history-head">
-              <span>${c.dayKey}</span>
+              <span>${formatDayKey(c.dayKey)}</span>
               <span>${money(c.netTotal ?? c.total)}</span>
             </div>
             <div class="history-sub">Tickets : ${c.tickets}</div>
@@ -1590,6 +1631,11 @@
       btn.addEventListener('click', () => switchScreen(btn.dataset.screen));
     });
 
+    document.getElementById('exerciseDate').addEventListener('change', () => {
+      renderAll();
+    });
+
+    setDefaultExerciseDate();
     renderAll();
   </script>
 </body>
