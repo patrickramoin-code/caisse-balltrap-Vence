@@ -1,4 +1,4 @@
-const CACHE_NAME = "caisse-bt-v4";
+const CACHE_NAME = "caisse-bt-v5";
 
 self.addEventListener("install", function(event) {
   event.waitUntil(
@@ -10,6 +10,8 @@ self.addEventListener("install", function(event) {
       ]);
     })
   );
+
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", function(event) {
@@ -22,6 +24,8 @@ self.addEventListener("activate", function(event) {
           }
         })
       );
+    }).then(function() {
+      return self.clients.claim();
     })
   );
 });
